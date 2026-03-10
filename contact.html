@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kyla Fallis — Environmental Engineer & Researcher</title>
+  <meta name="description" content="Kyla Fallis is an Environmental Engineering student at Ohio State University, researcher, nonprofit founder, and public speaker working at the intersection of science, policy, and advocacy.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── HOME-SPECIFIC STYLES ── */
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: var(--bg-dark);
+      position: relative;
+      overflow: hidden;
+      padding-top: 64px;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 70% 30%, rgba(74,124,87,0.22) 0%, transparent 55%),
+        radial-gradient(ellipse at 20% 80%, rgba(45,90,53,0.15) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Subtle grain texture overlay */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 4rem;
+      align-items: center;
+      width: 90%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 80px 0;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--green-light);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--green-light);
+    }
+
+    .hero h1 {
+      color: var(--text-white);
+      margin-bottom: 1.6rem;
+      font-weight: 300;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--green-light);
+    }
+
+    .hero-tagline {
+      font-size: 1.1rem;
+      line-height: 1.75;
+      color: rgba(244,247,244,0.72);
+      max-width: 52ch;
+      margin-bottom: 2.4rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Hero photo card */
+    .hero-photo-card {
+      background: rgba(74,124,87,0.12);
+      border: 1px solid rgba(74,124,87,0.25);
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      position: relative;
+    }
+
+    .hero-photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      filter: grayscale(15%) contrast(1.05);
+    }
+
+    /* Photo placeholder if no image */
+    .hero-photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: var(--green-light);
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .hero-photo-placeholder svg {
+      width: 64px;
+      height: 64px;
+      opacity: 0.4;
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(244,247,244,0.35);
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: scrollBounce 2.5s ease-in-out infinite;
+    }
+
+    .scroll-hint svg { width: 20px; height: 20px; }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── FEATURED HIGHLIGHTS ── */
+    .highlights {
+      padding: 80px 0;
+      background: var(--bg);
+    }
+
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--green-pale);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .highlight-item {
+      padding: 2.4rem 2rem;
+      border-right: 1px solid var(--green-pale);
+      transition: var(--transition);
+    }
+
+    .highlight-item:last-child { border-right: none; }
+
+    .highlight-item:hover { background: var(--bg-mid); }
+
+    .highlight-number {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--green-primary);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .highlight-item p {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+    }
+
+    /* ── FEATURED RESEARCH PREVIEW ── */
+    .research-preview {
+      background: var(--bg-mid);
+    }
+
+    .research-preview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .research-card-home {
+      background: var(--bg-card);
+      border: 1px solid var(--green-pale);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .research-card-home:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--green-light);
+    }
+
+    .research-card-home .journal {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--green-primary);
+    }
+
+    .research-card-home h3 {
+      font-size: 1.15rem;
+      line-height: 1.3;
+    }
+
+    .research-card-home p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      flex: 1;
+    }
+
+    /* ── FAIRGAME SPOTLIGHT ── */
+    .fairgame-section {
+      background: var(--bg-dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fairgame-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 90% 50%, rgba(74,124,87,0.2) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .fairgame-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .fairgame-content h2 {
+      color: var(--text-white);
+      margin-bottom: 1.2rem;
+    }
+
+    .fairgame-content p {
+      color: rgba(244,247,244,0.72);
+      margin-bottom: 1rem;
+    }
+
+    .fairgame-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .fg-stat {
+      background: rgba(74,124,87,0.12);
+      border: 1px solid rgba(74,124,87,0.2);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem;
+    }
+
+    .fg-stat .num {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--green-light);
+      line-height: 1;
+    }
+
+    .fg-stat .lbl {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(244,247,244,0.5);
+      margin-top: 0.3rem;
+    }
+
+    /* Image placeholder for FairGame */
+    .fairgame-visual {
+      background: rgba(74,124,87,0.1);
+      border: 1px solid rgba(74,124,87,0.2);
+      border-radius: var(--radius-lg);
+      aspect-ratio: 4/3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: rgba(244,247,244,0.3);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+      gap: 1rem;
+      padding: 2rem;
+    }
+
+    /* ── SPEAKING TEASER ── */
+    .speaking-teaser {
+      background: var(--bg);
+    }
+
+    .speaking-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .speaking-item {
+      background: var(--bg-card);
+      border: 1px solid var(--green-pale);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .speaking-item:hover {
+      border-color: var(--green-light);
+      transform: translateY(-2px);
+    }
+
+    .speaking-item .event-name {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .speaking-item .event-org {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green-primary);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo-card { display: none; }
+      .research-preview-grid { grid-template-columns: 1fr; }
+      .fairgame-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .fairgame-visual { display: none; }
+      .speaking-list { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .highlights-grid { grid-template-columns: 1fr; }
+      .highlight-item { border-right: none; border-bottom: 1px solid var(--green-pale); }
+      .highlight-item:last-child { border-bottom: none; }
+      .speaking-list { grid-template-columns: 1fr; }
+      .fairgame-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Kyla <span>Fallis</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="work.html">Work</a></li>
+        <li><a href="speaking.html">Speaking</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="nav-cta">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow reveal">Environmental Engineer · Ohio State University</div>
+        <h1 class="reveal reveal-delay-1">Kyla<br><em>Fallis.</em></h1>
+        <p class="hero-tagline reveal reveal-delay-2">
+          I work at the intersection of deep-sea electrochemistry, renewable energy, 
+          and global policy — building systems that close the gap between what science 
+          knows and what the world does.
+        </p>
+        <div class="hero-ctas reveal reveal-delay-3">
+          <a href="research.html" class="btn btn-primary">View Research <span class="arrow">→</span></a>
+          <a href="contact.html" class="btn btn-outline" style="color:var(--green-light);border-color:var(--green-light);">Get In Touch</a>
+          <a href="files/Kyla_Fallis_Resume.pdf" class="btn btn-ghost" style="color:rgba(244,247,244,0.5);border-color:rgba(74,124,87,0.3);" target="_blank">Resume ↓</a>
+        </div>
+      </div>
+
+      <!-- PHOTO — Replace src with your actual headshot path -->
+      <!-- IMAGE SUGGESTION: A professional photo of you — ideally slightly candid,
+           outdoors or in a lab setting. Not a plain studio headshot. Good lighting,
+           looking toward camera. Portrait orientation. -->
+      <div class="hero-photo-card reveal reveal-delay-2">
+        <img src="images/headshot.jpg" alt="Kyla Fallis" onerror="this.parentElement.innerHTML='<div class=\'hero-photo-placeholder\'><svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'currentColor\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1\' d=\'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z\'/></svg><span>Add your photo to images/headshot.jpg</span></div>'">
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/>
+      </svg>
+      Scroll
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS BAR -->
+  <section class="highlights">
+    <div class="container">
+      <div class="highlights-grid reveal">
+        <div class="highlight-item">
+          <div class="highlight-number">3</div>
+          <div class="highlight-label">Publications</div>
+          <p>IEEE, Springer, and Sustentabilis Terra — with two more in press for 2026.</p>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-number">10+</div>
+          <div class="highlight-label">Awards & Honors</div>
+          <p>EPA Award, ISEF Qualifier, Melvin Scholar, NYSCamp Delegate, and more.</p>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-number">5</div>
+          <div class="highlight-label">Team Members</div>
+          <p>Managing FairGame Initiative — a nonprofit bridging equity gaps in STEM education.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- RESEARCH PREVIEW -->
+  <section class="research-preview">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Featured Research</span>
+        <h2>Published &amp; In Press</h2>
+        <p>Peer-reviewed work spanning deep-sea electrochemistry, tidal energy, and renewable energy systems.</p>
+      </div>
+
+      <div class="research-preview-grid">
+        <!-- Card 1 -->
+        <div class="research-card-home reveal reveal-delay-1">
+          <div class="journal">IEEE · In Press</div>
+          <span class="badge badge-press">2026</span>
+          <h3>Dark Oxygen Flux Production in the Clarion-Clipperton Zone</h3>
+          <p>A hybrid ML/DL framework quantifying dark oxygen production flux and modeling risks of deep-sea mining to a newly discovered ocean ecosystem.</p>
+          <div class="tag-list">
+            <span class="tag">Machine Learning</span>
+            <span class="tag">Oceanography</span>
+            <span class="tag">Deep-Sea Mining</span>
+          </div>
+          <a href="research.html#dark-oxygen" class="btn btn-ghost" style="margin-top:1rem;">Read More <span class="arrow">→</span></a>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="research-card-home reveal reveal-delay-2">
+          <div class="journal">Sustentabilis Terra · Published 2025</div>
+          <span class="badge badge-published">Published</span>
+          <h3>Electrogenic Biotransformation of Organic Substrates</h3>
+          <p>Independent research designing compost-powered microbial fuel cells — EPA Award winner, ISEF Qualifier, and IFoRE Finalist.</p>
+          <div class="tag-list">
+            <span class="tag">Microbial Fuel Cells</span>
+            <span class="tag">Renewable Energy</span>
+            <span class="tag">Electrochemistry</span>
+          </div>
+          <a href="research.html#mfc-research" class="btn btn-ghost" style="margin-top:1rem;">Read More <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="reveal" style="text-align:center;">
+        <a href="research.html" class="btn btn-primary">View All Research <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FAIRGAME SPOTLIGHT -->
+  <section class="fairgame-section" style="padding: var(--section-pad);">
+    <div class="container">
+      <div class="fairgame-inner">
+        <div class="fairgame-content">
+          <span class="section-label" style="color:var(--green-light);">Nonprofit Leadership</span>
+          <h2>FairGame Initiative</h2>
+          <p>FairGame is a nonprofit I founded in November 2025 to close the resource and opportunity gap in STEM education — starting with the science fair pipeline that changed my own trajectory.</p>
+          <p>We manage outreach across more than 10 school science fairs, connecting students with mentorship, funding guidance, and the institutional access that too often determines who gets to compete at the national level.</p>
+
+          <div class="fairgame-stats">
+            <div class="fg-stat">
+              <div class="num">5</div>
+              <div class="lbl">Team Members</div>
+            </div>
+            <div class="fg-stat">
+              <div class="num">10+</div>
+              <div class="lbl">Science Fairs</div>
+            </div>
+            <div class="fg-stat">
+              <div class="num">Nov '25</div>
+              <div class="lbl">Founded</div>
+            </div>
+            <div class="fg-stat">
+              <div class="num">501(c)</div>
+              <div class="lbl">Nonprofit Status</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;">
+            <a href="https://fairgameinitiative.org" target="_blank" rel="noopener" class="btn btn-primary">Visit FairGame <span class="arrow">→</span></a>
+            <a href="work.html#fairgame" class="btn btn-outline" style="color:var(--green-light);border-color:var(--green-light);">Learn More</a>
+          </div>
+        </div>
+
+        <!-- IMAGE SUGGESTION: A photo of you at a science fair, speaking to students,
+             or a team photo from FairGame events. Warm, candid, shows action. -->
+        <div class="fairgame-visual">
+          <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="none" viewBox="0 0 24 24" stroke="currentColor" opacity="0.3">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          <span>Add a FairGame photo to<br>images/fairgame.jpg</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" style="background:rgba(74,124,87,0.15);"></div>
+
+  <!-- SPEAKING TEASER -->
+  <section class="speaking-teaser">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Public Speaking</span>
+        <h2>Taking the Stage</h2>
+        <p>From international science fairs to civic retreats — advocating for science, equity, and policy at every level.</p>
+      </div>
+
+      <div class="speaking-list">
+        <div class="speaking-item reveal reveal-delay-1">
+          <div class="event-org">Center of Science and Industry</div>
+          <div class="event-name">COSI Big Science Day</div>
+        </div>
+        <div class="speaking-item reveal reveal-delay-2">
+          <div class="event-org">Society for Science</div>
+          <div class="event-name">ISEF International Presenter</div>
+        </div>
+        <div class="speaking-item reveal reveal-delay-3">
+          <div class="event-org">UNA-USA · OSU Representative</div>
+          <div class="event-name">National Leadership Summit</div>
+        </div>
+      </div>
+
+      <div class="reveal" style="text-align:center;">
+        <a href="speaking.html" class="btn btn-outline">All Speaking Engagements <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo">Kyla Fallis</span>
+        <nav class="footer-links">
+          <a href="research.html">Research</a>
+          <a href="work.html">Work</a>
+          <a href="speaking.html">Speaking</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="https://linkedin.com/in/kylafallis07" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/kylafallis" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://fairgameinitiative.org" target="_blank" rel="noopener">FairGame ↗</a>
+        </nav>
+        <p class="footer-copy" id="footer-year"></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script>
+    document.getElementById('footer-year').textContent =
+      `© ${new Date().getFullYear()} Kyla Fallis · Environmental Engineer · Researcher · Builder`;
+  </script>
+</body>
+</html>
