@@ -3,405 +3,204 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kyla Fallis — Environmental Engineer & Researcher</title>
-  <meta name="description" content="Kyla Fallis is an Environmental Engineering student at Ohio State University, researcher, nonprofit founder, and public speaker working at the intersection of science, policy, and advocacy.">
+  <title>Contact — Kyla Fallis</title>
+  <meta name="description" content="Get in touch with Kyla Fallis — for research collaboration, speaking inquiries, or booking a meeting.">
   <link rel="stylesheet" href="style.css">
+  <!-- Calendly embed styles -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <style>
-    /* ── HOME-SPECIFIC STYLES ── */
+    /* ── CONTACT PAGE STYLES ── */
 
-    /* Hero */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      background: var(--bg-dark);
-      position: relative;
-      overflow: hidden;
-      padding-top: 64px;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 70% 30%, rgba(74,124,87,0.22) 0%, transparent 55%),
-        radial-gradient(ellipse at 20% 80%, rgba(45,90,53,0.15) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    /* Subtle grain texture overlay */
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-      opacity: 0.4;
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 2;
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 4rem;
-      align-items: center;
-      width: 90%;
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 80px 0;
-    }
-
-    .hero-eyebrow {
-      font-family: var(--font-sans);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--green-light);
-      margin-bottom: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .hero-eyebrow::before {
-      content: '';
-      display: block;
-      width: 32px;
-      height: 1px;
-      background: var(--green-light);
-    }
-
-    .hero h1 {
-      color: var(--text-white);
-      margin-bottom: 1.6rem;
-      font-weight: 300;
-    }
-
-    .hero h1 em {
-      font-style: italic;
-      color: var(--green-light);
-    }
-
-    .hero-tagline {
-      font-size: 1.1rem;
-      line-height: 1.75;
-      color: rgba(244,247,244,0.72);
-      max-width: 52ch;
-      margin-bottom: 2.4rem;
-    }
-
-    .hero-ctas {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    /* Hero photo card */
-    .hero-photo-card {
-      background: rgba(74,124,87,0.12);
-      border: 1px solid rgba(74,124,87,0.25);
-      border-radius: 12px;
-      overflow: hidden;
-      aspect-ratio: 3/4;
-      position: relative;
-    }
-
-    .hero-photo-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top center;
-      filter: grayscale(15%) contrast(1.05);
-    }
-
-    /* Photo placeholder if no image */
-    .hero-photo-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      color: var(--green-light);
-      font-family: var(--font-sans);
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 2rem;
-      text-align: center;
-    }
-
-    .hero-photo-placeholder svg {
-      width: 64px;
-      height: 64px;
-      opacity: 0.4;
-    }
-
-    /* Scroll indicator */
-    .scroll-hint {
-      position: absolute;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      color: rgba(244,247,244,0.35);
-      font-size: 0.68rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      animation: scrollBounce 2.5s ease-in-out infinite;
-    }
-
-    .scroll-hint svg { width: 20px; height: 20px; }
-
-    @keyframes scrollBounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%       { transform: translateX(-50%) translateY(6px); }
-    }
-
-    /* ── FEATURED HIGHLIGHTS ── */
-    .highlights {
-      padding: 80px 0;
-      background: var(--bg);
-    }
-
-    .highlights-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      border: 1px solid var(--green-pale);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-    }
-
-    .highlight-item {
-      padding: 2.4rem 2rem;
-      border-right: 1px solid var(--green-pale);
-      transition: var(--transition);
-    }
-
-    .highlight-item:last-child { border-right: none; }
-
-    .highlight-item:hover { background: var(--bg-mid); }
-
-    .highlight-number {
-      font-family: var(--font-serif);
-      font-size: 3rem;
-      font-weight: 300;
-      color: var(--green-primary);
-      line-height: 1;
-      margin-bottom: 0.5rem;
-    }
-
-    .highlight-label {
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text-light);
-      margin-bottom: 0.5rem;
-    }
-
-    .highlight-item p {
-      font-size: 0.9rem;
-      color: var(--text-mid);
-    }
-
-    /* ── FEATURED RESEARCH PREVIEW ── */
-    .research-preview {
-      background: var(--bg-mid);
-    }
-
-    .research-preview-grid {
+    .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-bottom: 2.5rem;
+      gap: 4rem;
+      align-items: start;
     }
 
-    .research-card-home {
+    /* Form card */
+    .contact-form-card {
       background: var(--bg-card);
       border: 1px solid var(--green-pale);
       border-radius: var(--radius-lg);
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      transition: var(--transition);
+      padding: 2.5rem;
       box-shadow: var(--shadow-sm);
     }
 
-    .research-card-home:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
-      border-color: var(--green-light);
+    .contact-form-card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
     }
 
-    .research-card-home .journal {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--green-primary);
-    }
-
-    .research-card-home h3 {
-      font-size: 1.15rem;
-      line-height: 1.3;
-    }
-
-    .research-card-home p {
+    .contact-form-card .subtitle {
       font-size: 0.9rem;
       color: var(--text-light);
-      flex: 1;
+      margin-bottom: 2rem;
     }
 
-    /* ── FAIRGAME SPOTLIGHT ── */
-    .fairgame-section {
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .submit-btn {
+      width: 100%;
+      justify-content: center;
+      margin-top: 0.5rem;
+      padding: 1rem;
+      font-size: 0.88rem;
+    }
+
+    .form-success {
+      display: none;
+      background: #D4EDDA;
+      border: 1px solid #B8D4BB;
+      border-radius: var(--radius);
+      padding: 1rem 1.2rem;
+      color: #1D6B35;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      font-weight: 500;
+    }
+
+    /* Right sidebar */
+    .contact-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact-info-card {
       background: var(--bg-dark);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
       position: relative;
       overflow: hidden;
     }
 
-    .fairgame-section::before {
+    .contact-info-card::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 90% 50%, rgba(74,124,87,0.2) 0%, transparent 60%);
+      background: radial-gradient(ellipse at 80% 20%, rgba(74,124,87,0.2) 0%, transparent 65%);
       pointer-events: none;
     }
 
-    .fairgame-inner {
-      position: relative;
-      z-index: 2;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
-
-    .fairgame-content h2 {
+    .contact-info-card h3 {
       color: var(--text-white);
+      font-size: 1.2rem;
       margin-bottom: 1.2rem;
+      position: relative;
     }
 
-    .fairgame-content p {
-      color: rgba(244,247,244,0.72);
-      margin-bottom: 1rem;
-    }
-
-    .fairgame-stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+    .contact-link-row {
+      display: flex;
+      align-items: center;
       gap: 1rem;
-      margin-top: 2rem;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid rgba(74,124,87,0.15);
+      position: relative;
     }
 
-    .fg-stat {
-      background: rgba(74,124,87,0.12);
-      border: 1px solid rgba(74,124,87,0.2);
-      border-radius: var(--radius-lg);
-      padding: 1.4rem;
+    .contact-link-row:last-child { border-bottom: none; }
+
+    .contact-link-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(74,124,87,0.15);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
 
-    .fg-stat .num {
-      font-family: var(--font-serif);
-      font-size: 2.2rem;
-      font-weight: 300;
-      color: var(--green-light);
-      line-height: 1;
-    }
+    .contact-link-icon svg { width: 16px; height: 16px; stroke: var(--green-light); }
 
-    .fg-stat .lbl {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
+    .contact-link-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(244,247,244,0.5);
-      margin-top: 0.3rem;
+      color: rgba(244,247,244,0.4);
     }
 
-    /* Image placeholder for FairGame */
-    .fairgame-visual {
-      background: rgba(74,124,87,0.1);
-      border: 1px solid rgba(74,124,87,0.2);
+    .contact-link-value {
+      font-size: 0.88rem;
+      color: rgba(244,247,244,0.8);
+    }
+
+    .contact-link-value a {
+      color: rgba(244,247,244,0.8);
+      transition: var(--transition);
+    }
+
+    .contact-link-value a:hover { color: var(--green-light); }
+
+    /* Calendly section */
+    .booking-section {
+      background: var(--bg-mid);
+    }
+
+    .calendly-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--green-pale);
       border-radius: var(--radius-lg);
-      aspect-ratio: 4/3;
+      overflow: hidden;
+      min-height: 700px;
+    }
+
+    /* Inline Calendly embed */
+    .calendly-inline-widget {
+      min-width: 320px;
+      height: 700px;
+    }
+
+    /* Calendly placeholder (shows if Calendly URL not set) */
+    .calendly-placeholder {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: rgba(244,247,244,0.3);
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      min-height: 400px;
+      gap: 1rem;
       text-align: center;
-      gap: 1rem;
-      padding: 2rem;
+      padding: 3rem;
+      color: var(--text-light);
     }
 
-    /* ── SPEAKING TEASER ── */
-    .speaking-teaser {
-      background: var(--bg);
-    }
+    .calendly-placeholder h3 { color: var(--text-dark); }
 
-    .speaking-list {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .speaking-item {
-      background: var(--bg-card);
-      border: 1px solid var(--green-pale);
-      border-radius: var(--radius-lg);
+    .setup-steps {
+      background: var(--bg-mid);
+      border-radius: var(--radius);
       padding: 1.5rem;
-      transition: var(--transition);
+      text-align: left;
+      max-width: 480px;
     }
 
-    .speaking-item:hover {
-      border-color: var(--green-light);
-      transform: translateY(-2px);
+    .setup-steps ol {
+      list-style: decimal;
+      padding-left: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
     }
 
-    .speaking-item .event-name {
-      font-family: var(--font-serif);
-      font-size: 1.05rem;
-      margin-bottom: 0.35rem;
+    .setup-steps li { font-size: 0.88rem; color: var(--text-mid); }
+
+    .setup-steps code {
+      background: var(--bg-dark);
+      color: var(--green-light);
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.82rem;
     }
 
-    .speaking-item .event-org {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--green-primary);
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .hero-inner { grid-template-columns: 1fr; }
-      .hero-photo-card { display: none; }
-      .research-preview-grid { grid-template-columns: 1fr; }
-      .fairgame-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-      .fairgame-visual { display: none; }
-      .speaking-list { grid-template-columns: 1fr 1fr; }
-    }
-
-    @media (max-width: 768px) {
-      .highlights-grid { grid-template-columns: 1fr; }
-      .highlight-item { border-right: none; border-bottom: 1px solid var(--green-pale); }
-      .highlight-item:last-child { border-bottom: none; }
-      .speaking-list { grid-template-columns: 1fr; }
-      .fairgame-stats { grid-template-columns: repeat(2, 1fr); }
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -412,72 +211,153 @@
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">Kyla <span>Fallis</span></a>
       <ul class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="index.html">Home</a></li>
         <li><a href="research.html">Research</a></li>
         <li><a href="work.html">Work</a></li>
         <li><a href="speaking.html">Speaking</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="contact.html" class="nav-cta">Contact</a></li>
+        <li><a href="contact.html" class="nav-cta active" style="background:var(--green-mid);">Contact</a></li>
       </ul>
-      <button class="nav-toggle" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-content">
-        <div class="hero-eyebrow reveal">Environmental Engineer · Ohio State University</div>
-        <h1 class="reveal reveal-delay-1">Kyla<br><em>Fallis.</em></h1>
-        <p class="hero-tagline reveal reveal-delay-2">
-          I work at the intersection of deep-sea electrochemistry, renewable energy, 
-          and global policy — building systems that close the gap between what science 
-          knows and what the world does.
-        </p>
-        <div class="hero-ctas reveal reveal-delay-3">
-          <a href="research.html" class="btn btn-primary">View Research <span class="arrow">→</span></a>
-          <a href="contact.html" class="btn btn-outline" style="color:var(--green-light);border-color:var(--green-light);">Get In Touch</a>
-          <a href="files/Kyla_Fallis_Resume.pdf" class="btn btn-ghost" style="color:rgba(244,247,244,0.5);border-color:rgba(74,124,87,0.3);" target="_blank">Resume ↓</a>
-        </div>
-      </div>
-
-      <!-- PHOTO — Replace src with your actual headshot path -->
-      <!-- IMAGE SUGGESTION: A professional photo of you — ideally slightly candid,
-           outdoors or in a lab setting. Not a plain studio headshot. Good lighting,
-           looking toward camera. Portrait orientation. -->
-      <div class="hero-photo-card reveal reveal-delay-2">
-        <img src="images/headshot.jpg" alt="Kyla Fallis" onerror="this.parentElement.innerHTML='<div class=\'hero-photo-placeholder\'><svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'currentColor\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1\' d=\'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z\'/></svg><span>Add your photo to images/headshot.jpg</span></div>'">
-      </div>
-    </div>
-
-    <div class="scroll-hint">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/>
-      </svg>
-      Scroll
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="section-label">Get In Touch</span>
+      <h1>Contact</h1>
+      <p>Whether you're reaching out about research collaboration, a speaking opportunity, or just want to connect — I'd love to hear from you.</p>
     </div>
   </section>
 
-  <!-- HIGHLIGHTS BAR -->
-  <section class="highlights">
+  <!-- CONTACT FORM + SIDEBAR -->
+  <section style="padding: var(--section-pad);">
     <div class="container">
-      <div class="highlights-grid reveal">
-        <div class="highlight-item">
-          <div class="highlight-number">3</div>
-          <div class="highlight-label">Publications</div>
-          <p>IEEE, Springer, and Sustentabilis Terra — with two more in press for 2026.</p>
+      <div class="contact-grid">
+
+        <!-- CONTACT FORM (Formspree) -->
+        <div class="contact-form-card reveal">
+          <h2>Send a Message</h2>
+          <p class="subtitle">I'll respond within 2–3 business days.</p>
+
+          <!--
+            SETUP INSTRUCTIONS FOR FORMSPREE:
+            1. Go to https://formspree.io and create a free account
+            2. Create a new form — you'll receive an endpoint like:
+               https://formspree.io/f/xabc1234
+            3. Replace the action URL below with YOUR endpoint
+            4. Your email address stays completely private — Formspree routes
+               submissions to you without ever exposing your email publicly.
+          -->
+          <form id="contact-form" action="https://formspree.io/f/xaqpekgw" method="POST">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="your name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="youremail@email.com" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <select id="subject" name="subject">
+                <option value="">Select a topic...</option>
+                <option value="Research Collaboration">Research Collaboration</option>
+                <option value="Speaking Inquiry">Speaking Inquiry</option>
+                <option value="FairGame Initiative">FairGame Initiative</option>
+                <option value="General Inquiry">General Inquiry</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="6" placeholder="Tell me what's on your mind..." required></textarea>
+            </div>
+
+            <!-- Honeypot anti-spam -->
+            <input type="text" name="_gotcha" style="display:none">
+
+            <!-- Formspree redirect (optional) -->
+            <!-- <input type="hidden" name="_next" value="https://kylafallis.com/contact.html?sent=true"> -->
+
+            <button type="submit" class="btn btn-primary submit-btn">
+              Send Message <span class="arrow">→</span>
+            </button>
+
+            <div class="form-success" id="form-success">
+              ✓ Message sent! I'll be in touch soon.
+            </div>
+          </form>
         </div>
-        <div class="highlight-item">
-          <div class="highlight-number">10+</div>
-          <div class="highlight-label">Awards & Honors</div>
-          <p>EPA Award, ISEF Qualifier, Melvin Scholar, NYSCamp Delegate, and more.</p>
-        </div>
-        <div class="highlight-item">
-          <div class="highlight-number">5</div>
-          <div class="highlight-label">Team Members</div>
-          <p>Managing FairGame Initiative — a nonprofit bridging equity gaps in STEM education.</p>
+
+        <!-- SIDEBAR -->
+        <div class="contact-sidebar reveal reveal-delay-1">
+
+          <div class="contact-info-card">
+            <h3>Connect</h3>
+
+            <div class="contact-link-row">
+              <div class="contact-link-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+                  <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-link-label">LinkedIn</div>
+                <div class="contact-link-value">
+                  <a href="https://linkedin.com/in/kylafallis07" target="_blank" rel="noopener">linkedin.com/in/kylafallis07 ↗</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-link-row">
+              <div class="contact-link-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-link-label">GitHub</div>
+                <div class="contact-link-value">
+                  <a href="https://github.com/kylafallis" target="_blank" rel="noopener">github.com/kylafallis ↗</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-link-row">
+              <div class="contact-link-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-link-label">FairGame Initiative</div>
+                <div class="contact-link-value">
+                  <a href="https://fairgameinitiative.org" target="_blank" rel="noopener">fairgameinitiative.org ↗</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- What I'm open to -->
+          <div class="card" style="padding:1.8rem;">
+            <span class="section-label" style="margin-bottom:1rem;">Open To</span>
+            <ul style="display:flex;flex-direction:column;gap:0.6rem;">
+              <li style="font-size:0.9rem;color:var(--text-mid);display:flex;align-items:flex-start;gap:0.6rem;"><span style="color:var(--green-primary);font-weight:700;flex-shrink:0;">→</span> Research collaboration &amp; co-authorship</li>
+              <li style="font-size:0.9rem;color:var(--text-mid);display:flex;align-items:flex-start;gap:0.6rem;"><span style="color:var(--green-primary);font-weight:700;flex-shrink:0;">→</span> Speaking at conferences, schools &amp; civic events</li>
+              <li style="font-size:0.9rem;color:var(--text-mid);display:flex;align-items:flex-start;gap:0.6rem;"><span style="color:var(--green-primary);font-weight:700;flex-shrink:0;">→</span> FairGame partnerships &amp; sponsorships</li>
+              <li style="font-size:0.9rem;color:var(--text-mid);display:flex;align-items:flex-start;gap:0.6rem;"><span style="color:var(--green-primary);font-weight:700;flex-shrink:0;">→</span> Internships &amp; research fellowships</li>
+              <li style="font-size:0.9rem;color:var(--text-mid);display:flex;align-items:flex-start;gap:0.6rem;"><span style="color:var(--green-primary);font-weight:700;flex-shrink:0;">→</span> Media &amp; press inquiries</li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </div>
@@ -485,128 +365,26 @@
 
   <div class="divider"></div>
 
-  <!-- RESEARCH PREVIEW -->
-  <section class="research-preview">
+  <!-- BOOK A MEETING (Calendly) -->
+  <section class="booking-section" style="padding: var(--section-pad);" id="book">
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-label">Featured Research</span>
-        <h2>Published &amp; In Press</h2>
-        <p>Peer-reviewed work spanning deep-sea electrochemistry, tidal energy, and renewable energy systems.</p>
+        <span class="section-label">Schedule Time</span>
+        <h2>Book a Meeting</h2>
+        <p>Select a time that works for you. Available slots sync directly with my calendar.</p>
       </div>
 
-      <div class="research-preview-grid">
-        <!-- Card 1 -->
-        <div class="research-card-home reveal reveal-delay-1">
-          <div class="journal">IEEE · In Press</div>
-          <span class="badge badge-press">2026</span>
-          <h3>Dark Oxygen Flux Production in the Clarion-Clipperton Zone</h3>
-          <p>A hybrid ML/DL framework quantifying dark oxygen production flux and modeling risks of deep-sea mining to a newly discovered ocean ecosystem.</p>
-          <div class="tag-list">
-            <span class="tag">Machine Learning</span>
-            <span class="tag">Oceanography</span>
-            <span class="tag">Deep-Sea Mining</span>
-          </div>
-          <a href="research.html#dark-oxygen" class="btn btn-ghost" style="margin-top:1rem;">Read More <span class="arrow">→</span></a>
-        </div>
 
-        <!-- Card 2 -->
-        <div class="research-card-home reveal reveal-delay-2">
-          <div class="journal">Sustentabilis Terra · Published 2025</div>
-          <span class="badge badge-published">Published</span>
-          <h3>Electrogenic Biotransformation of Organic Substrates</h3>
-          <p>Independent research designing compost-powered microbial fuel cells — EPA Award winner, ISEF Qualifier, and IFoRE Finalist.</p>
-          <div class="tag-list">
-            <span class="tag">Microbial Fuel Cells</span>
-            <span class="tag">Renewable Energy</span>
-            <span class="tag">Electrochemistry</span>
-          </div>
-          <a href="research.html#mfc-research" class="btn btn-ghost" style="margin-top:1rem;">Read More <span class="arrow">→</span></a>
-        </div>
-      </div>
-
-      <div class="reveal" style="text-align:center;">
-        <a href="research.html" class="btn btn-primary">View All Research <span class="arrow">→</span></a>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- FAIRGAME SPOTLIGHT -->
-  <section class="fairgame-section" style="padding: var(--section-pad);">
-    <div class="container">
-      <div class="fairgame-inner">
-        <div class="fairgame-content">
-          <span class="section-label" style="color:var(--green-light);">Nonprofit Leadership</span>
-          <h2>FairGame Initiative</h2>
-          <p>FairGame is a nonprofit I founded in November 2025 to close the resource and opportunity gap in STEM education — starting with the science fair pipeline that changed my own trajectory.</p>
-          <p>We manage outreach across more than 10 school science fairs, connecting students with mentorship, funding guidance, and the institutional access that too often determines who gets to compete at the national level.</p>
-
-          <div class="fairgame-stats">
-            <div class="fg-stat">
-              <div class="num">5</div>
-              <div class="lbl">Team Members</div>
-            </div>
-            <div class="fg-stat">
-              <div class="num">10+</div>
-              <div class="lbl">Science Fairs</div>
-            </div>
-            <div class="fg-stat">
-              <div class="num">Nov '25</div>
-              <div class="lbl">Founded</div>
-            </div>
-            <div class="fg-stat">
-              <div class="num">501(c)</div>
-              <div class="lbl">Nonprofit Status</div>
-            </div>
-          </div>
-
-          <div style="display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;">
-            <a href="https://fairgameinitiative.org" target="_blank" rel="noopener" class="btn btn-primary">Visit FairGame <span class="arrow">→</span></a>
-            <a href="work.html#fairgame" class="btn btn-outline" style="color:var(--green-light);border-color:var(--green-light);">Learn More</a>
+      <div class="reveal">
+      
+        <div class="calendly-wrapper">
+          <div class="calendly-inline-widget"
+            data-url="https://calendly.com/kylakayf/30min"
+            style="min-width:320px;height:700px;">
           </div>
         </div>
+        -->
 
-        <!-- IMAGE SUGGESTION: A photo of you at a science fair, speaking to students,
-             or a team photo from FairGame events. Warm, candid, shows action. -->
-        <div class="fairgame-visual">
-          <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="none" viewBox="0 0 24 24" stroke="currentColor" opacity="0.3">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-          </svg>
-          <span>Add a FairGame photo to<br>images/fairgame.jpg</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider" style="background:rgba(74,124,87,0.15);"></div>
-
-  <!-- SPEAKING TEASER -->
-  <section class="speaking-teaser">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-label">Public Speaking</span>
-        <h2>Taking the Stage</h2>
-        <p>From international science fairs to civic retreats — advocating for science, equity, and policy at every level.</p>
-      </div>
-
-      <div class="speaking-list">
-        <div class="speaking-item reveal reveal-delay-1">
-          <div class="event-org">Center of Science and Industry</div>
-          <div class="event-name">COSI Big Science Day</div>
-        </div>
-        <div class="speaking-item reveal reveal-delay-2">
-          <div class="event-org">Society for Science</div>
-          <div class="event-name">ISEF International Presenter</div>
-        </div>
-        <div class="speaking-item reveal reveal-delay-3">
-          <div class="event-org">UNA-USA · OSU Representative</div>
-          <div class="event-name">National Leadership Summit</div>
-        </div>
-      </div>
-
-      <div class="reveal" style="text-align:center;">
-        <a href="speaking.html" class="btn btn-outline">All Speaking Engagements <span class="arrow">→</span></a>
       </div>
     </div>
   </section>
@@ -617,24 +395,55 @@
       <div class="footer-inner">
         <span class="footer-logo">Kyla Fallis</span>
         <nav class="footer-links">
+          <a href="index.html">Home</a>
           <a href="research.html">Research</a>
           <a href="work.html">Work</a>
           <a href="speaking.html">Speaking</a>
           <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
           <a href="https://linkedin.com/in/kylafallis07" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/kylafallis" target="_blank" rel="noopener">GitHub</a>
           <a href="https://fairgameinitiative.org" target="_blank" rel="noopener">FairGame ↗</a>
         </nav>
-        <p class="footer-copy" id="footer-year"></p>
+        <p class="footer-copy">© <script>document.write(new Date().getFullYear())</script> Kyla Fallis · Environmental Engineer · Researcher · Builder</p>
       </div>
     </div>
   </footer>
 
+  <!-- Calendly script (loads widget when you uncomment it) -->
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
   <script src="main.js"></script>
   <script>
-    document.getElementById('footer-year').textContent =
-      `© ${new Date().getFullYear()} Kyla Fallis · Environmental Engineer · Researcher · Builder`;
+    // Formspree AJAX submission (gives a nice success message instead of redirect)
+    const form = document.getElementById('contact-form');
+    const success = document.getElementById('form-success');
+
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = form.querySelector('.submit-btn');
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            form.reset();
+            success.style.display = 'block';
+            btn.textContent = 'Sent ✓';
+          } else {
+            btn.textContent = 'Error — try again';
+            btn.disabled = false;
+          }
+        } catch {
+          btn.textContent = 'Error — try again';
+          btn.disabled = false;
+        }
+      });
+    }
   </script>
 </body>
 </html>
