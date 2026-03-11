@@ -6,11 +6,7 @@
   <title>Contact — Kyla Fallis</title>
   <meta name="description" content="Get in touch with Kyla Fallis — for research collaboration, speaking inquiries, or booking a meeting.">
   <link rel="stylesheet" href="style.css">
-  <!-- Calendly embed styles -->
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <style>
-    /* ── CONTACT PAGE STYLES ── */
-
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -22,19 +18,20 @@
     .contact-form-card {
       background: var(--bg-card);
       border: 1px solid var(--green-pale);
-      border-radius: var(--radius-lg);
       padding: 2.5rem;
       box-shadow: var(--shadow-sm);
     }
 
     .contact-form-card h2 {
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
+      font-size: 2rem;
+      margin-bottom: 0.4rem;
     }
 
     .contact-form-card .subtitle {
-      font-size: 0.9rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
       color: var(--text-light);
+      letter-spacing: 0.08em;
       margin-bottom: 2rem;
     }
 
@@ -49,22 +46,21 @@
       justify-content: center;
       margin-top: 0.5rem;
       padding: 1rem;
-      font-size: 0.88rem;
     }
 
     .form-success {
       display: none;
       background: #D4EDDA;
       border: 1px solid #B8D4BB;
-      border-radius: var(--radius);
       padding: 1rem 1.2rem;
       color: #1D6B35;
-      font-size: 0.9rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
       margin-top: 1rem;
-      font-weight: 500;
     }
 
-    /* Right sidebar */
+    /* Sidebar */
     .contact-sidebar {
       display: flex;
       flex-direction: column;
@@ -73,7 +69,6 @@
 
     .contact-info-card {
       background: var(--bg-dark);
-      border-radius: var(--radius-lg);
       padding: 2rem;
       position: relative;
       overflow: hidden;
@@ -83,14 +78,14 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 80% 20%, rgba(74,124,87,0.2) 0%, transparent 65%);
+      background: radial-gradient(ellipse at 85% 15%, rgba(74,124,89,0.18) 0%, transparent 65%);
       pointer-events: none;
     }
 
     .contact-info-card h3 {
       color: var(--text-white);
       font-size: 1.2rem;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.4rem;
       position: relative;
     }
 
@@ -98,122 +93,192 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      padding: 0.7rem 0;
-      border-bottom: 1px solid rgba(74,124,87,0.15);
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(74,124,89,0.15);
       position: relative;
     }
 
     .contact-link-row:last-child { border-bottom: none; }
 
     .contact-link-icon {
-      width: 36px;
-      height: 36px;
-      background: rgba(74,124,87,0.15);
-      border-radius: 8px;
+      width: 34px;
+      height: 34px;
+      background: rgba(74,124,89,0.14);
+      border: 1px solid rgba(74,124,89,0.2);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
 
-    .contact-link-icon svg { width: 16px; height: 16px; stroke: var(--green-light); }
+    .contact-link-icon svg { width: 15px; height: 15px; stroke: var(--green-light); }
 
     .contact-link-label {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(244,247,244,0.4);
+      color: rgba(245,242,237,0.38);
     }
 
     .contact-link-value {
       font-size: 0.88rem;
-      color: rgba(244,247,244,0.8);
+      color: rgba(245,242,237,0.78);
     }
 
     .contact-link-value a {
-      color: rgba(244,247,244,0.8);
-      transition: var(--transition);
+      color: rgba(245,242,237,0.78);
+      transition: color 0.2s ease;
     }
 
     .contact-link-value a:hover { color: var(--green-light); }
 
-    /* Calendly section */
-    .booking-section {
-      background: var(--bg-mid);
-    }
-
-    .calendly-wrapper {
+    /* Open to card */
+    .open-to-card {
       background: var(--bg-card);
       border: 1px solid var(--green-pale);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      min-height: 700px;
+      padding: 1.8rem;
     }
 
-    /* Inline Calendly embed */
-    .calendly-inline-widget {
-      min-width: 320px;
-      height: 700px;
-    }
-
-    /* Calendly placeholder (shows if Calendly URL not set) */
-    .calendly-placeholder {
+    .open-to-list {
+      margin-top: 1rem;
       display: flex;
       flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .open-to-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--text-mid);
+    }
+
+    .open-to-list li::before {
+      content: '→';
+      color: var(--green-primary);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* Booking section */
+    .booking-section {
+      background: var(--bg-mid);
+      padding: var(--section-pad);
+    }
+
+    .booking-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--green-pale);
+      border: 1px solid var(--green-pale);
+      margin-bottom: 2.5rem;
+    }
+
+    .booking-option {
+      background: var(--bg-card);
+      padding: 2rem;
+      transition: background 0.2s ease;
+    }
+
+    .booking-option:hover { background: var(--bg); }
+
+    .booking-option .duration {
+      font-family: var(--font-serif);
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--green-primary);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .booking-option .type {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.8rem;
+    }
+
+    .booking-option p {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+
+    .booking-option .btn {
+      font-size: 0.7rem;
+      padding: 0.6rem 1.2rem;
+    }
+
+    /* Cal embed wrapper */
+    .cal-embed-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--green-pale);
+      min-height: 600px;
+      display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 400px;
-      gap: 1rem;
+      overflow: hidden;
+    }
+
+    /* Cal.com inline embed placeholder */
+    /* When Cal.com is set up, the iframe fills this container automatically */
+    .cal-placeholder {
       text-align: center;
       padding: 3rem;
       color: var(--text-light);
-    }
-
-    .calendly-placeholder h3 { color: var(--text-dark); }
-
-    .setup-steps {
-      background: var(--bg-mid);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      text-align: left;
       max-width: 480px;
     }
 
-    .setup-steps ol {
+    .cal-placeholder h3 { color: var(--text-dark); margin-bottom: 0.8rem; }
+    .cal-placeholder p  { font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+    .cal-setup-steps {
+      background: var(--bg-mid);
+      border: 1px solid var(--green-pale);
+      padding: 1.5rem;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+
+    .cal-setup-steps ol {
       list-style: decimal;
       padding-left: 1.2rem;
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
+      color: var(--text-mid);
     }
 
-    .setup-steps li { font-size: 0.88rem; color: var(--text-mid); }
-
-    .setup-steps code {
+    .cal-setup-steps code {
       background: var(--bg-dark);
       color: var(--green-light);
-      padding: 0.15rem 0.4rem;
-      border-radius: 3px;
-      font-size: 0.82rem;
+      padding: 0.12rem 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
     }
 
     @media (max-width: 900px) {
-      .contact-grid { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
+      .contact-grid   { grid-template-columns: 1fr; }
+      .form-row       { grid-template-columns: 1fr; }
+      .booking-options { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">Kyla <span>Fallis</span></a>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
         <li><a href="research.html">Research</a></li>
-        <li><a href="work.html">Work</a></li>
+        <li><a href="projects.html">Projects</a></li>
         <li><a href="speaking.html">Speaking</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html" class="nav-cta active" style="background:var(--green-mid);">Contact</a></li>
@@ -221,8 +286,15 @@
       <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     </div>
   </nav>
+  <div class="nav-overlay">
+    <a href="index.html">Home</a>
+    <a href="research.html">Research</a>
+    <a href="projects.html">Projects</a>
+    <a href="speaking.html">Speaking</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
 
-  <!-- PAGE HERO -->
   <section class="page-hero">
     <div class="container">
       <span class="section-label">Get In Touch</span>
@@ -236,29 +308,27 @@
     <div class="container">
       <div class="contact-grid">
 
-        <!-- CONTACT FORM (Formspree) -->
+        <!-- FORM (Formspree) -->
         <div class="contact-form-card reveal">
           <h2>Send a Message</h2>
           <p class="subtitle">I'll respond within 2–3 business days.</p>
 
           <!--
-            SETUP INSTRUCTIONS FOR FORMSPREE:
+            FORMSPREE SETUP:
             1. Go to https://formspree.io and create a free account
-            2. Create a new form — you'll receive an endpoint like:
-               https://formspree.io/f/xabc1234
+            2. Create a new form — you'll get an endpoint like https://formspree.io/f/xabc1234
             3. Replace the action URL below with YOUR endpoint
-            4. Your email address stays completely private — Formspree routes
-               submissions to you without ever exposing your email publicly.
+            Your email stays private — Formspree routes submissions without exposing it.
           -->
           <form id="contact-form" action="https://formspree.io/f/xaqpekgw" method="POST">
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="your name" required>
+                <input type="text" id="name" name="name" placeholder="Your name" required>
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="youremail@email.com" required>
+                <input type="email" id="email" name="email" placeholder="your@email.com" required>
               </div>
             </div>
 
@@ -269,6 +339,7 @@
                 <option value="Research Collaboration">Research Collaboration</option>
                 <option value="Speaking Inquiry">Speaking Inquiry</option>
                 <option value="FairGame Initiative">FairGame Initiative</option>
+                <option value="Media / Press">Media / Press</option>
                 <option value="General Inquiry">General Inquiry</option>
                 <option value="Other">Other</option>
               </select>
@@ -279,18 +350,15 @@
               <textarea id="message" name="message" rows="6" placeholder="Tell me what's on your mind..." required></textarea>
             </div>
 
-            <!-- Honeypot anti-spam -->
+            <!-- Honeypot -->
             <input type="text" name="_gotcha" style="display:none">
-
-            <!-- Formspree redirect (optional) -->
-            <!-- <input type="hidden" name="_next" value="https://kylafallis.com/contact.html?sent=true"> -->
 
             <button type="submit" class="btn btn-primary submit-btn">
               Send Message <span class="arrow">→</span>
             </button>
 
             <div class="form-success" id="form-success">
-              ✓ Message sent! I'll be in touch soon.
+              ✓ Message sent — I'll be in touch soon.
             </div>
           </form>
         </div>
@@ -343,18 +411,16 @@
                 </div>
               </div>
             </div>
-
           </div>
 
-          <!-- What I'm open to -->
-          <div class="card" style="padding:1.8rem;">
-            <span class="section-label" style="margin-bottom:1rem;">Open To</span>
-            <ul style="display:flex;flex-direction:column;gap:0.6rem;">
-              <li style="font-size:0.9rem;color:var(--text-mid);display:flex;align-items:flex-start;gap:0.6rem;"><span style="color:var(--green-primary);font-weight:700;flex-shrink:0;">→</span> Research collaboration &amp; co-authorship</li>
-              <li style="font-size:0.9rem;color:var(--text-mid);display:flex;align-items:flex-start;gap:0.6rem;"><span style="color:var(--green-primary);font-weight:700;flex-shrink:0;">→</span> Speaking at conferences, schools &amp; civic events</li>
-              <li style="font-size:0.9rem;color:var(--text-mid);display:flex;align-items:flex-start;gap:0.6rem;"><span style="color:var(--green-primary);font-weight:700;flex-shrink:0;">→</span> FairGame partnerships &amp; sponsorships</li>
-              <li style="font-size:0.9rem;color:var(--text-mid);display:flex;align-items:flex-start;gap:0.6rem;"><span style="color:var(--green-primary);font-weight:700;flex-shrink:0;">→</span> Internships &amp; research fellowships</li>
-              <li style="font-size:0.9rem;color:var(--text-mid);display:flex;align-items:flex-start;gap:0.6rem;"><span style="color:var(--green-primary);font-weight:700;flex-shrink:0;">→</span> Media &amp; press inquiries</li>
+          <div class="open-to-card">
+            <span class="section-label">Open To</span>
+            <ul class="open-to-list">
+              <li>Research collaboration &amp; co-authorship</li>
+              <li>Speaking at conferences, schools &amp; civic events</li>
+              <li>FairGame partnerships &amp; sponsorships</li>
+              <li>Internships &amp; research fellowships</li>
+              <li>Media &amp; press inquiries</li>
             </ul>
           </div>
 
@@ -365,31 +431,101 @@
 
   <div class="divider"></div>
 
-  <!-- BOOK A MEETING (Calendly) -->
-  <section class="booking-section" style="padding: var(--section-pad);" id="book">
+  <!-- BOOK A MEETING (Cal.com) -->
+  <section class="booking-section" id="book">
     <div class="container">
       <div class="section-header reveal">
         <span class="section-label">Schedule Time</span>
         <h2>Book a Meeting</h2>
-        <p>Select a time that works for you. Available slots sync directly with my calendar.</p>
+        <p>Select a meeting type and pick a time that works for you. Syncs directly with my calendar.</p>
       </div>
 
-
-      <div class="reveal">
-      
-        <div class="calendly-wrapper">
-          <div class="calendly-inline-widget"
-            data-url="https://calendly.com/kylakayf/30min"
-            style="min-width:320px;height:700px;">
-          </div>
+      <!-- Meeting type cards -->
+      <div class="booking-options reveal">
+        <div class="booking-option">
+          <div class="duration">30</div>
+          <div class="type">min · Intro Call</div>
+          <p>Research collaboration, speaking inquiries, or general connections. Let's get to know each other.</p>
+          <!--
+            CAL.COM SETUP:
+            1. Create a free account at cal.com
+            2. Set up an event type called "30-Minute Intro" (or similar)
+            3. Replace YOUR_USERNAME and YOUR_EVENT_SLUG below
+          -->
+          <a href="https://cal.com/kylafallis/30min" target="_blank" rel="noopener" class="btn btn-primary">Book 30 Min <span class="arrow">→</span></a>
         </div>
-        -->
-
+        <div class="booking-option">
+          <div class="duration">15</div>
+          <div class="type">min · Quick Chat</div>
+          <p>A fast check-in. Good for follow-ups, quick questions, or brief introductions.</p>
+          <a href="https://cal.com/kylafallis/15min" target="_blank" rel="noopener" class="btn btn-outline">Book 15 Min <span class="arrow">→</span></a>
+        </div>
+        <div class="booking-option">
+          <div class="duration">45</div>
+          <div class="type">min · FairGame / Mentorship</div>
+          <p>Students, educators, or organizations interested in FairGame programs, partnerships, or STEM mentorship.</p>
+          <a href="https://cal.com/kylafallis/fairgame" target="_blank" rel="noopener" class="btn btn-outline">Book 45 Min <span class="arrow">→</span></a>
+        </div>
       </div>
+
+      <!--
+        CAL.COM INLINE EMBED (optional — shows calendar directly on page):
+        Uncomment the block below after setting up Cal.com.
+        Replace YOUR_USERNAME with your actual Cal.com username.
+
+        <div class="cal-embed-wrapper reveal">
+          <div style="width:100%;height:600px;" id="cal-embed"></div>
+        </div>
+
+        <script type="text/javascript">
+          (function (C, A, L) {
+            let p = function (a, ar) { a.q.push(ar); };
+            let d = C.document;
+            C.Cal = C.Cal || function () {
+              let cal = C.Cal;
+              let ar = arguments;
+              if (!cal.loaded) {
+                cal.ns = {};
+                cal.q = cal.q || [];
+                d.head.appendChild(d.createElement("script")).src = A;
+                cal.loaded = true;
+              }
+              if (ar[0] === L) {
+                const api = function () { p(api, arguments); };
+                const namespace = ar[1];
+                api.q = api.q || [];
+                if (typeof namespace === "string") {
+                  cal.ns[namespace] = cal.ns[namespace] || api;
+                  p(cal.ns[namespace], ar);
+                  p(cal, ["-", ar]);
+                } else { p(cal, ar); }
+                return;
+              }
+              p(cal, ar);
+            };
+          })(window, "https://app.cal.com/embed/embed.js", "init");
+          Cal("init", {origin:"https://cal.com"});
+          Cal("inline", {
+            elementOrSelector:"#cal-embed",
+            calLink: "YOUR_USERNAME/30min",
+          });
+          Cal("ui", {
+            theme: "light",
+            styles: { branding: { brandColor: "#4A7C59" } },
+            hideEventTypeDetails: false,
+          });
+        </script>
+      -->
+
+      <div class="reveal" style="text-align:center;margin-top:1rem;">
+        <p style="font-family:var(--font-mono);font-size:0.72rem;color:var(--text-light);letter-spacing:0.06em;">
+          Can't find a time? <a href="#contact-form" style="color:var(--green-primary);">Send a message instead →</a>
+        </p>
+      </div>
+
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="footer-inner">
@@ -397,24 +533,21 @@
         <nav class="footer-links">
           <a href="index.html">Home</a>
           <a href="research.html">Research</a>
-          <a href="work.html">Work</a>
+          <a href="projects.html">Projects</a>
           <a href="speaking.html">Speaking</a>
           <a href="about.html">About</a>
           <a href="https://linkedin.com/in/kylafallis07" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://fairgameinitiative.org" target="_blank" rel="noopener">FairGame ↗</a>
+          <a href="https://github.com/kylafallis" target="_blank" rel="noopener">GitHub</a>
         </nav>
-        <p class="footer-copy">© <script>document.write(new Date().getFullYear())</script> Kyla Fallis · Environmental Engineer · Researcher · Builder</p>
+        <p class="footer-copy" id="footer-year"></p>
       </div>
     </div>
   </footer>
 
-  <!-- Calendly script (loads widget when you uncomment it) -->
-  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-
   <script src="main.js"></script>
   <script>
-    // Formspree AJAX submission (gives a nice success message instead of redirect)
-    const form = document.getElementById('contact-form');
+    // Formspree AJAX — success message instead of redirect
+    const form    = document.getElementById('contact-form');
     const success = document.getElementById('form-success');
 
     if (form) {
@@ -426,20 +559,21 @@
 
         try {
           const res = await fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
+            method:  'POST',
+            body:    new FormData(form),
             headers: { 'Accept': 'application/json' }
           });
+
           if (res.ok) {
             form.reset();
             success.style.display = 'block';
             btn.textContent = 'Sent ✓';
           } else {
-            btn.textContent = 'Error — try again';
+            btn.textContent = 'Error — please try again';
             btn.disabled = false;
           }
         } catch {
-          btn.textContent = 'Error — try again';
+          btn.textContent = 'Error — please try again';
           btn.disabled = false;
         }
       });

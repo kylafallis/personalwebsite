@@ -7,77 +7,81 @@
   <meta name="description" content="Kyla Fallis is an Environmental Engineering student at Ohio State University, researcher, nonprofit founder, and public speaker working at the intersection of science, policy, and advocacy.">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* ── HOME-SPECIFIC STYLES ── */
-
-    /* Hero */
+    /* ── HERO: FULL VIEWPORT PHOTO ── */
     .hero {
+      position: relative;
       min-height: 100vh;
       display: flex;
-      align-items: center;
-      background: var(--bg-dark);
-      position: relative;
+      align-items: flex-end;
       overflow: hidden;
-      padding-top: 64px;
     }
 
-    .hero::before {
-      content: '';
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+    }
+
+    /* Gradient: left-heavy so text is legible, right fades to show photo */
+    .hero-overlay {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse at 70% 30%, rgba(74,124,87,0.22) 0%, transparent 55%),
-        radial-gradient(ellipse at 20% 80%, rgba(45,90,53,0.15) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    /* Subtle grain texture overlay */
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-      opacity: 0.4;
+        linear-gradient(to right,
+          rgba(26,43,24,0.88) 0%,
+          rgba(26,43,24,0.55) 45%,
+          rgba(26,43,24,0.2) 100%),
+        linear-gradient(to top,
+          rgba(26,43,24,0.75) 0%,
+          transparent 50%);
     }
 
     .hero-inner {
       position: relative;
       z-index: 2;
-      display: grid;
-      grid-template-columns: 1fr 420px;
-      gap: 4rem;
-      align-items: center;
       width: 90%;
       max-width: var(--max-width);
       margin: 0 auto;
-      padding: 80px 0;
+      padding: 0 0 88px;
     }
 
     .hero-eyebrow {
-      font-family: var(--font-sans);
-      font-size: 0.75rem;
-      font-weight: 600;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--green-light);
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.4rem;
       display: flex;
       align-items: center;
       gap: 0.75rem;
+      opacity: 0;
+      animation: heroFadeUp 0.8s ease 0.3s forwards;
     }
 
     .hero-eyebrow::before {
       content: '';
       display: block;
-      width: 32px;
+      width: 28px;
       height: 1px;
       background: var(--green-light);
+      flex-shrink: 0;
     }
 
     .hero h1 {
       color: var(--text-white);
-      margin-bottom: 1.6rem;
+      font-size: clamp(4rem, 9vw, 8rem);
       font-weight: 300;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.8rem;
+      max-width: 10ch;
+      opacity: 0;
+      animation: heroFadeUp 0.9s ease 0.5s forwards;
     }
 
     .hero h1 em {
@@ -86,138 +90,121 @@
     }
 
     .hero-tagline {
-      font-size: 1.1rem;
+      font-family: var(--font-sans);
+      font-size: clamp(1rem, 1.6vw, 1.12rem);
+      font-weight: 300;
       line-height: 1.75;
-      color: rgba(244,247,244,0.72);
-      max-width: 52ch;
+      color: rgba(245,242,237,0.78);
+      max-width: 50ch;
       margin-bottom: 2.4rem;
+      opacity: 0;
+      animation: heroFadeUp 0.9s ease 0.7s forwards;
     }
 
     .hero-ctas {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
-    }
-
-    /* Hero photo card */
-    .hero-photo-card {
-      background: rgba(74,124,87,0.12);
-      border: 1px solid rgba(74,124,87,0.25);
-      border-radius: 12px;
-      overflow: hidden;
-      aspect-ratio: 3/4;
-      position: relative;
-    }
-
-    .hero-photo-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top center;
-      filter: grayscale(15%) contrast(1.05);
-    }
-
-    /* Photo placeholder if no image */
-    .hero-photo-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      color: var(--green-light);
-      font-family: var(--font-sans);
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 2rem;
-      text-align: center;
-    }
-
-    .hero-photo-placeholder svg {
-      width: 64px;
-      height: 64px;
-      opacity: 0.4;
+      opacity: 0;
+      animation: heroFadeUp 0.9s ease 0.9s forwards;
     }
 
     /* Scroll indicator */
     .scroll-hint {
       position: absolute;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
+      bottom: 2.2rem;
+      right: 5%;
       z-index: 2;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 8px;
-      color: rgba(244,247,244,0.35);
-      font-size: 0.68rem;
-      letter-spacing: 0.15em;
+      color: rgba(245,242,237,0.3);
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      animation: scrollBounce 2.5s ease-in-out infinite;
+      opacity: 0;
+      animation: heroFadeUp 1s ease 1.2s forwards;
     }
 
-    .scroll-hint svg { width: 20px; height: 20px; }
-
-    @keyframes scrollBounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%       { transform: translateX(-50%) translateY(6px); }
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: rgba(245,242,237,0.15);
+      position: relative;
+      overflow: hidden;
     }
 
-    /* ── FEATURED HIGHLIGHTS ── */
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--green-light);
+      animation: scrollDrop 2s ease-in-out 1.5s infinite;
+    }
+
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    @keyframes scrollDrop {
+      0%   { top: -100%; }
+      100% { top: 200%; }
+    }
+
+    /* ── HIGHLIGHTS BAR ── */
     .highlights {
-      padding: 80px 0;
+      padding: 72px 0;
       background: var(--bg);
     }
 
     .highlights-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 0;
       border: 1px solid var(--green-pale);
-      border-radius: var(--radius-lg);
       overflow: hidden;
     }
 
     .highlight-item {
-      padding: 2.4rem 2rem;
+      padding: 2.4rem 2.2rem;
       border-right: 1px solid var(--green-pale);
-      transition: var(--transition);
+      transition: background 0.25s ease;
     }
 
     .highlight-item:last-child { border-right: none; }
-
     .highlight-item:hover { background: var(--bg-mid); }
 
     .highlight-number {
       font-family: var(--font-serif);
-      font-size: 3rem;
+      font-size: 3.2rem;
       font-weight: 300;
       color: var(--green-primary);
       line-height: 1;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
     }
 
     .highlight-label {
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--text-light);
       margin-bottom: 0.5rem;
     }
 
     .highlight-item p {
-      font-size: 0.9rem;
-      color: var(--text-mid);
+      font-size: 0.88rem;
+      line-height: 1.6;
     }
 
-    /* ── FEATURED RESEARCH PREVIEW ── */
-    .research-preview {
-      background: var(--bg-mid);
-    }
+    /* ── RESEARCH PREVIEW ── */
+    .research-preview { background: var(--bg-mid); }
 
     .research-preview-grid {
       display: grid;
@@ -229,7 +216,6 @@
     .research-card-home {
       background: var(--bg-card);
       border: 1px solid var(--green-pale);
-      border-radius: var(--radius-lg);
       padding: 2rem;
       display: flex;
       flex-direction: column;
@@ -245,27 +231,21 @@
     }
 
     .research-card-home .journal {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--green-primary);
     }
 
-    .research-card-home h3 {
-      font-size: 1.15rem;
-      line-height: 1.3;
-    }
+    .research-card-home h3 { font-size: 1.12rem; line-height: 1.3; }
+    .research-card-home p  { font-size: 0.88rem; color: var(--text-light); flex: 1; }
 
-    .research-card-home p {
-      font-size: 0.9rem;
-      color: var(--text-light);
-      flex: 1;
-    }
-
-    /* ── FAIRGAME SPOTLIGHT ── */
+    /* ── FAIRGAME ── */
     .fairgame-section {
       background: var(--bg-dark);
+      padding: var(--section-pad);
       position: relative;
       overflow: hidden;
     }
@@ -274,7 +254,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 90% 50%, rgba(74,124,87,0.2) 0%, transparent 60%);
+      background: radial-gradient(ellipse at 90% 50%, rgba(74,124,89,0.18) 0%, transparent 58%);
       pointer-events: none;
     }
 
@@ -287,134 +267,226 @@
       align-items: center;
     }
 
-    .fairgame-content h2 {
-      color: var(--text-white);
-      margin-bottom: 1.2rem;
-    }
-
-    .fairgame-content p {
-      color: rgba(244,247,244,0.72);
-      margin-bottom: 1rem;
-    }
+    .fairgame-content h2 { color: var(--text-white); margin-bottom: 1.2rem; }
+    .fairgame-content p  { color: rgba(245,242,237,0.72); margin-bottom: 1rem; max-width: none; }
 
     .fairgame-stats {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-      margin-top: 2rem;
+      gap: 2px;
+      background: rgba(74,124,89,0.15);
     }
 
     .fg-stat {
-      background: rgba(74,124,87,0.12);
-      border: 1px solid rgba(74,124,87,0.2);
-      border-radius: var(--radius-lg);
-      padding: 1.4rem;
+      background: rgba(26,43,24,0.6);
+      padding: 1.6rem;
     }
 
     .fg-stat .num {
       font-family: var(--font-serif);
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       font-weight: 300;
       color: var(--green-light);
       line-height: 1;
     }
 
     .fg-stat .lbl {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(244,247,244,0.5);
-      margin-top: 0.3rem;
-    }
-
-    /* Image placeholder for FairGame */
-    .fairgame-visual {
-      background: rgba(74,124,87,0.1);
-      border: 1px solid rgba(74,124,87,0.2);
-      border-radius: var(--radius-lg);
-      aspect-ratio: 4/3;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: rgba(244,247,244,0.3);
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-align: center;
-      gap: 1rem;
-      padding: 2rem;
+      color: rgba(245,242,237,0.45);
+      margin-top: 0.35rem;
     }
 
     /* ── SPEAKING TEASER ── */
-    .speaking-teaser {
-      background: var(--bg);
-    }
+    .speaking-teaser { background: var(--bg); }
 
     .speaking-list {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
     .speaking-item {
       background: var(--bg-card);
       border: 1px solid var(--green-pale);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
+      padding: 1.6rem;
       transition: var(--transition);
     }
 
     .speaking-item:hover {
       border-color: var(--green-light);
       transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .speaking-item .event-org {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green-primary);
+      margin-bottom: 0.5rem;
     }
 
     .speaking-item .event-name {
       font-family: var(--font-serif);
       font-size: 1.05rem;
-      margin-bottom: 0.35rem;
+      line-height: 1.3;
     }
 
-    .speaking-item .event-org {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
+    /* ── AS SEEN IN ── */
+    .as-seen-in {
+      background: var(--bg-dark);
+      padding: var(--section-pad);
+    }
+
+    .seen-in-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--green-primary);
+      color: rgba(245,242,237,0.35);
+      text-align: center;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .seen-in-label::before,
+    .seen-in-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(245,242,237,0.1);
+    }
+
+    .seen-in-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: rgba(74,124,89,0.1);
+    }
+
+    .seen-in-item {
+      background: rgba(26,43,24,0.7);
+      padding: 1.8rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: background 0.25s ease;
+    }
+
+    .seen-in-item:hover { background: rgba(74,124,89,0.15); }
+
+    .seen-in-item a {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      height: 100%;
+    }
+
+    .seen-in-type {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--green-light);
+    }
+
+    .seen-in-source {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(245,242,237,0.45);
+    }
+
+    .seen-in-title {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text-white);
+      line-height: 1.35;
+      flex: 1;
+    }
+
+    .seen-in-arrow {
+      font-size: 0.75rem;
+      color: var(--green-light);
+      margin-top: auto;
+      transition: transform 0.2s ease;
+    }
+
+    .seen-in-item:hover .seen-in-arrow { transform: translateX(4px); }
+
+    .seen-in-item.no-link { cursor: default; }
+
+    .seen-in-item.no-link .seen-in-title { color: rgba(245,242,237,0.4); }
+
+    .seen-in-item.no-link .seen-in-arrow { display: none; }
+
+    /* ── CONTACT CTA ── */
+    .contact-cta-section {
+      padding: var(--section-pad);
+      background: var(--bg);
+      text-align: center;
+    }
+
+    .contact-cta-section h2 {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-cta-section p {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      max-width: 44ch;
+      margin: 0 auto 2.4rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
-      .hero-inner { grid-template-columns: 1fr; }
-      .hero-photo-card { display: none; }
-      .research-preview-grid { grid-template-columns: 1fr; }
-      .fairgame-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-      .fairgame-visual { display: none; }
-      .speaking-list { grid-template-columns: 1fr 1fr; }
+      .fairgame-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .seen-in-grid   { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 768px) {
+      .hero h1 { font-size: clamp(3.5rem, 14vw, 5rem); }
       .highlights-grid { grid-template-columns: 1fr; }
-      .highlight-item { border-right: none; border-bottom: 1px solid var(--green-pale); }
+      .highlight-item  { border-right: none; border-bottom: 1px solid var(--green-pale); }
       .highlight-item:last-child { border-bottom: none; }
-      .speaking-list { grid-template-columns: 1fr; }
-      .fairgame-stats { grid-template-columns: repeat(2, 1fr); }
+      .research-preview-grid { grid-template-columns: 1fr; }
+      .speaking-list   { grid-template-columns: 1fr; }
+      .seen-in-grid    { grid-template-columns: 1fr; }
+      .fairgame-stats  { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
-<body>
+<body class="page-home">
 
   <!-- NAV -->
   <nav>
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">Kyla <span>Fallis</span></a>
       <ul class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
         <li><a href="research.html">Research</a></li>
-        <li><a href="work.html">Work</a></li>
+        <li><a href="projects.html">Projects</a></li>
         <li><a href="speaking.html">Speaking</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html" class="nav-cta">Contact</a></li>
@@ -425,38 +497,39 @@
     </div>
   </nav>
 
+  <!-- MOBILE OVERLAY -->
+  <div class="nav-overlay">
+    <a href="research.html">Research</a>
+    <a href="projects.html">Projects</a>
+    <a href="speaking.html">Speaking</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-content">
-        <div class="hero-eyebrow reveal">Environmental Engineer · Ohio State University</div>
-        <h1 class="reveal reveal-delay-1">Kyla<br><em>Fallis.</em></h1>
-        <p class="hero-tagline reveal reveal-delay-2">
-          I work at the intersection of deep-sea electrochemistry, renewable energy, 
-          and global policy — building systems that close the gap between what science 
-          knows and what the world does.
-        </p>
-        <div class="hero-ctas reveal reveal-delay-3">
-          <a href="research.html" class="btn btn-primary">View Research <span class="arrow">→</span></a>
-          <a href="contact.html" class="btn btn-outline" style="color:var(--green-light);border-color:var(--green-light);">Get In Touch</a>
-          <a href="files/Kyla_Fallis_Resume.pdf" class="btn btn-ghost" style="color:rgba(244,247,244,0.5);border-color:rgba(74,124,87,0.3);" target="_blank">Resume ↓</a>
-        </div>
-      </div>
+    <!-- Replace with your actual photo path -->
+    <img class="hero-bg" src="images/hero.jpg" alt="Kyla Fallis speaking at COSI Big Science Day">
+    <div class="hero-overlay"></div>
 
-      <!-- PHOTO — Replace src with your actual headshot path -->
-      <!-- IMAGE SUGGESTION: A professional photo of you — ideally slightly candid,
-           outdoors or in a lab setting. Not a plain studio headshot. Good lighting,
-           looking toward camera. Portrait orientation. -->
-      <div class="hero-photo-card reveal reveal-delay-2">
-        <img src="images/headshot.jpg" alt="Kyla Fallis" onerror="this.parentElement.innerHTML='<div class=\'hero-photo-placeholder\'><svg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'currentColor\'><path stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'1\' d=\'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z\'/></svg><span>Add your photo to images/headshot.jpg</span></div>'">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Environmental Engineer · Ohio State University</div>
+      <h1>Kyla<br><em>Fallis.</em></h1>
+      <p class="hero-tagline">
+        I work at the intersection of deep-sea electrochemistry, renewable energy,
+        and global policy — building systems that close the gap between what science
+        knows and what the world does.
+      </p>
+      <div class="hero-ctas">
+        <a href="research.html" class="btn btn-primary">View Research <span class="arrow">→</span></a>
+        <a href="contact.html" class="btn btn-outline-light">Get In Touch</a>
+        <a href="files/Kyla_Fallis_Resume.pdf" class="btn btn-ghost" style="color:rgba(245,242,237,0.45);border-color:rgba(122,175,138,0.3);" target="_blank">Resume ↓</a>
       </div>
     </div>
 
     <div class="scroll-hint">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/>
-      </svg>
-      Scroll
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
     </div>
   </section>
 
@@ -475,9 +548,9 @@
           <p>EPA Award, ISEF Qualifier, Melvin Scholar, NYSCamp Delegate, and more.</p>
         </div>
         <div class="highlight-item">
-          <div class="highlight-number">5</div>
-          <div class="highlight-label">Team Members</div>
-          <p>Managing FairGame Initiative — a nonprofit bridging equity gaps in STEM education.</p>
+          <div class="highlight-number">501c3</div>
+          <div class="highlight-label">Nonprofit Founded</div>
+          <p>FairGame Initiative — bridging equity gaps in STEM education across Ohio.</p>
         </div>
       </div>
     </div>
@@ -495,10 +568,9 @@
       </div>
 
       <div class="research-preview-grid">
-        <!-- Card 1 -->
         <div class="research-card-home reveal reveal-delay-1">
-          <div class="journal">IEEE · In Press</div>
-          <span class="badge badge-press">2026</span>
+          <div class="journal">IEEE · In Press 2026</div>
+          <span class="badge badge-press">In Press</span>
           <h3>Dark Oxygen Flux Production in the Clarion-Clipperton Zone</h3>
           <p>A hybrid ML/DL framework quantifying dark oxygen production flux and modeling risks of deep-sea mining to a newly discovered ocean ecosystem.</p>
           <div class="tag-list">
@@ -509,7 +581,6 @@
           <a href="research.html#dark-oxygen" class="btn btn-ghost" style="margin-top:1rem;">Read More <span class="arrow">→</span></a>
         </div>
 
-        <!-- Card 2 -->
         <div class="research-card-home reveal reveal-delay-2">
           <div class="journal">Sustentabilis Terra · Published 2025</div>
           <span class="badge badge-published">Published</span>
@@ -533,53 +604,43 @@
   <div class="divider"></div>
 
   <!-- FAIRGAME SPOTLIGHT -->
-  <section class="fairgame-section" style="padding: var(--section-pad);">
+  <section class="fairgame-section">
     <div class="container">
       <div class="fairgame-inner">
-        <div class="fairgame-content">
-          <span class="section-label" style="color:var(--green-light);">Nonprofit Leadership</span>
+        <div class="fairgame-content reveal">
+          <span class="section-label">Nonprofit Leadership</span>
           <h2>FairGame Initiative</h2>
           <p>FairGame is a nonprofit I founded in November 2025 to close the resource and opportunity gap in STEM education — starting with the science fair pipeline that changed my own trajectory.</p>
           <p>We manage outreach across more than 10 school science fairs, connecting students with mentorship, funding guidance, and the institutional access that too often determines who gets to compete at the national level.</p>
-
-          <div class="fairgame-stats">
-            <div class="fg-stat">
-              <div class="num">5</div>
-              <div class="lbl">Team Members</div>
-            </div>
-            <div class="fg-stat">
-              <div class="num">10+</div>
-              <div class="lbl">Science Fairs</div>
-            </div>
-            <div class="fg-stat">
-              <div class="num">Nov '25</div>
-              <div class="lbl">Founded</div>
-            </div>
-            <div class="fg-stat">
-              <div class="num">501(c)</div>
-              <div class="lbl">Nonprofit Status</div>
-            </div>
-          </div>
-
           <div style="display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;">
             <a href="https://fairgameinitiative.org" target="_blank" rel="noopener" class="btn btn-primary">Visit FairGame <span class="arrow">→</span></a>
-            <a href="work.html#fairgame" class="btn btn-outline" style="color:var(--green-light);border-color:var(--green-light);">Learn More</a>
+            <a href="projects.html#fairgame" class="btn btn-outline-light">Learn More</a>
           </div>
         </div>
 
-        <!-- IMAGE SUGGESTION: A photo of you at a science fair, speaking to students,
-             or a team photo from FairGame events. Warm, candid, shows action. -->
-        <div class="fairgame-visual">
-          <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="none" viewBox="0 0 24 24" stroke="currentColor" opacity="0.3">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-          </svg>
-          <span>Add a FairGame photo to<br>images/fairgame.jpg</span>
+        <div class="fairgame-stats reveal reveal-delay-1">
+          <div class="fg-stat">
+            <div class="num">5</div>
+            <div class="lbl">Team Members</div>
+          </div>
+          <div class="fg-stat">
+            <div class="num">10+</div>
+            <div class="lbl">Science Fairs</div>
+          </div>
+          <div class="fg-stat">
+            <div class="num">Nov '25</div>
+            <div class="lbl">Founded</div>
+          </div>
+          <div class="fg-stat">
+            <div class="num">501c3</div>
+            <div class="lbl">Nonprofit Status</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="divider" style="background:rgba(74,124,87,0.15);"></div>
+  <div class="divider" style="background:rgba(74,124,89,0.15);"></div>
 
   <!-- SPEAKING TEASER -->
   <section class="speaking-teaser">
@@ -593,11 +654,11 @@
       <div class="speaking-list">
         <div class="speaking-item reveal reveal-delay-1">
           <div class="event-org">Center of Science and Industry</div>
-          <div class="event-name">COSI Big Science Day</div>
+          <div class="event-name">COSI Big Science Day — Invited Panelist</div>
         </div>
         <div class="speaking-item reveal reveal-delay-2">
-          <div class="event-org">Society for Science</div>
-          <div class="event-name">ISEF International Presenter</div>
+          <div class="event-org">Society for Science · International</div>
+          <div class="event-name">ISEF — International Presenter</div>
         </div>
         <div class="speaking-item reveal reveal-delay-3">
           <div class="event-org">UNA-USA · OSU Representative</div>
@@ -611,6 +672,77 @@
     </div>
   </section>
 
+  <!-- AS SEEN IN -->
+  <section class="as-seen-in">
+    <div class="container">
+      <div class="seen-in-label reveal">As Seen In</div>
+
+      <div class="seen-in-grid reveal">
+
+        <div class="seen-in-item">
+          <a href="https://www.hometownstations.com/news/allen_county/powering-tomorrow-with-compost-bath-high-school-senior-advances-to-international-science-fair/article_f99a4d35-c043-4add-93e2-ee4ebaf897bd.html" target="_blank" rel="noopener">
+            <span class="seen-in-type">News</span>
+            <span class="seen-in-source">Hometown Stations</span>
+            <span class="seen-in-title">Powering Tomorrow with Compost: Bath Senior Advances to International Science Fair</span>
+            <span class="seen-in-arrow">↗</span>
+          </a>
+        </div>
+
+        <div class="seen-in-item">
+          <a href="https://www.limaohio.com/news/2025/03/11/baths-fallis-a-finalist-in-state-science-fair/" target="_blank" rel="noopener">
+            <span class="seen-in-type">News</span>
+            <span class="seen-in-source">Lima Ohio News</span>
+            <span class="seen-in-title">Bath's Fallis a Finalist in State Science Fair</span>
+            <span class="seen-in-arrow">↗</span>
+          </a>
+        </div>
+
+        <div class="seen-in-item">
+          <a href="https://www.youtube.com/watch?v=DCksEBo1YXc" target="_blank" rel="noopener">
+            <span class="seen-in-type">Video</span>
+            <span class="seen-in-source">YouTube</span>
+            <span class="seen-in-title">Kyla Fallis — Speaking Engagement</span>
+            <span class="seen-in-arrow">↗</span>
+          </a>
+        </div>
+
+        <div class="seen-in-item no-link">
+          <span class="seen-in-type">Publication</span>
+          <span class="seen-in-source">Sustentabilis Terra</span>
+          <span class="seen-in-title">Electrogenic Biotransformation of Organic Substrates · Vol. 3, Issue 2 (2025)</span>
+        </div>
+
+        <div class="seen-in-item no-link">
+          <span class="seen-in-type">In Press · 2026</span>
+          <span class="seen-in-source">IEEE</span>
+          <span class="seen-in-title">Hybrid ML/DL Framework for Assessing Dark Oxygen Flux Production</span>
+        </div>
+
+        <div class="seen-in-item no-link">
+          <span class="seen-in-type">In Press · 2026</span>
+          <span class="seen-in-source">Springer</span>
+          <span class="seen-in-title">Physics-Informed Deep Learning for Tidal Energy Site Selection</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT CTA -->
+  <section class="contact-cta-section">
+    <div class="container">
+      <div class="reveal">
+        <span class="section-label" style="justify-content:center;display:flex;">Get In Touch</span>
+        <h2>Let's talk.</h2>
+        <p>Whether you're a researcher, recruiter, educator, or someone who wants to build something that matters — I'd love to hear from you.</p>
+        <div class="cta-buttons">
+          <a href="contact.html" class="btn btn-primary">Send a Message <span class="arrow">→</span></a>
+          <a href="contact.html#book" class="btn btn-outline">Book a Meeting</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
     <div class="container">
@@ -618,7 +750,7 @@
         <span class="footer-logo">Kyla Fallis</span>
         <nav class="footer-links">
           <a href="research.html">Research</a>
-          <a href="work.html">Work</a>
+          <a href="projects.html">Projects</a>
           <a href="speaking.html">Speaking</a>
           <a href="about.html">About</a>
           <a href="contact.html">Contact</a>
@@ -632,9 +764,5 @@
   </footer>
 
   <script src="main.js"></script>
-  <script>
-    document.getElementById('footer-year').textContent =
-      `© ${new Date().getFullYear()} Kyla Fallis · Environmental Engineer · Researcher · Builder`;
-  </script>
 </body>
 </html>

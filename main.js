@@ -2,31 +2,77 @@
 // main.js — Shared JS across all pages
 // ============================================================
 
-// ── NAV TOGGLE (mobile) ──────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.querySelector('.nav-toggle');
-  const links  = document.querySelector('.nav-links');
 
-  if (toggle && links) {
+  // ── NAV: TRANSPARENT ON HOME, SOLID EVERYWHERE ELSE ────────
+  const navEl = document.querySelector('nav');
+  const isHome = document.body.classList.contains('page-home');
+
+  if (navEl) {
+    if (isHome) {
+      // Start transparent on homepage
+      navEl.classList.add('nav-transparent');
+
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 60) {
+          navEl.classList.remove('nav-transparent');
+          navEl.classList.add('nav-scrolled');
+        } else {
+          navEl.classList.remove('nav-scrolled');
+          navEl.classList.add('nav-transparent');
+        }
+      }, { passive: true });
+    } else {
+      // All other pages: always dark solid
+      navEl.classList.add('nav-solid');
+    }
+  }
+
+  // ── MOBILE NAV OVERLAY ──────────────────────────────────────
+  const toggle  = document.querySelector('.nav-toggle');
+  const overlay = document.querySelector('.nav-overlay');
+
+  if (toggle && overlay) {
     toggle.addEventListener('click', () => {
-      links.classList.toggle('open');
+      const isOpen = overlay.classList.toggle('open');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+
+      // Animate hamburger → X
+      const spans = toggle.querySelectorAll('span');
+      if (isOpen) {
+        spans[0].style.transform = 'translateY(6.5px) rotate(45deg)';
+        spans[1].style.opacity   = '0';
+        spans[2].style.transform = 'translateY(-6.5px) rotate(-45deg)';
+      } else {
+        spans[0].style.transform = '';
+        spans[1].style.opacity   = '';
+        spans[2].style.transform = '';
+      }
     });
+
     // Close on link click
-    links.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => links.classList.remove('open'));
+    overlay.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+        const spans = toggle.querySelectorAll('span');
+        spans[0].style.transform = '';
+        spans[1].style.opacity   = '';
+        spans[2].style.transform = '';
+      });
     });
   }
 
   // ── ACTIVE NAV LINK ────────────────────────────────────────
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-links a').forEach(a => {
+  document.querySelectorAll('.nav-links a, .nav-overlay a').forEach(a => {
     const href = a.getAttribute('href');
     if (href === currentPath || (currentPath === '' && href === 'index.html')) {
       a.classList.add('active');
     }
   });
 
-  // ── SCROLL ANIMATIONS ──────────────────────────────────────
+  // ── SCROLL REVEAL ──────────────────────────────────────────
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -35,62 +81,14 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
 
   reveals.forEach(el => observer.observe(el));
 
-  // ── NAV SHADOW ON SCROLL ────────────────────────────────────
-  const navEl = document.querySelector('nav');
-  if (navEl) {
-    window.addEventListener('scroll', () => {
-      navEl.style.boxShadow = window.scrollY > 10
-        ? '0 2px 24px rgba(28,43,30,0.1)'
-        : 'none';
-    }, { passive: true });
+  // ── FOOTER YEAR ────────────────────────────────────────────
+  const yearEl = document.getElementById('footer-year');
+  if (yearEl) {
+    yearEl.textContent = `© ${new Date().getFullYear()} Kyla Fallis · Environmental Engineer · Researcher · Builder`;
   }
+
 });
-
-// ── RENDER SHARED NAV ────────────────────────────────────────
-function renderNav(activePage) {
-  return `
-  <nav>
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo">Kyla <span>Fallis</span></a>
-      <ul class="nav-links">
-        <li><a href="index.html" ${activePage==='home'?'class="active"':''}>Home</a></li>
-        <li><a href="research.html" ${activePage==='research'?'class="active"':''}>Research</a></li>
-        <li><a href="work.html" ${activePage==='work'?'class="active"':''}>Work</a></li>
-        <li><a href="speaking.html" ${activePage==='speaking'?'class="active"':''}>Speaking</a></li>
-        <li><a href="about.html" ${activePage==='about'?'class="active"':''}>About</a></li>
-        <li><a href="contact.html" class="nav-cta" ${activePage==='contact'?'style="background:var(--green-mid)"':''}>Contact</a></li>
-      </ul>
-      <button class="nav-toggle" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>`;
-}
-
-// ── RENDER SHARED FOOTER ─────────────────────────────────────
-function renderFooter() {
-  return `
-  <footer>
-    <div class="container">
-      <div class="footer-inner">
-        <span class="footer-logo">Kyla Fallis</span>
-        <nav class="footer-links">
-          <a href="index.html">Home</a>
-          <a href="research.html">Research</a>
-          <a href="work.html">Work</a>
-          <a href="speaking.html">Speaking</a>
-          <a href="about.html">About</a>
-          <a href="contact.html">Contact</a>
-          <a href="https://linkedin.com/in/kylafallis07" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/kylafallis" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://fairgameinitiative.org" target="_blank" rel="noopener">FairGame</a>
-        </nav>
-        <p class="footer-copy">© ${new Date().getFullYear()} Kyla Fallis · Environmental Engineer · Researcher · Builder</p>
-      </div>
-    </div>
-  </footer>`;
-}

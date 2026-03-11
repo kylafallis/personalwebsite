@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Kyla Fallis</title>
+  <meta name="description" content="About Kyla Fallis — Environmental Engineering student at Ohio State, researcher, nonprofit founder, and public advocate.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Split hero */
+    .about-hero {
+      background: var(--bg-dark);
+      padding-top: 68px;
+      min-height: 70vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .about-hero-photo {
+      position: relative;
+      min-height: 480px;
+    }
+
+    .about-hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+    }
+
+    .about-hero-photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 60%, var(--bg-dark) 100%);
+    }
+
+    .about-hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 4rem 5% 4rem 3.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-hero-content h1 {
+      color: var(--text-white);
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-hero-content h1 em {
+      font-style: italic;
+      color: var(--green-light);
+      display: block;
+    }
+
+    .about-hero-content p {
+      color: rgba(245,242,237,0.68);
+      font-size: 1rem;
+      line-height: 1.75;
+      max-width: 44ch;
+    }
+
+    /* Prose section */
+    .about-prose {
+      background: var(--bg);
+      padding: var(--section-pad);
+    }
+
+    .about-prose-inner {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .prose-block p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--text-mid);
+      margin-bottom: 1.6rem;
+      max-width: none;
+    }
+
+    .prose-block p:last-child { margin-bottom: 0; }
+
+    /* Credentials sidebar */
+    .credentials-sidebar {
+      position: sticky;
+      top: 96px;
+    }
+
+    .credentials-block {
+      border: 1px solid var(--green-pale);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .credentials-block-header {
+      background: var(--bg-mid);
+      padding: 0.9rem 1.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--green-primary);
+      border-bottom: 1px solid var(--green-pale);
+    }
+
+    .credential-row {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--green-pale);
+    }
+
+    .credential-row:last-child { border-bottom: none; }
+
+    .credential-year {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      color: var(--green-light);
+      background: var(--bg-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.9rem 0;
+      writing-mode: horizontal-tb;
+    }
+
+    .credential-text {
+      padding: 0.9rem 1.2rem;
+      font-size: 0.85rem;
+      color: var(--text-dark);
+      line-height: 1.45;
+    }
+
+    .credential-text .cred-org {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      color: var(--text-light);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 0.15rem;
+    }
+
+    /* Download buttons */
+    .download-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .download-row .btn {
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    /* Involvement */
+    .involvement-section {
+      background: var(--bg-mid);
+      padding: var(--section-pad);
+    }
+
+    .involvement-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--green-pale);
+      border: 1px solid var(--green-pale);
+      margin-top: 0;
+    }
+
+    .involvement-item {
+      background: var(--bg-card);
+      padding: 2rem;
+      transition: background 0.2s ease;
+    }
+
+    .involvement-item:hover { background: var(--bg); }
+
+    .involvement-item .inv-role {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green-primary);
+      margin-bottom: 0.4rem;
+    }
+
+    .involvement-item h3 {
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
+      line-height: 1.35;
+    }
+
+    .involvement-item p {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--text-light);
+    }
+
+    /* Awards strip */
+    .awards-strip {
+      background: var(--bg-dark);
+      padding: var(--section-pad);
+    }
+
+    .awards-columns {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+
+    .awards-column-title {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green-light);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(122,175,138,0.2);
+    }
+
+    .awards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .award-item {}
+
+    .award-item .award-title {
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-white);
+      line-height: 1.35;
+    }
+
+    .award-item .award-org {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: rgba(245,242,237,0.38);
+      margin-top: 0.15rem;
+      letter-spacing: 0.04em;
+    }
+
+    @media (max-width: 1024px) {
+      .about-hero { grid-template-columns: 1fr; min-height: auto; }
+      .about-hero-photo { min-height: 340px; }
+      .about-hero-photo-overlay { background: linear-gradient(to top, var(--bg-dark) 0%, transparent 60%); }
+      .about-hero-content { padding: 2rem 5%; }
+      .about-prose-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .credentials-sidebar { position: static; }
+      .awards-columns { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .involvement-grid { grid-template-columns: 1fr; }
+      .awards-columns { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Kyla <span>Fallis</span></a>
+      <ul class="nav-links">
+        <li><a href="research.html">Research</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="speaking.html">Speaking</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="contact.html" class="nav-cta">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="nav-overlay">
+    <a href="index.html">Home</a>
+    <a href="research.html">Research</a>
+    <a href="projects.html">Projects</a>
+    <a href="speaking.html">Speaking</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- SPLIT HERO -->
+  <div class="about-hero">
+    <div class="about-hero-photo">
+      <!-- Replace with images/about.jpg (banner2.JPG) -->
+      <img src="images/about.jpg" alt="Kyla Fallis speaking">
+      <div class="about-hero-photo-overlay"></div>
+    </div>
+    <div class="about-hero-content">
+      <span class="section-label" style="margin-bottom:1rem;">About</span>
+      <h1>Engineer.<br>Researcher.<br><em>Builder.</em></h1>
+      <p>Environmental Engineering student at Ohio State · Humanitarian Engineering Scholars Program · Pre-Law Minor in Science &amp; Engineering in the Public Interest</p>
+    </div>
+  </div>
+
+  <!-- PROSE + CREDENTIALS -->
+  <section class="about-prose">
+    <div class="container">
+      <div class="about-prose-inner">
+
+        <div class="prose-block reveal">
+          <p>
+            I grew up in Lima, Ohio, watching science fairs from the sidelines — curious but under-resourced, with no roadmap for how someone like me got to stand at a project board at a national competition. When I finally found my way in, through a teacher who believed in me and a community that showed up, it changed everything. That experience is the through-line of most of what I build.
+          </p>
+          <p>
+            Now I'm an Environmental Engineering student at Ohio State in the Humanitarian Engineering Scholars Program, pursuing a pre-law minor in Science and Engineering in the Public Interest. My research spans deep-sea electrochemistry, machine learning applications in ocean science, and renewable energy systems. Two papers are in press for 2026 — one with IEEE, one with Springer — and my independent MFC research was published in Sustentabilis Terra in 2025. In parallel, I compete on Ohio State's Model UN team, where I work at the intersection of technical knowledge and international policy.
+          </p>
+          <p>
+            The direction I'm building toward sits at the overlap of environmental engineering and law — not because I couldn't choose between them, but because the most important problems won't be solved by either field alone. The science tells us what's possible. The policy determines what actually happens. I want to be someone who can move in both rooms.
+          </p>
+        </div>
+
+        <div class="credentials-sidebar reveal reveal-delay-1">
+
+          <!-- Education -->
+          <div class="credentials-block">
+            <div class="credentials-block-header">Education</div>
+            <div class="credential-row">
+              <div class="credential-year">2028</div>
+              <div class="credential-text">
+                B.S. Environmental Engineering
+                <div class="cred-org">Ohio State University · Humanitarian Engineering Scholars · Expected Dec 2028</div>
+              </div>
+            </div>
+            <div class="credential-row">
+              <div class="credential-year">2025</div>
+              <div class="credential-text">
+                High School Valedictorian, Rank 1
+                <div class="cred-org">Bath High School · Lima, Ohio</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Select honors -->
+          <div class="credentials-block">
+            <div class="credentials-block-header">Select Honors</div>
+            <div class="credential-row">
+              <div class="credential-year">Int'l</div>
+              <div class="credential-text">
+                ISEF Qualifier · EPA Award · IFoRE Finalist
+                <div class="cred-org">Society for Science · U.S. EPA</div>
+              </div>
+            </div>
+            <div class="credential-row">
+              <div class="credential-year">Natl</div>
+              <div class="credential-text">
+                National Youth Science Camp — Ohio Delegate · AJAS Fellow
+                <div class="cred-org">NYSC · American Junior Academy of Science</div>
+              </div>
+            </div>
+            <div class="credential-row">
+              <div class="credential-year">State</div>
+              <div class="credential-text">
+                Melvin Scholar · OAS President's Award · Edison Award
+                <div class="cred-org">Ohio Academy of Science · State of Ohio</div>
+              </div>
+            </div>
+            <div class="credential-row">
+              <div class="credential-year">2025</div>
+              <div class="credential-text">
+                Distinguished Young Woman of Allen County
+                <div class="cred-org">DYW Program</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Downloads -->
+          <div class="download-row">
+            <a href="files/Kyla_Fallis_Resume.pdf" class="btn btn-primary" target="_blank">
+              Resume <span>↓</span>
+            </a>
+            <a href="files/Kyla_Fallis_CV.pdf" class="btn btn-outline" target="_blank">
+              Full CV <span>↓</span>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVOLVEMENT -->
+  <section class="involvement-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Campus &amp; Community</span>
+        <h2>Involvement</h2>
+      </div>
+
+      <div class="involvement-grid reveal">
+        <div class="involvement-item">
+          <div class="inv-role">Founder &amp; Executive Director</div>
+          <h3>FairGame Initiative</h3>
+          <p>Founded November 2025. Nonprofit closing the resource gap in STEM education. Manages 5-person team, oversees outreach across 10+ Ohio science fairs.</p>
+        </div>
+        <div class="involvement-item">
+          <div class="inv-role">Competitor &amp; UNA Member</div>
+          <h3>OSU CCWA — Model United Nations</h3>
+          <p>Competes on Ohio State's collegiate MUN team through the Council on World Affairs. Active member of the United Nations Association, advocating for diplomacy and human rights.</p>
+        </div>
+        <div class="involvement-item">
+          <div class="inv-role">Member</div>
+          <h3>Undergraduate Student Government — Sustainability Issues Team</h3>
+          <p>Selected for OSU's sustainability committee to advance student-driven policy recommendations and integrate sustainable practices into university operations.</p>
+        </div>
+        <div class="involvement-item">
+          <div class="inv-role">Member</div>
+          <h3>Society of Women Engineers (SWE) &amp; Engineers for a Sustainable World</h3>
+          <p>Community building for gender equity in engineering; collaboration on sustainable engineering projects and devices alongside ESW's interdisciplinary team.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AWARDS -->
+  <section class="awards-strip">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label" style="color:var(--green-light);">Recognition</span>
+        <h2 style="color:var(--text-white);">Awards &amp; Honors</h2>
+      </div>
+
+      <div class="awards-columns reveal">
+        <div>
+          <div class="awards-column-title">International &amp; National</div>
+          <div class="awards-list">
+            <div class="award-item">
+              <div class="award-title">IFoRE 2025 Finalist</div>
+              <div class="award-org">International Forum on Research Excellence</div>
+            </div>
+            <div class="award-item">
+              <div class="award-title">EPA Award — ISEF</div>
+              <div class="award-org">U.S. Environmental Protection Agency</div>
+            </div>
+            <div class="award-item">
+              <div class="award-title">ISEF Qualifier &amp; Presenter</div>
+              <div class="award-org">Society for Science</div>
+            </div>
+            <div class="award-item">
+              <div class="award-title">National Youth Science Camp — Ohio Delegate</div>
+              <div class="award-org">NYSC · One of two Ohio representatives</div>
+            </div>
+            <div class="award-item">
+              <div class="award-title">AJAS Fellow</div>
+              <div class="award-org">American Junior Academy of Science</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="awards-column-title">State</div>
+          <div class="awards-list">
+            <div class="award-item">
+              <div class="award-title">Melvin Scholar</div>
+              <div class="award-org">Ohio Academy of Science</div>
+            </div>
+            <div class="award-item">
+              <div class="award-title">OAS President's Award</div>
+              <div class="award-org">Ohio Academy of Science</div>
+            </div>
+            <div class="award-item">
+              <div class="award-title">Governor's Thomas Edison Award for Excellence in STEM</div>
+              <div class="award-org">State of Ohio</div>
+            </div>
+            <div class="award-item">
+              <div class="award-title">1st Place, Ohio 4-H AI Competition</div>
+              <div class="award-org">Ohio 4-H · National Qualifier</div>
+            </div>
+            <div class="award-item">
+              <div class="award-title">5× Superior Ratings, State Science Day</div>
+              <div class="award-org">Ohio Academy of Science</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="awards-column-title">Regional &amp; Academic</div>
+          <div class="awards-list">
+            <div class="award-item">
+              <div class="award-title">Distinguished Young Woman of Allen County</div>
+              <div class="award-org">DYW Program</div>
+            </div>
+            <div class="award-item">
+              <div class="award-title">Class Valedictorian, Rank 1</div>
+              <div class="award-org">Bath High School · May 2025</div>
+            </div>
+            <div class="award-item">
+              <div class="award-title">National Honor Society</div>
+              <div class="award-org">Bath High School</div>
+            </div>
+            <div class="award-item">
+              <div class="award-title">Humanitarian Engineering Scholars Program</div>
+              <div class="award-org">The Ohio State University</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo">Kyla Fallis</span>
+        <nav class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="research.html">Research</a>
+          <a href="projects.html">Projects</a>
+          <a href="speaking.html">Speaking</a>
+          <a href="contact.html">Contact</a>
+          <a href="https://linkedin.com/in/kylafallis07" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://fairgameinitiative.org" target="_blank" rel="noopener">FairGame ↗</a>
+        </nav>
+        <p class="footer-copy" id="footer-year"></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

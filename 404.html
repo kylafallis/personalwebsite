@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Kyla Fallis</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: var(--bg-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 60%, rgba(74,124,89,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 20%, rgba(74,124,89,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .error-num {
+      font-family: var(--font-serif);
+      font-size: clamp(7rem, 22vw, 16rem);
+      font-weight: 300;
+      color: rgba(122,175,138,0.12);
+      line-height: 1;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -52%);
+      user-select: none;
+      pointer-events: none;
+      letter-spacing: -0.05em;
+    }
+
+    .error-content {
+      position: relative;
+      z-index: 2;
+      max-width: 480px;
+    }
+
+    .error-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--green-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .error-content h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 300;
+      color: var(--text-white);
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+
+    .error-content h1 em {
+      font-style: italic;
+      color: var(--green-light);
+    }
+
+    .error-content p {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      color: rgba(245,242,237,0.55);
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+      max-width: none;
+    }
+
+    .error-nav {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <span class="error-num">404</span>
+
+  <div class="error-content">
+    <div class="error-label">404 — Page Not Found</div>
+    <h1>Lost somewhere in<br><em>the deep ocean.</em></h1>
+    <p>
+      Even dark oxygen has a source — but this page doesn't seem to.
+      Whatever you were looking for has drifted somewhere beyond the photic zone.
+    </p>
+    <div class="error-nav">
+      <a href="index.html" class="btn btn-primary">← Back to Surface</a>
+      <a href="research.html" class="btn btn-outline-light">View Research</a>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>

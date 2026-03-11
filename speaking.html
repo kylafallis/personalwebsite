@@ -7,30 +7,22 @@
   <meta name="description" content="Kyla Fallis is available for public speaking on topics spanning environmental engineering, science equity, renewable energy, and student research.">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* ── SPEAKING PAGE STYLES ── */
-
-    /* Speaking entries - alternating layout */
     .speaking-entry {
       display: grid;
-      grid-template-columns: 80px 1fr;
+      grid-template-columns: 72px 1fr;
       gap: 0 2.5rem;
       padding: 2.5rem 0;
       border-bottom: 1px solid var(--green-pale);
       align-items: start;
+      transition: var(--transition);
     }
 
     .speaking-entry:last-child { border-bottom: none; }
 
-    .speaking-entry:hover .speaking-icon {
-      background: var(--green-primary);
-      color: var(--text-white);
-    }
-
     .speaking-icon {
-      width: 56px;
-      height: 56px;
-      border: 1.5px solid var(--green-pale);
-      border-radius: 50%;
+      width: 52px;
+      height: 52px;
+      border: 1px solid var(--green-pale);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -39,30 +31,31 @@
       margin-top: 4px;
     }
 
+    .speaking-entry:hover .speaking-icon {
+      background: var(--green-primary);
+      border-color: var(--green-primary);
+    }
+
     .speaking-icon svg {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       stroke: var(--green-primary);
-      transition: var(--transition);
+      transition: stroke 0.25s ease;
     }
 
     .speaking-entry:hover .speaking-icon svg { stroke: white; }
 
-    .speaking-content {}
-
     .speaking-org {
-      font-size: 0.7rem;
-      font-weight: 700;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--green-primary);
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.35rem;
     }
 
-    .speaking-content h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.6rem;
-    }
+    .speaking-content h3 { font-size: 1.3rem; margin-bottom: 0.6rem; }
 
     .speaking-content p {
       font-size: 0.95rem;
@@ -78,44 +71,153 @@
     }
 
     .speaking-meta span {
-      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
       color: var(--text-light);
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
     }
 
-    /* Topics I speak on */
+    /* Conference timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--green-pale);
+      overflow: hidden;
+    }
+
+    .timeline-year-group {}
+
+    .timeline-year {
+      background: var(--bg-dark);
+      padding: 0.75rem 1.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green-light);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .timeline-year::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(122,175,138,0.2);
+    }
+
+    .timeline-event {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: center;
+      padding: 1.1rem 1.6rem;
+      border-bottom: 1px solid var(--green-pale);
+      transition: background 0.2s ease;
+    }
+
+    .timeline-event:last-child { border-bottom: none; }
+    .timeline-event:hover { background: var(--bg-mid); }
+
+    .timeline-event-name {
+      font-family: var(--font-serif);
+      font-size: 1rem;
+      color: var(--text-dark);
+    }
+
+    .timeline-event-org {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-top: 0.15rem;
+    }
+
+    .timeline-event-badge {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green-primary);
+      white-space: nowrap;
+      padding: 0.22rem 0.6rem;
+      border: 1px solid var(--green-pale);
+      background: var(--bg);
+    }
+
+    /* MUN block */
+    .mun-block {
+      background: var(--bg-mid);
+      padding: 2.5rem;
+      border: 1px solid var(--green-pale);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .mun-block h3 { font-size: 1.5rem; margin-bottom: 0.8rem; }
+    .mun-block p  { font-size: 0.95rem; line-height: 1.7; }
+
+    .mun-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--green-pale);
+      overflow: hidden;
+    }
+
+    .mun-item {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--green-pale);
+      padding: 1rem 1.2rem;
+      font-size: 0.88rem;
+    }
+
+    .mun-item:last-child { border-bottom: none; }
+
+    .mun-item strong {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    /* Topics grid */
     .topics-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 1rem;
+      gap: 1px;
+      background: var(--green-pale);
+      border: 1px solid var(--green-pale);
     }
 
     .topic-card {
       background: var(--bg-card);
-      border: 1px solid var(--green-pale);
-      border-radius: var(--radius-lg);
-      padding: 1.6rem;
-      transition: var(--transition);
+      padding: 1.8rem;
+      transition: background 0.2s ease;
     }
 
-    .topic-card:hover {
-      border-color: var(--green-light);
-      transform: translateY(-2px);
-    }
+    .topic-card:hover { background: var(--bg-mid); }
 
     .topic-icon {
-      font-size: 1.5rem;
-      margin-bottom: 0.6rem;
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
       display: block;
     }
 
     .topic-card h4 {
       font-family: var(--font-sans);
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0;
       text-transform: none;
       color: var(--text-dark);
       margin-bottom: 0.4rem;
@@ -124,59 +226,13 @@
     .topic-card p {
       font-size: 0.82rem;
       color: var(--text-light);
-      line-height: 1.55;
-    }
-
-    /* MUN section */
-    .mun-block {
-      background: var(--bg-mid);
-      border-radius: var(--radius-lg);
-      padding: 2.5rem;
-      border: 1px solid var(--green-pale);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
-      align-items: center;
-    }
-
-    .mun-block h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .mun-block p {
-      font-size: 0.95rem;
-      line-height: 1.7;
-    }
-
-    .mun-highlights {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-    }
-
-    .mun-item {
-      background: var(--bg-card);
-      border: 1px solid var(--green-pale);
-      border-radius: var(--radius);
-      padding: 1rem 1.2rem;
-      font-size: 0.88rem;
-    }
-
-    .mun-item strong {
-      color: var(--green-primary);
-      display: block;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 0.2rem;
+      line-height: 1.6;
     }
 
     /* Booking CTA */
     .booking-cta {
       background: var(--bg-dark);
-      border-radius: var(--radius-lg);
-      padding: 3rem;
+      padding: 3.5rem;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -186,24 +242,14 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(74,124,87,0.25) 0%, transparent 65%);
+      background: radial-gradient(ellipse at 50% 0%, rgba(74,124,89,0.22) 0%, transparent 65%);
       pointer-events: none;
     }
 
-    .booking-cta h2 {
-      color: var(--text-white);
-      margin-bottom: 1rem;
-      position: relative;
-    }
+    .booking-cta h2 { color: var(--text-white); margin-bottom: 1rem; position: relative; }
+    .booking-cta p  { color: rgba(245,242,237,0.65); max-width: 48ch; margin: 0 auto 2rem; position: relative; }
 
-    .booking-cta p {
-      color: rgba(244,247,244,0.68);
-      max-width: 52ch;
-      margin: 0 auto 2rem;
-      position: relative;
-    }
-
-    .booking-cta .cta-buttons {
+    .cta-buttons {
       display: flex;
       gap: 1rem;
       justify-content: center;
@@ -213,21 +259,21 @@
 
     @media (max-width: 768px) {
       .speaking-entry { grid-template-columns: 1fr; gap: 1rem; }
-      .speaking-icon { display: none; }
-      .mun-block { grid-template-columns: 1fr; }
+      .speaking-icon  { display: none; }
+      .mun-block      { grid-template-columns: 1fr; }
+      .timeline-event { grid-template-columns: 1fr; }
+      .timeline-event-badge { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">Kyla <span>Fallis</span></a>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
         <li><a href="research.html">Research</a></li>
-        <li><a href="work.html">Work</a></li>
+        <li><a href="projects.html">Projects</a></li>
         <li><a href="speaking.html" class="active">Speaking</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html" class="nav-cta">Contact</a></li>
@@ -235,17 +281,24 @@
       <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     </div>
   </nav>
+  <div class="nav-overlay">
+    <a href="index.html">Home</a>
+    <a href="research.html">Research</a>
+    <a href="projects.html">Projects</a>
+    <a href="speaking.html">Speaking</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
 
-  <!-- PAGE HERO -->
   <section class="page-hero">
     <div class="container">
-      <span class="section-label">Public Speaking</span>
+      <span class="section-label">Public Speaking &amp; Advocacy</span>
       <h1>Taking the Stage</h1>
       <p>From international science competitions to civic retreats and Model UN committees — advocating for science, equity, and evidence-based policy at every level. Open to speaking opportunities.</p>
     </div>
   </section>
 
-  <!-- SPEAKING ENGAGEMENTS -->
+  <!-- FEATURED ENGAGEMENTS -->
   <section style="padding: var(--section-pad);">
     <div class="container">
       <div class="section-header reveal">
@@ -253,7 +306,6 @@
         <h2>Past &amp; Present</h2>
       </div>
 
-      <!-- COSI Big Science Day -->
       <div class="speaking-entry reveal">
         <div class="speaking-icon">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -264,35 +316,14 @@
           <div class="speaking-org">Center of Science and Industry · Columbus, OH</div>
           <h3>COSI Big Science Day — Invited Panelist</h3>
           <p>Selected as a student researcher panelist for Ohio's premier public science event, presenting original work on microbial fuel cells and renewable energy to a public audience at COSI. Engaged with scientists, educators, and community members on accessible, real-world STEM applications.</p>
-          <!-- IMAGE SUGGESTION: A photo of you at COSI, on stage, or at the panel.
-               Place at: images/speaking/cosi.jpg -->
           <div class="speaking-meta">
-            <span>📍 Columbus, Ohio</span>
-            <span>🧪 Student Research Panel</span>
+            <span>Columbus, Ohio</span>
+            <span>·</span>
+            <span>Student Research Panel</span>
           </div>
         </div>
       </div>
 
-      <!-- OAS State Science Day -->
-      <div class="speaking-entry reveal">
-        <div class="speaking-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5z"/>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
-          </svg>
-        </div>
-        <div class="speaking-content">
-          <div class="speaking-org">Ohio Academy of Science · Columbus, OH</div>
-          <h3>State Science Day — Research Presenter</h3>
-          <p>Presented original independent research to a statewide panel of scientists, engineers, and educators at the Ohio Academy of Science's flagship event. Recipient of multiple Superior ratings across five appearances, the OAS President's Award, and the Melvin Scholar designation for exceptional scientific inquiry.</p>
-          <div class="speaking-meta">
-            <span>📍 Columbus, Ohio</span>
-            <span>🏆 5× Superior Rating · OAS President's Award · Melvin Scholar</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- ISEF -->
       <div class="speaking-entry reveal">
         <div class="speaking-icon">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -303,16 +334,51 @@
           <div class="speaking-org">Society for Science · International</div>
           <h3>International Science &amp; Engineering Fair (ISEF) — Presenter</h3>
           <p>Qualified for and presented original research at ISEF — the world's largest pre-collegiate science competition — to an international panel of scientists and engineers. Recipient of the EPA Award for environmental impact research.</p>
-          <!-- IMAGE SUGGESTION: Photo of you at your ISEF display board.
-               Place at: images/speaking/isef.jpg -->
           <div class="speaking-meta">
-            <span>🌍 International</span>
-            <span>🏆 EPA Award</span>
+            <span>International</span>
+            <span>·</span>
+            <span>EPA Award</span>
           </div>
         </div>
       </div>
 
-      <!-- Rotary Club -->
+      <div class="speaking-entry reveal">
+        <div class="speaking-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l9-5-9-5-9 5 9 5z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+          </svg>
+        </div>
+        <div class="speaking-content">
+          <div class="speaking-org">Ohio Academy of Science · Columbus, OH</div>
+          <h3>State Science Day — Research Presenter</h3>
+          <p>Presented original independent research to a statewide panel of scientists and educators at the Ohio Academy of Science's flagship event. Recipient of multiple Superior ratings across five appearances, the OAS President's Award, and the Melvin Scholar designation.</p>
+          <div class="speaking-meta">
+            <span>Columbus, Ohio</span>
+            <span>·</span>
+            <span>5× Superior · OAS President's Award · Melvin Scholar</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="speaking-entry reveal">
+        <div class="speaking-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"/>
+          </svg>
+        </div>
+        <div class="speaking-content">
+          <div class="speaking-org">United Nations Association – USA · National</div>
+          <h3>UNA-USA Leadership Summit — OSU Representative</h3>
+          <p>Selected to represent The Ohio State University at the national UNA-USA Leadership Summit, engaging on global policy, multilateral diplomacy, and international advocacy with student leaders and UN experts from across the country.</p>
+          <div class="speaking-meta">
+            <span>National Conference</span>
+            <span>·</span>
+            <span>OSU Representative</span>
+          </div>
+        </div>
+      </div>
+
       <div class="speaking-entry reveal">
         <div class="speaking-icon">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -324,13 +390,13 @@
           <h3>Rotary Club Presentations</h3>
           <p>Invited speaker at Rotary Club meetings in Allen County, delivering presentations on environmental research, renewable energy innovation, and the importance of STEM education to community and civic leaders.</p>
           <div class="speaking-meta">
-            <span>📍 Allen County, Ohio</span>
-            <span>👥 Civic Audience</span>
+            <span>Allen County, Ohio</span>
+            <span>·</span>
+            <span>Civic Audience</span>
           </div>
         </div>
       </div>
 
-      <!-- Allen County Juvenile Court -->
       <div class="speaking-entry reveal">
         <div class="speaking-icon">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -342,37 +408,115 @@
           <h3>Juvenile Court Retreat — Selected Speaker</h3>
           <p>Invited to speak at the Allen County Juvenile Court's retreat, addressing youth audiences on themes of leadership, opportunity in STEM, and the role of community engagement in shaping a purposeful future.</p>
           <div class="speaking-meta">
-            <span>📍 Allen County, Ohio</span>
-            <span>👥 Youth Audience</span>
+            <span>Allen County, Ohio</span>
+            <span>·</span>
+            <span>Youth Audience</span>
           </div>
         </div>
       </div>
-
-      <!-- UNA-USA -->
-      <div class="speaking-entry reveal">
-        <div class="speaking-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064"/>
-          </svg>
-        </div>
-        <div class="speaking-content">
-          <div class="speaking-org">United Nations Association – USA · National</div>
-          <h3>UNA-USA Leadership Summit — OSU Representative</h3>
-          <p>Selected to represent The Ohio State University at the national UNA-USA Leadership Summit, engaging on global policy, multilateral diplomacy, and international advocacy with student leaders and UN experts from across the country.</p>
-          <div class="speaking-meta">
-            <span>🌍 National Conference</span>
-            <span>🎓 OSU Representative</span>
-          </div>
-        </div>
-      </div>
-
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- MODEL UN SECTION -->
+  <!-- CONFERENCE TIMELINE -->
   <section class="section-alt" style="padding: var(--section-pad);">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Full Record</span>
+        <h2>Conference Timeline</h2>
+      </div>
+
+      <div class="timeline reveal">
+        <div class="timeline-year-group">
+          <div class="timeline-year">2026</div>
+          <div class="timeline-event">
+            <div>
+              <div class="timeline-event-name">HoosierMUN II — WHO Committee</div>
+              <div class="timeline-event-org">OSU CCWA · Indiana University</div>
+            </div>
+            <span class="timeline-event-badge">MUN</span>
+          </div>
+          <div class="timeline-event">
+            <div>
+              <div class="timeline-event-name">UNA-USA Leadership Summit</div>
+              <div class="timeline-event-org">United Nations Association – USA · OSU Representative</div>
+            </div>
+            <span class="timeline-event-badge">Policy</span>
+          </div>
+        </div>
+
+        <div class="timeline-year-group">
+          <div class="timeline-year">2025</div>
+          <div class="timeline-event">
+            <div>
+              <div class="timeline-event-name">National Youth Science Camp — Ohio Delegate</div>
+              <div class="timeline-event-org">NYSC · One of two Ohio representatives</div>
+            </div>
+            <span class="timeline-event-badge">National</span>
+          </div>
+          <div class="timeline-event">
+            <div>
+              <div class="timeline-event-name">IFoRE — Finalist</div>
+              <div class="timeline-event-org">International Forum on Research Excellence</div>
+            </div>
+            <span class="timeline-event-badge">International</span>
+          </div>
+          <div class="timeline-event">
+            <div>
+              <div class="timeline-event-name">AJAS Annual Conference</div>
+              <div class="timeline-event-org">American Junior Academy of Science · AJAS Fellow</div>
+            </div>
+            <span class="timeline-event-badge">National</span>
+          </div>
+          <div class="timeline-event">
+            <div>
+              <div class="timeline-event-name">International Science &amp; Engineering Fair (ISEF)</div>
+              <div class="timeline-event-org">Society for Science · EPA Award</div>
+            </div>
+            <span class="timeline-event-badge">International</span>
+          </div>
+          <div class="timeline-event">
+            <div>
+              <div class="timeline-event-name">OAS State Science Day</div>
+              <div class="timeline-event-org">Ohio Academy of Science · Melvin Scholar · OAS President's Award</div>
+            </div>
+            <span class="timeline-event-badge">State</span>
+          </div>
+        </div>
+
+        <div class="timeline-year-group">
+          <div class="timeline-year">Ongoing</div>
+          <div class="timeline-event">
+            <div>
+              <div class="timeline-event-name">CCWA Model UN Competitions</div>
+              <div class="timeline-event-org">OSU Collegiate Council on World Affairs</div>
+            </div>
+            <span class="timeline-event-badge">Collegiate MUN</span>
+          </div>
+          <div class="timeline-event">
+            <div>
+              <div class="timeline-event-name">Future Environmental Leaders Summit</div>
+              <div class="timeline-event-org">Environmental advocacy programming</div>
+            </div>
+            <span class="timeline-event-badge">Advocacy</span>
+          </div>
+          <div class="timeline-event">
+            <div>
+              <div class="timeline-event-name">Women in STEM Conference</div>
+              <div class="timeline-event-org">Regional STEM equity programming</div>
+            </div>
+            <span class="timeline-event-badge">Advocacy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- MODEL UN -->
+  <section style="padding: var(--section-pad);">
     <div class="container">
       <div class="section-header reveal">
         <span class="section-label">Diplomatic Advocacy</span>
@@ -383,13 +527,10 @@
         <div>
           <h3>OSU Collegiate Council on World Affairs</h3>
           <p>As a member of Ohio State's Model UN team through the Collegiate Council on World Affairs (CCWA), I compete in collegiate-level MUN conferences — researching complex global issues, drafting policy positions, and negotiating multilateral resolutions in committee.</p>
-          <p style="margin-top:0.8rem;">My work in MUN sits alongside my engineering and research training: I'm interested not just in building technical solutions, but in the policy architecture that determines whether those solutions actually reach the people who need them.</p>
+          <p style="margin-top:0.8rem;">My work in MUN sits alongside my engineering and research training: I'm interested not just in building technical solutions, but in the policy architecture that determines whether those solutions reach the people who need them.</p>
           <a href="contact.html" class="btn btn-outline" style="margin-top:1.5rem;display:inline-flex;">Connect on Policy Work <span class="arrow">→</span></a>
         </div>
-
         <div class="mun-highlights">
-          <!-- IMAGE SUGGESTION: A photo of you at a MUN conference, at the podium,
-               or with your delegation. Place at: images/speaking/mun.jpg -->
           <div class="mun-item">
             <strong>Organization</strong>
             OSU Collegiate Council on World Affairs (CCWA)
@@ -403,8 +544,8 @@
             Global Health · Environmental Policy · Human Rights · Diplomacy
           </div>
           <div class="mun-item">
-            <strong>Notable Engagement</strong>
-            UNA-USA National Leadership Summit — OSU Representative
+            <strong>Recent Conference</strong>
+            HoosierMUN II — WHO Committee, Topic 2 (2026)
           </div>
         </div>
       </div>
@@ -413,7 +554,7 @@
 
   <div class="divider"></div>
 
-  <!-- TOPICS I SPEAK ON -->
+  <!-- TOPICS -->
   <section style="padding: var(--section-pad);">
     <div class="container">
       <div class="section-header reveal">
@@ -422,36 +563,36 @@
         <p>Open to speaking invitations from academic institutions, conferences, civic organizations, and youth programs.</p>
       </div>
 
-      <div class="topics-grid">
-        <div class="topic-card reveal reveal-delay-1">
+      <div class="topics-grid reveal">
+        <div class="topic-card">
           <span class="topic-icon">🔬</span>
           <h4>Student Research &amp; Science Fairs</h4>
           <p>Navigating independent research, ISEF, and the science fair pipeline — from first project to national stage.</p>
         </div>
-        <div class="topic-card reveal reveal-delay-2">
+        <div class="topic-card">
           <span class="topic-icon">⚡</span>
           <h4>Renewable Energy Innovation</h4>
           <p>Microbial fuel cells, tidal energy, and the future of decentralized, accessible clean power.</p>
         </div>
-        <div class="topic-card reveal reveal-delay-3">
+        <div class="topic-card">
           <span class="topic-icon">🌊</span>
           <h4>Ocean Science &amp; Deep-Sea Policy</h4>
           <p>Dark oxygen production, the Clarion-Clipperton Zone, and the stakes of international seabed mining governance.</p>
         </div>
-        <div class="topic-card reveal reveal-delay-1">
+        <div class="topic-card">
           <span class="topic-icon">⚖️</span>
           <h4>Science Equity &amp; Access</h4>
           <p>Why resource gaps in STEM education compound over time — and what the FairGame model offers as a response.</p>
         </div>
-        <div class="topic-card reveal reveal-delay-2">
+        <div class="topic-card">
           <span class="topic-icon">🌍</span>
           <h4>Engineering &amp; Global Policy</h4>
           <p>The intersection of technical expertise and policy advocacy — why engineers need to be in the room.</p>
         </div>
-        <div class="topic-card reveal reveal-delay-3">
+        <div class="topic-card">
           <span class="topic-icon">🧭</span>
           <h4>Leadership &amp; Early Career STEM</h4>
-          <p>Building a research portfolio, founding a nonprofit, and learning to navigate institutional spaces as a young woman in engineering.</p>
+          <p>Building a research portfolio, founding a nonprofit, and navigating institutional spaces as a young woman in engineering.</p>
         </div>
       </div>
     </div>
@@ -465,13 +606,12 @@
         <p>I'm open to speaking engagements at conferences, universities, civic events, and youth programs. If you have an event in mind, I'd love to hear from you.</p>
         <div class="cta-buttons">
           <a href="contact.html" class="btn btn-primary">Send an Inquiry <span class="arrow">→</span></a>
-          <a href="contact.html#book" class="btn btn-outline" style="color:var(--green-light);border-color:rgba(74,124,87,0.4);">Schedule a Call</a>
+          <a href="contact.html#book" class="btn btn-outline-light">Schedule a Call</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="footer-inner">
@@ -479,13 +619,13 @@
         <nav class="footer-links">
           <a href="index.html">Home</a>
           <a href="research.html">Research</a>
-          <a href="work.html">Work</a>
+          <a href="projects.html">Projects</a>
           <a href="about.html">About</a>
           <a href="contact.html">Contact</a>
           <a href="https://linkedin.com/in/kylafallis07" target="_blank" rel="noopener">LinkedIn</a>
           <a href="https://fairgameinitiative.org" target="_blank" rel="noopener">FairGame ↗</a>
         </nav>
-        <p class="footer-copy">© <script>document.write(new Date().getFullYear())</script> Kyla Fallis · Environmental Engineer · Researcher · Builder</p>
+        <p class="footer-copy" id="footer-year"></p>
       </div>
     </div>
   </footer>

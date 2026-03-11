@@ -7,11 +7,9 @@
   <meta name="description" content="Peer-reviewed research by Kyla Fallis in deep-sea electrochemistry, tidal energy, and renewable energy systems.">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* ── RESEARCH PAGE STYLES ── */
     .research-entry {
       background: var(--bg-card);
       border: 1px solid var(--green-pale);
-      border-radius: var(--radius-lg);
       overflow: hidden;
       box-shadow: var(--shadow-sm);
       transition: var(--transition);
@@ -26,7 +24,6 @@
     .research-entry-inner {
       display: grid;
       grid-template-columns: 1fr 280px;
-      gap: 0;
     }
 
     .research-body {
@@ -43,8 +40,9 @@
     }
 
     .research-journal {
-      font-size: 0.72rem;
-      font-weight: 700;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 500;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--green-primary);
@@ -54,7 +52,7 @@
     .research-entry h2 {
       font-size: clamp(1.2rem, 2.5vw, 1.55rem);
       line-height: 1.25;
-      margin: 0.6rem 0 1.2rem;
+      margin: 0.7rem 0 1.2rem;
     }
 
     .research-entry p {
@@ -64,6 +62,7 @@
     }
 
     .research-coauthors {
+      font-family: var(--font-sans);
       font-size: 0.82rem;
       color: var(--text-light);
       font-style: italic;
@@ -71,8 +70,9 @@
     }
 
     .meta-label {
-      font-size: 0.68rem;
-      font-weight: 700;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--text-light);
@@ -80,16 +80,27 @@
     }
 
     .meta-value {
+      font-family: var(--font-sans);
       font-size: 0.88rem;
       color: var(--text-dark);
     }
 
-    .meta-block { margin-bottom: 0.5rem; }
+    .meta-block { margin-bottom: 0.8rem; }
 
-    /* Solar / other independent research */
+    .meta-pdf-placeholder {
+      margin-top: auto;
+      padding: 1rem;
+      background: var(--bg);
+      border: 1px solid var(--green-pale);
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: var(--text-light);
+      text-align: center;
+      letter-spacing: 0.08em;
+    }
+
     .secondary-research {
       background: var(--bg-mid);
-      border-radius: var(--radius-lg);
       padding: 1.8rem 2rem;
       border: 1px solid var(--green-pale);
       margin-top: 1rem;
@@ -100,40 +111,32 @@
       margin-bottom: 0.5rem;
     }
 
-    /* Research timeline on right side of page hero */
     .research-hero-note {
-      background: rgba(74,124,87,0.1);
-      border: 1px solid rgba(74,124,87,0.2);
-      border-radius: var(--radius-lg);
+      background: rgba(74,124,89,0.1);
+      border: 1px solid rgba(74,124,89,0.2);
       padding: 1.4rem;
       margin-top: 2rem;
+      font-family: var(--font-sans);
       font-size: 0.85rem;
-      color: rgba(244,247,244,0.65);
+      color: rgba(245,242,237,0.65);
     }
 
-    .research-hero-note strong {
-      color: var(--green-light);
-      font-weight: 600;
-    }
+    .research-hero-note strong { color: var(--green-light); }
 
     @media (max-width: 900px) {
-      .research-entry-inner {
-        grid-template-columns: 1fr;
-      }
+      .research-entry-inner { grid-template-columns: 1fr; }
       .research-body { border-right: none; border-bottom: 1px solid var(--green-pale); }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">Kyla <span>Fallis</span></a>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
         <li><a href="research.html" class="active">Research</a></li>
-        <li><a href="work.html">Work</a></li>
+        <li><a href="projects.html">Projects</a></li>
         <li><a href="speaking.html">Speaking</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html" class="nav-cta">Contact</a></li>
@@ -141,8 +144,15 @@
       <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     </div>
   </nav>
+  <div class="nav-overlay">
+    <a href="index.html">Home</a>
+    <a href="research.html">Research</a>
+    <a href="projects.html">Projects</a>
+    <a href="speaking.html">Speaking</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
 
-  <!-- PAGE HERO -->
   <section class="page-hero">
     <div class="container">
       <span class="section-label">Publications &amp; Research</span>
@@ -154,7 +164,6 @@
     </div>
   </section>
 
-  <!-- MAIN RESEARCH -->
   <section style="padding: var(--section-pad);">
     <div class="container">
 
@@ -168,10 +177,10 @@
             <p>
               The Clarion-Clipperton Zone (CCZ) — a vast stretch of the central Pacific Ocean — is the world's most targeted region for commercial deep-sea mining due to its rich deposits of polymetallic nodules. In 2023, a landmark discovery revealed that these nodules are also the source of a previously unknown biological phenomenon: the production of oxygen at depths far below the photic zone, in complete darkness. This "dark oxygen" may have profound implications for the origins of aerobic life on Earth.
             </p>
-            <p style="margin-top: 1rem;">
-              This paper presents a novel hybrid machine learning and deep learning framework to quantify dark oxygen production (DOP) flux across the CCZ and model the potential consequences of large-scale seabed mining on this newly identified ecosystem. By training on available geochemical and hydrodynamic datasets, the framework generates spatially resolved predictions of oxygen flux and risk zones, offering a critical decision-support tool for international seabed mining policy.
+            <p style="margin-top:1rem;">
+              This paper presents a novel hybrid machine learning and deep learning framework to quantify dark oxygen production (DOP) flux across the CCZ and model the potential consequences of large-scale seabed mining on this newly identified ecosystem. By training on available geochemical and hydrodynamic datasets, the framework generates spatially resolved predictions of oxygen flux and risk zones — offering a critical decision-support tool for international seabed mining policy.
             </p>
-            <div class="tag-list" style="margin-top: 1.2rem;">
+            <div class="tag-list" style="margin-top:1.2rem;">
               <span class="tag">Machine Learning</span>
               <span class="tag">Deep Learning</span>
               <span class="tag">Dark Oxygen Production</span>
@@ -195,17 +204,10 @@
               <div class="meta-value">Ocean Science · ML/DL · Environmental Engineering</div>
             </div>
             <div class="meta-block">
-              <div class="meta-label">Award / Recognition</div>
+              <div class="meta-label">Recognition</div>
               <div class="meta-value">IEEE Conference Poster Presentation</div>
             </div>
-            <!-- Uncomment when PDF is ready:
-            <a href="files/papers/dark-oxygen-ieee.pdf" class="btn btn-primary" target="_blank" style="margin-top:auto;">
-              Download PDF ↓
-            </a>
-            -->
-            <div style="margin-top:auto; padding: 1rem; background: var(--bg); border-radius: var(--radius); font-size:0.78rem; color:var(--text-light); text-align:center;">
-              PDF available upon publication
-            </div>
+            <div class="meta-pdf-placeholder">PDF available upon publication</div>
           </div>
         </div>
       </div>
@@ -218,18 +220,17 @@
             <span class="badge badge-press">In Press · Spring 2026</span>
             <h2>A Novel Physics-Informed Deep Learning Framework for Tidal Energy Site Selection</h2>
             <p>
-              Optimal site selection is one of the most consequential decisions in tidal energy development — determining not only energy yield, but environmental impact and long-term viability. Traditional selection methods rely on empirical surveys and simplified hydrodynamic models that often fail to capture the complex, nonlinear interactions between tidal flows, seabed bathymetry, and turbine placement.
+              Optimal site selection is one of the most consequential decisions in tidal energy development — determining not only energy yield, but environmental impact and long-term viability. Traditional selection methods rely on empirical surveys and simplified hydrodynamic models that often fail to capture complex, nonlinear interactions between tidal flows, seabed bathymetry, and turbine placement.
             </p>
-            <p style="margin-top: 1rem;">
+            <p style="margin-top:1rem;">
               This paper introduces a physics-informed deep learning algorithm that embeds hydrodynamic governing equations directly into the neural network architecture, constraining predictions to be physically plausible even in data-sparse regions. The result is a site selection framework that outperforms purely data-driven approaches on accuracy and interpretability — providing actionable, spatially explicit recommendations for offshore tidal energy developers.
             </p>
-            <div class="tag-list" style="margin-top: 1.2rem;">
+            <div class="tag-list" style="margin-top:1.2rem;">
               <span class="tag">Physics-Informed ML</span>
               <span class="tag">Tidal Energy</span>
               <span class="tag">Renewable Energy</span>
               <span class="tag">Deep Learning</span>
               <span class="tag">Hydrodynamics</span>
-              <span class="tag">Site Selection</span>
             </div>
           </div>
           <div class="research-meta">
@@ -245,14 +246,12 @@
               <div class="meta-label">Domain</div>
               <div class="meta-value">Renewable Energy · Physics-Informed AI</div>
             </div>
-            <div style="margin-top:auto; padding: 1rem; background: var(--bg); border-radius: var(--radius); font-size:0.78rem; color:var(--text-light); text-align:center;">
-              PDF available upon publication
-            </div>
+            <div class="meta-pdf-placeholder">PDF available upon publication</div>
           </div>
         </div>
       </div>
 
-      <!-- PAPER 3: MFC / Sustentabilis Terra -->
+      <!-- PAPER 3: MFC -->
       <div class="research-entry reveal" id="mfc-research">
         <div class="research-entry-inner">
           <div class="research-body">
@@ -262,13 +261,10 @@
             <p>
               Access to reliable, affordable energy remains one of the most persistent barriers to development in low-resource communities. This project investigates microbial fuel cells (MFCs) as a decentralized, low-cost alternative — using the electrochemical activity of naturally occurring soil microbes, fed by organic compost, to generate usable electricity.
             </p>
-            <p style="margin-top: 1rem;">
-              Over 18 months of independent research, I designed and fabricated multiple MFC prototypes, systematically varied substrate compositions and electrode configurations, and conducted controlled electrochemical performance experiments. Key findings demonstrated consistent voltage output from compost-based bioanodic chambers, with substrate longevity as the primary variable in energy efficiency optimization.
+            <p style="margin-top:1rem;">
+              Over 18 months of independent research, I designed and fabricated multiple MFC prototypes, systematically varied substrate compositions and electrode configurations, and conducted controlled electrochemical performance experiments. Key findings demonstrated consistent voltage output from compost-based bioanodic chambers, with substrate longevity as the primary variable in energy efficiency optimization. This work earned the EPA Award and ISEF qualification — and directly informed the LYKA Lamp project.
             </p>
-            <p style="margin-top: 1rem;">
-              This work earned the EPA Award and an ISEF qualification — and directly informed the design of the LYKA Lamp project, a proof-of-concept MFC-powered lighting system.
-            </p>
-            <div class="tag-list" style="margin-top: 1.2rem;">
+            <div class="tag-list" style="margin-top:1.2rem;">
               <span class="tag">Microbial Fuel Cells</span>
               <span class="tag">Bioelectrochemistry</span>
               <span class="tag">Decentralized Energy</span>
@@ -294,53 +290,48 @@
               <div class="meta-value">Nov 2023 – April 2025</div>
             </div>
             <!-- Uncomment when PDF ready:
-            <a href="files/papers/mfc-sustentabilis.pdf" class="btn btn-primary" target="_blank" style="margin-top:auto;">
-              Download PDF ↓
-            </a>
+            <a href="files/papers/mfc-sustentabilis.pdf" class="btn btn-primary" target="_blank" style="margin-top:auto;">Download PDF ↓</a>
             -->
-            <div style="margin-top:auto; padding: 1rem; background: var(--bg); border-radius: var(--radius); font-size:0.78rem; color:var(--text-light); text-align:center;">
-              Add PDF to files/papers/<br>to enable download
-            </div>
+            <div class="meta-pdf-placeholder">Add PDF to files/papers/ to enable download</div>
           </div>
         </div>
       </div>
 
-      <!-- SECONDARY RESEARCH -->
-      <div class="reveal" style="margin-top: 2.5rem;">
+      <!-- ADDITIONAL RESEARCH -->
+      <div class="reveal" style="margin-top:2.5rem;">
         <h3 style="font-family:var(--font-serif);font-size:1.5rem;margin-bottom:1.2rem;">Additional Independent Research</h3>
         <div class="secondary-research">
           <div class="research-journal">Independent Study · Ohio Academy of Science</div>
           <h3>Solar Panels' Effect on Soil Nutrients</h3>
           <p style="margin-top:0.6rem;font-size:0.95rem;">
-            Investigated the relationship between solar panel installation and changes in soil nutrient composition across multiple sites. Collected soil samples using standardized protocols and applied spectroscopic analysis to determine mineral and macronutrient shifts. Findings contributed to understanding land-use tradeoffs in solar energy deployment. Recognized with a State Superior rating by the Ohio Academy of Science.
+            Investigated the relationship between solar panel installation and changes in soil nutrient composition across multiple sites. Collected soil samples using standardized protocols and applied spectroscopic analysis to determine mineral and macronutrient shifts. Findings contribute to understanding land-use tradeoffs in solar energy deployment. Recognized with a State Superior rating by the Ohio Academy of Science.
           </p>
           <div class="tag-list">
             <span class="tag">Soil Science</span>
             <span class="tag">Solar Energy</span>
             <span class="tag">Environmental Chemistry</span>
           </div>
-          <p style="font-size:0.78rem;color:var(--text-light);margin-top:0.8rem;font-style:italic;">OAS State Superior · Nov 2023 – April 2025</p>
+          <p style="font-family:var(--font-mono);font-size:0.7rem;color:var(--text-light);margin-top:0.8rem;">OAS State Superior · Nov 2023 – April 2025</p>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="container">
       <div class="footer-inner">
         <span class="footer-logo">Kyla Fallis</span>
         <nav class="footer-links">
           <a href="index.html">Home</a>
-          <a href="work.html">Work</a>
+          <a href="projects.html">Projects</a>
           <a href="speaking.html">Speaking</a>
           <a href="about.html">About</a>
           <a href="contact.html">Contact</a>
           <a href="https://linkedin.com/in/kylafallis07" target="_blank" rel="noopener">LinkedIn</a>
           <a href="https://fairgameinitiative.org" target="_blank" rel="noopener">FairGame ↗</a>
         </nav>
-        <p class="footer-copy">© <script>document.write(new Date().getFullYear())</script> Kyla Fallis · Environmental Engineer · Researcher · Builder</p>
+        <p class="footer-copy" id="footer-year"></p>
       </div>
     </div>
   </footer>

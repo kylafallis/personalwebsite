@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Kyla Fallis</title>
+  <meta name="description" content="Engineering projects, software builds, and nonprofit leadership by Kyla Fallis.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* FairGame hero block */
+    .fairgame-hero-block {
+      background: var(--bg-dark);
+      padding: 3rem;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 4rem;
+    }
+
+    .fairgame-hero-block::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 80% 30%, rgba(74,124,89,0.22) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .fairgame-hero-block-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .fg-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green-light);
+      border: 1px solid rgba(74,124,89,0.4);
+      padding: 0.3rem 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .fg-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--green-light);
+      flex-shrink: 0;
+    }
+
+    .fairgame-hero-block h2 {
+      color: var(--text-white);
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      margin-bottom: 1rem;
+    }
+
+    .fairgame-hero-block .subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green-light);
+      margin-bottom: 1.2rem;
+    }
+
+    .fairgame-hero-block p {
+      color: rgba(245,242,237,0.72);
+      font-size: 1rem;
+      margin-bottom: 0.9rem;
+      max-width: 62ch;
+    }
+
+    .fg-highlights-list {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .fg-highlights-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: rgba(245,242,237,0.65);
+    }
+
+    .fg-highlights-list li::before {
+      content: '→';
+      color: var(--green-light);
+      flex-shrink: 0;
+    }
+
+    .fg-cta-block {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-end;
+      padding-top: 1rem;
+    }
+
+    /* Project cards */
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--green-pale);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--green-light);
+    }
+
+    .project-card-top {
+      padding: 2rem 2rem 1rem;
+      flex: 1;
+    }
+
+    .project-card-bottom {
+      padding: 1.2rem 2rem;
+      border-top: 1px solid var(--green-pale);
+      background: var(--bg-mid);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .project-category {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--green-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+      line-height: 1.25;
+    }
+
+    .project-card p {
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    .project-role {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    .project-date {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-light);
+    }
+
+    .award-flag {
+      background: #D4EDDA;
+      color: #1D6B35;
+      border: 1px solid #B8D4BB;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      padding: 0.3rem 0.7rem;
+      margin-top: 1rem;
+      display: inline-block;
+    }
+
+    .section-divider-label {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin: 3.5rem 0 2rem;
+    }
+
+    .section-divider-label h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      white-space: nowrap;
+    }
+
+    .section-divider-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--green-pale);
+    }
+
+    @media (max-width: 900px) {
+      .fairgame-hero-block-inner { grid-template-columns: 1fr; }
+      .fg-cta-block { align-items: flex-start; flex-direction: row; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Kyla <span>Fallis</span></a>
+      <ul class="nav-links">
+        <li><a href="research.html">Research</a></li>
+        <li><a href="projects.html" class="active">Projects</a></li>
+        <li><a href="speaking.html">Speaking</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="nav-cta">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="nav-overlay">
+    <a href="index.html">Home</a>
+    <a href="research.html">Research</a>
+    <a href="projects.html">Projects</a>
+    <a href="speaking.html">Speaking</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="section-label">Engineering &amp; Software</span>
+      <h1>Projects &amp; Work</h1>
+      <p>From AI-powered waste sorting to renewable energy hardware — engineering built to solve real problems, with real outcomes.</p>
+    </div>
+  </section>
+
+  <section style="padding: var(--section-pad);">
+    <div class="container">
+
+      <!-- FAIRGAME -->
+      <div class="fairgame-hero-block reveal" id="fairgame">
+        <div class="fairgame-hero-block-inner">
+          <div>
+            <div class="fg-badge">Founder &amp; Executive Director · Nov 2025 – Present</div>
+            <div class="subtitle">Nonprofit Leadership</div>
+            <h2>FairGame Initiative</h2>
+            <p>FairGame is a nonprofit organization I founded in November 2025 to close the resource and opportunity gap in STEM education — starting with the science fair pipeline that changed my own trajectory.</p>
+            <p>We manage outreach across more than 10 school science fairs, connecting underserved students with mentorship, funding guidance, and the institutional access that too often determines who gets to compete at the national level.</p>
+            <ul class="fg-highlights-list">
+              <li>Manages 5-person team across operations, outreach, and programming</li>
+              <li>Oversees nonprofit finances, legal compliance, and organizational strategy</li>
+              <li>Directed outreach across 10+ school science fairs in Ohio</li>
+              <li>Bridges resource gaps for underserved students in STEM competitions</li>
+            </ul>
+          </div>
+          <div class="fg-cta-block">
+            <a href="https://fairgameinitiative.org" target="_blank" rel="noopener" class="btn btn-primary">Visit FairGame <span class="arrow">→</span></a>
+            <a href="contact.html" class="btn btn-outline-light">Partner With Us</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOFTWARE -->
+      <div class="section-divider-label reveal">
+        <h3>Software Projects</h3>
+      </div>
+
+      <div class="card-grid reveal">
+        <div class="project-card">
+          <div class="project-card-top">
+            <div class="project-category">Software · ML / Computer Vision</div>
+            <h3>WasteWise AI</h3>
+            <p>AI-powered waste sorting system using computer vision to classify incoming items as organic, recyclable, or landfill trash — reducing contamination and methane emissions at the point of disposal.</p>
+            <span class="award-flag">1st Place, Ohio 4-H AI Competition · National Qualifier</span>
+            <div class="tag-list">
+              <span class="tag">Machine Learning</span>
+              <span class="tag">Computer Vision</span>
+              <span class="tag">Python</span>
+            </div>
+          </div>
+          <div class="project-card-bottom">
+            <span class="project-role">Project Lead</span>
+            <span class="project-date">April 2024</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-top">
+            <div class="project-category">Software · Full-Stack</div>
+            <h3>Class Companion</h3>
+            <p>Academic collaboration hub connecting OSU students for study groups and resource sharing. Building full-stack: real-time interaction, course-specific groupings, and mobile-first UI.</p>
+            <span class="badge badge-dev" style="margin-top:1rem;">In Development</span>
+            <div class="tag-list">
+              <span class="tag">JavaScript</span>
+              <span class="tag">Firebase</span>
+              <span class="tag">HTML/CSS</span>
+            </div>
+          </div>
+          <div class="project-card-bottom">
+            <span class="project-role">Lead Developer</span>
+            <span class="project-date">In Development</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-top">
+            <div class="project-category">Software · AI Tools</div>
+            <h3>AI Research Assistant</h3>
+            <p>Private, AI-powered research assistant designed to streamline academic workflows, with a companion Chrome extension integrating research assistance directly into the browser.</p>
+            <span class="badge badge-dev" style="margin-top:1rem;">In Development</span>
+            <div class="tag-list">
+              <span class="tag">JavaScript</span>
+              <span class="tag">Chrome Extension API</span>
+              <span class="tag">AI / LLM</span>
+            </div>
+          </div>
+          <div class="project-card-bottom">
+            <span class="project-role">Developer</span>
+            <span class="project-date">In Development</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-top">
+            <div class="project-category">Software · Educational</div>
+            <h3>Pythagoras Plains</h3>
+            <p>Educational RPG built in MATLAB for a university engineering course. Players solve math problems to defeat enemies, with adaptive difficulty and interactive storylines.</p>
+            <div class="tag-list">
+              <span class="tag">MATLAB</span>
+              <span class="tag">Game Design</span>
+            </div>
+          </div>
+          <div class="project-card-bottom">
+            <span class="project-role">Programmer</span>
+            <span class="project-date">Nov – Dec 2024</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HARDWARE / ENGINEERING -->
+      <div class="section-divider-label reveal">
+        <h3>Engineering &amp; Hardware</h3>
+      </div>
+
+      <div class="card-grid reveal">
+        <div class="project-card">
+          <div class="project-card-top">
+            <div class="project-category">Engineering · Sensors &amp; Embedded Systems</div>
+            <h3>AquaTracker</h3>
+            <p>Autonomous water quality monitoring device measuring salinity, pH, and temperature in real time. Integrated environmental sensors with a microcontroller and wrote C++ firmware for automated data logging.</p>
+            <div class="tag-list">
+              <span class="tag">C++</span>
+              <span class="tag">SolidWorks</span>
+              <span class="tag">Sensor Integration</span>
+              <span class="tag">Circuit Design</span>
+            </div>
+          </div>
+          <div class="project-card-bottom">
+            <span class="project-role">Team Engineer</span>
+            <span class="project-date">October 2024</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-top">
+            <div class="project-category">Engineering · Renewable Energy</div>
+            <h3>LYKA Lamp</h3>
+            <p>Renewable energy lamp powered entirely by compost-based microbial fuel cells. Designed circuitry with capacitors and voltage boost converters to store and regulate biological power output — a direct application of the MFC research.</p>
+            <div class="tag-list">
+              <span class="tag">Circuit Design</span>
+              <span class="tag">MFC Fabrication</span>
+              <span class="tag">Power Electronics</span>
+            </div>
+          </div>
+          <div class="project-card-bottom">
+            <span class="project-role">Lead Designer</span>
+            <span class="project-date">May 2024</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-top">
+            <div class="project-category">Engineering · Smart Systems</div>
+            <h3>Smart Energy Monitor</h3>
+            <p>Startup concept for a household smart energy monitoring system to track consumption patterns and optimize efficiency — bridging personal energy data with actionable sustainability recommendations.</p>
+            <span class="badge badge-dev" style="margin-top:1rem;">Concept / Prototyping</span>
+            <div class="tag-list">
+              <span class="tag">IoT</span>
+              <span class="tag">Energy Systems</span>
+              <span class="tag">Data Analysis</span>
+            </div>
+          </div>
+          <div class="project-card-bottom">
+            <span class="project-role">Project Lead</span>
+            <span class="project-date">Concept Stage</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo">Kyla Fallis</span>
+        <nav class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="research.html">Research</a>
+          <a href="speaking.html">Speaking</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="https://linkedin.com/in/kylafallis07" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://fairgameinitiative.org" target="_blank" rel="noopener">FairGame ↗</a>
+        </nav>
+        <p class="footer-copy" id="footer-year"></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
