@@ -239,8 +239,6 @@
       gap: 0.9rem;
     }
 
-    .award-item {}
-
     .award-item .award-title {
       font-family: var(--font-sans);
       font-size: 0.9rem;
@@ -301,7 +299,7 @@
   <div class="about-hero">
     <div class="about-hero-photo">
       <!-- Replace with images/about.jpg (banner2.JPG) -->
-      <img src="images/about.jpg" alt="Kyla Fallis speaking">
+      <img src="images/about.JPG" alt="Kyla Fallis speaking">
       <div class="about-hero-photo-overlay"></div>
     </div>
     <div class="about-hero-content">
@@ -405,28 +403,7 @@
         <h2>Involvement</h2>
       </div>
 
-      <div class="involvement-grid reveal">
-        <div class="involvement-item">
-          <div class="inv-role">Founder &amp; Executive Director</div>
-          <h3>FairGame Initiative</h3>
-          <p>Founded November 2025. Nonprofit closing the resource gap in STEM education. Manages 5-person team, oversees outreach across 10+ Ohio science fairs.</p>
-        </div>
-        <div class="involvement-item">
-          <div class="inv-role">Competitor &amp; UNA Member</div>
-          <h3>OSU CCWA — Model United Nations</h3>
-          <p>Competes on Ohio State's collegiate MUN team through the Council on World Affairs. Active member of the United Nations Association, advocating for diplomacy and human rights.</p>
-        </div>
-        <div class="involvement-item">
-          <div class="inv-role">Member</div>
-          <h3>Undergraduate Student Government — Sustainability Issues Team</h3>
-          <p>Selected for OSU's sustainability committee to advance student-driven policy recommendations and integrate sustainable practices into university operations.</p>
-        </div>
-        <div class="involvement-item">
-          <div class="inv-role">Member</div>
-          <h3>Society of Women Engineers (SWE) &amp; Engineers for a Sustainable World</h3>
-          <p>Community building for gender equity in engineering; collaboration on sustainable engineering projects and devices alongside ESW's interdisciplinary team.</p>
-        </div>
-      </div>
+      <div class="involvement-grid reveal" id="involvement-grid"></div>
     </div>
   </section>
 
@@ -438,81 +415,7 @@
         <h2 style="color:var(--text-white);">Awards &amp; Honors</h2>
       </div>
 
-      <div class="awards-columns reveal">
-        <div>
-          <div class="awards-column-title">International &amp; National</div>
-          <div class="awards-list">
-            <div class="award-item">
-              <div class="award-title">IFoRE 2025 Finalist</div>
-              <div class="award-org">International Forum on Research Excellence</div>
-            </div>
-            <div class="award-item">
-              <div class="award-title">EPA Award — ISEF</div>
-              <div class="award-org">U.S. Environmental Protection Agency</div>
-            </div>
-            <div class="award-item">
-              <div class="award-title">ISEF Qualifier &amp; Presenter</div>
-              <div class="award-org">Society for Science</div>
-            </div>
-            <div class="award-item">
-              <div class="award-title">National Youth Science Camp — Ohio Delegate</div>
-              <div class="award-org">NYSC · One of two Ohio representatives</div>
-            </div>
-            <div class="award-item">
-              <div class="award-title">AJAS Fellow</div>
-              <div class="award-org">American Junior Academy of Science</div>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="awards-column-title">State</div>
-          <div class="awards-list">
-            <div class="award-item">
-              <div class="award-title">Melvin Scholar</div>
-              <div class="award-org">Ohio Academy of Science</div>
-            </div>
-            <div class="award-item">
-              <div class="award-title">OAS President's Award</div>
-              <div class="award-org">Ohio Academy of Science</div>
-            </div>
-            <div class="award-item">
-              <div class="award-title">Governor's Thomas Edison Award for Excellence in STEM</div>
-              <div class="award-org">State of Ohio</div>
-            </div>
-            <div class="award-item">
-              <div class="award-title">1st Place, Ohio 4-H AI Competition</div>
-              <div class="award-org">Ohio 4-H · National Qualifier</div>
-            </div>
-            <div class="award-item">
-              <div class="award-title">5× Superior Ratings, State Science Day</div>
-              <div class="award-org">Ohio Academy of Science</div>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="awards-column-title">Regional &amp; Academic</div>
-          <div class="awards-list">
-            <div class="award-item">
-              <div class="award-title">Distinguished Young Woman of Allen County</div>
-              <div class="award-org">DYW Program</div>
-            </div>
-            <div class="award-item">
-              <div class="award-title">Class Valedictorian, Rank 1</div>
-              <div class="award-org">Bath High School · May 2025</div>
-            </div>
-            <div class="award-item">
-              <div class="award-title">National Honor Society</div>
-              <div class="award-org">Bath High School</div>
-            </div>
-            <div class="award-item">
-              <div class="award-title">Humanitarian Engineering Scholars Program</div>
-              <div class="award-org">The Ohio State University</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="awards-columns reveal" id="awards-columns"></div>
     </div>
   </section>
 
@@ -534,6 +437,8 @@
     </div>
   </footer>
 
+  <script src="data.js"></script>
+  <script src="render.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
