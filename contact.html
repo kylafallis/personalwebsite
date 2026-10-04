@@ -3,8 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact — Kyla Fallis</title>
-  <meta name="description" content="Get in touch with Kyla Fallis — for research collaboration, speaking inquiries, or booking a meeting.">
+  <title>Contact · Kyla Fallis</title>
+  <meta name="description" content="Get in touch with Kyla Fallis for research collaboration, speaking inquiries, or booking a meeting.">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"        content="https://kylafallis.com/contact.html">
+  <meta property="og:site_name"   content="Kyla Fallis">
+  <meta property="og:title"       content="Contact · Kyla Fallis">
+  <meta property="og:description" content="Get in touch with Kyla Fallis for research collaboration, speaking inquiries, or to book a meeting. Researcher, engineer, nonprofit founder.">
+  <meta property="og:image"       content="https://kylafallis.com/images/share.jpg">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:title"      content="Contact · Kyla Fallis">
+  <meta name="twitter:description" content="Get in touch with Kyla Fallis for research collaboration, speaking inquiries, or to book a meeting.">
+  <meta name="twitter:image"      content="https://kylafallis.com/images/share.jpg">
+
+    <link rel="canonical" href="https://kylafallis.com/contact.html">
+  <!-- Icons -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#1A2B18">
+
   <link rel="stylesheet" href="style.css">
   <style>
     .contact-grid {
@@ -281,6 +302,7 @@
         <li><a href="projects.html">Projects</a></li>
         <li><a href="speaking.html">Speaking</a></li>
         <li><a href="about.html">About</a></li>
+        <li><a href="now.html">Now</a></li>
         <li><a href="contact.html" class="nav-cta active" style="background:var(--green-mid);">Contact</a></li>
       </ul>
       <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
@@ -292,6 +314,8 @@
     <a href="projects.html">Projects</a>
     <a href="speaking.html">Speaking</a>
     <a href="about.html">About</a>
+    <a href="now.html">Now</a>
+    <a href="mediakit.html">Media Kit</a>
     <a href="contact.html">Contact</a>
   </div>
 
@@ -299,7 +323,7 @@
     <div class="container">
       <span class="section-label">Get In Touch</span>
       <h1>Contact</h1>
-      <p>Whether you're reaching out about research collaboration, a speaking opportunity, or just want to connect — I'd love to hear from you.</p>
+      <p>Whether you're reaching out about research collaboration, a speaking opportunity, or just want to connect, I'd love to hear from you.</p>
     </div>
   </section>
 
@@ -316,9 +340,10 @@
           <!--
             FORMSPREE SETUP:
             1. Go to https://formspree.io and create a free account
-            2. Create a new form — you'll get an endpoint like https://formspree.io/f/xabc1234
+            2. Create a new form, and you'll get an endpoint like https://formspree.io/f/xabc1234
             3. Replace the action URL below with YOUR endpoint
-            Your email stays private — Formspree routes submissions without exposing it.
+            Your email stays private. Formspree routes submissions without exposing it.
+            Prefer to write directly? <a href="mailto:hello@kylafallis.com" class="contact-email">hello@kylafallis.com</a>
           -->
           <form id="contact-form" action="https://formspree.io/f/xaqpekgw" method="POST">
             <div class="form-row">
@@ -358,7 +383,7 @@
             </button>
 
             <div class="form-success" id="form-success">
-              ✓ Message sent — I'll be in touch soon.
+              ✓ Message sent. I'll be in touch soon.
             </div>
           </form>
         </div>
@@ -368,6 +393,21 @@
 
           <div class="contact-info-card">
             <h3>Connect</h3>
+
+            <div class="contact-link-row">
+              <div class="contact-link-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 6h18v12H3z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 6l9 7 9-7"/>
+                </svg>
+              </div>
+              <div>
+                <div class="contact-link-label">Email</div>
+                <div class="contact-link-value">
+                  <a href="mailto:hello@kylafallis.com">hello@kylafallis.com</a>
+                </div>
+              </div>
+            </div>
 
             <div class="contact-link-row">
               <div class="contact-link-icon">
@@ -413,6 +453,16 @@
             </div>
           </div>
 
+          <div class="contact-info-card" style="margin-top:1rem;">
+            <h3>Press &amp; Organizers</h3>
+            <p style="font-size:0.88rem;color:var(--text-mid);line-height:1.7;">
+              Bios, headshots, talk titles, and booking details are all in one place.
+            </p>
+            <a href="mediakit.html" class="btn btn-outline" style="margin-top:1.1rem;display:inline-flex;">
+              View Media Kit <span class="arrow">→</span>
+            </a>
+          </div>
+
           <div class="open-to-card">
             <span class="section-label">Open To</span>
             <ul class="open-to-list">
@@ -422,6 +472,16 @@
               <li>Internships &amp; research fellowships</li>
               <li>Media &amp; press inquiries</li>
             </ul>
+          </div>
+
+          <div class="open-to-card" style="margin-top:1rem;">
+            <span class="section-label">Press &amp; Organizers</span>
+            <p style="font-size:0.88rem;color:rgba(245,242,237,0.65);line-height:1.6;margin-bottom:1.2rem;max-width:none;">
+              Bios, speaking topics, research credentials, and downloadable assets for press features and event introductions.
+            </p>
+            <a href="mediakit.html" class="btn btn-outline-light" style="width:100%;justify-content:center;">
+              View Media Kit <span class="arrow">→</span>
+            </a>
           </div>
 
         </div>
@@ -469,7 +529,7 @@
       </div>
 
       <!--
-        CAL.COM INLINE EMBED (optional — shows calendar directly on page):
+        CAL.COM INLINE EMBED (optional: shows calendar directly on page):
         Uncomment the block below after setting up Cal.com.
         Replace YOUR_USERNAME with your actual Cal.com username.
 
@@ -530,6 +590,7 @@
     <div class="container">
       <div class="footer-inner">
         <span class="footer-logo">Kyla Fallis</span>
+        <!-- prerender:footer --><div class="footer-links-wrap"><div class="footer-links" role="navigation" aria-label="Elsewhere"><a href="https://linkedin.com/in/kylafallis07" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.75V21h-4v-5.6c0-1.34-.03-3.06-1.9-3.06-1.9 0-2.2 1.45-2.2 2.96V21H9z"/></svg><span>LinkedIn</span></a><a href="https://github.com/kylafallis" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.26.8-.57v-2c-3.34.72-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.1-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.3.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 016 0C18.26 4.3 19.26 4.62 19.26 4.62c.64 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.37.81 1.1.81 2.22v3.29c0 .31.2.68.81.57A12 12 0 0012 .5z"/></svg><span>GitHub</span></a><a href="https://fairgameinitiative.org" target="_blank" rel="noopener" aria-label="FairGame Initiative" title="FairGame Initiative"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v18M12 3l7 3-7 3"/><path d="M5 21h14"/></svg><span>FairGame Initiative</span></a><a href="mailto:hello@kylafallis.com" aria-label="hello@kylafallis.com" title="hello@kylafallis.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="M3 6l9 7 9-7"/></svg><span>hello@kylafallis.com</span></a></div></div><!-- /prerender:footer -->
         <p class="footer-copy" id="footer-year"></p>
       </div>
     </div>
@@ -539,7 +600,7 @@
   <script src="render.js"></script>
   <script src="main.js"></script>
   <script>
-    // Formspree AJAX — success message instead of redirect
+    // Formspree AJAX: success message instead of redirect
     const form    = document.getElementById('contact-form');
     const success = document.getElementById('form-success');
 
@@ -562,11 +623,11 @@
             success.style.display = 'block';
             btn.textContent = 'Sent ✓';
           } else {
-            btn.textContent = 'Error — please try again';
+            btn.textContent = 'Error, please try again';
             btn.disabled = false;
           }
         } catch {
-          btn.textContent = 'Error — please try again';
+          btn.textContent = 'Error, please try again';
           btn.disabled = false;
         }
       });

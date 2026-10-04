@@ -3,8 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Kyla Fallis</title>
-  <meta name="description" content="About Kyla Fallis — Environmental Engineering student at Ohio State, researcher, nonprofit founder, and public advocate.">
+  <title>About · Kyla Fallis</title>
+  <meta name="description" content="About Kyla Fallis · Chemical Engineering student at Ohio State, researcher, nonprofit founder, and public advocate.">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"        content="https://kylafallis.com/about.html">
+  <meta property="og:site_name"   content="Kyla Fallis">
+  <meta property="og:title"       content="About · Kyla Fallis">
+  <meta property="og:description" content="Chemical Engineering student at Ohio State, Humanitarian Engineering Scholars Program. Researcher, nonprofit founder, and public speaker.">
+  <meta property="og:image"       content="https://kylafallis.com/images/share.jpg">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:title"      content="About · Kyla Fallis">
+  <meta name="twitter:description" content="Chemical Engineering student at Ohio State, Humanitarian Engineering Scholars Program. Researcher, nonprofit founder, and public speaker.">
+  <meta name="twitter:image"      content="https://kylafallis.com/images/share.jpg">
+
+    <link rel="canonical" href="https://kylafallis.com/about.html">
+  <!-- Icons -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#1A2B18">
+
   <link rel="stylesheet" href="style.css">
   <style>
     /* Split hero */
@@ -22,6 +43,8 @@
       position: relative;
       min-height: 480px;
     }
+
+    .about-hero-photo picture { display: contents; }
 
     .about-hero-photo img {
       width: 100%;
@@ -281,6 +304,7 @@
         <li><a href="projects.html">Projects</a></li>
         <li><a href="speaking.html">Speaking</a></li>
         <li><a href="about.html" class="active">About</a></li>
+        <li><a href="now.html">Now</a></li>
         <li><a href="contact.html" class="nav-cta">Contact</a></li>
       </ul>
       <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
@@ -292,20 +316,28 @@
     <a href="projects.html">Projects</a>
     <a href="speaking.html">Speaking</a>
     <a href="about.html">About</a>
+    <a href="now.html">Now</a>
+    <a href="mediakit.html">Media Kit</a>
     <a href="contact.html">Contact</a>
   </div>
 
   <!-- SPLIT HERO -->
   <div class="about-hero">
     <div class="about-hero-photo">
-      <!-- Replace with images/about.jpg (banner2.JPG) -->
-      <img src="images/about.JPG" alt="Kyla Fallis speaking">
+      <picture>
+        <source type="image/webp" sizes="(max-width: 900px) 100vw, 50vw"
+                srcset="images/about-900w.webp 900w, images/about.webp 1600w">
+        <source type="image/jpeg" sizes="(max-width: 900px) 100vw, 50vw"
+                srcset="images/about-900w.jpg 900w, images/about.jpg 1600w">
+        <img src="images/about.jpg" width="1600" height="1067" loading="lazy" decoding="async"
+             alt="Kyla Fallis presenting microbial fuel cell research at COSI Big Science Day, Columbus, 2025">
+      </picture>
       <div class="about-hero-photo-overlay"></div>
     </div>
     <div class="about-hero-content">
       <span class="section-label" style="margin-bottom:1rem;">About</span>
       <h1>Engineer.<br>Researcher.<br><em>Builder.</em></h1>
-      <p>Environmental Engineering student at Ohio State · Humanitarian Engineering Scholars Program · Pre-Law Minor in Science &amp; Engineering in the Public Interest</p>
+      <p>Chemical Engineering student at Ohio State · Humanitarian Engineering Scholars Program · Pre-Law Minor in Science &amp; Engineering in the Public Interest</p>
     </div>
   </div>
 
@@ -315,14 +347,20 @@
       <div class="about-prose-inner">
 
         <div class="prose-block reveal">
-          <p>
-            I grew up in Lima, Ohio, watching science fairs from the sidelines — curious but under-resourced, with no roadmap for how someone like me got to stand at a project board at a national competition. When I finally found my way in, through a teacher who believed in me and a community that showed up, it changed everything. That experience is the through-line of most of what I build.
+          <p class="prose-lead">
+            I'm the only woman in almost every room I've walked into. That's not a complaint. It's the reason I build what I build.
           </p>
           <p>
-            Now I'm an Environmental Engineering student at Ohio State in the Humanitarian Engineering Scholars Program, pursuing a pre-law minor in Science and Engineering in the Public Interest. My research spans deep-sea electrochemistry, machine learning applications in ocean science, and renewable energy systems. Two papers are in press for 2026 — one with IEEE, one with Springer — and my independent MFC research was published in Sustentabilis Terra in 2025. In parallel, I compete on Ohio State's Model UN team, where I work at the intersection of technical knowledge and international policy.
+            This past summer I was at NASA's Marshall Space Flight Center, in the Electromagnetic Environments Testing Branch, working on electromagnetic environmental effects and building a test fixture we called the Iron Hand Mark 3. Most of my time outside that goes to EvE Waste, the startup I co-founded in 2024 and serve as CTO. We build modular anaerobic reactors that sit on-site at food manufacturers, digest their organic waste before it can be hauled to a landfill, and turn the digestate into a nutrient additive we sell on. There's a pilot running at Clocktower and testing underway on Ohio State's campus. Alongside that I serve as Vice President of the United Nations Association of Ohio, and I attended Climate Week NYC this year.
           </p>
           <p>
-            The direction I'm building toward sits at the overlap of environmental engineering and law — not because I couldn't choose between them, but because the most important problems won't be solved by either field alone. The science tells us what's possible. The policy determines what actually happens. I want to be someone who can move in both rooms.
+            Two papers came out this year: one with IEEE modeling dark oxygen flux across the Clarion-Clipperton Zone, the stretch of Pacific seabed the deep-sea mining industry wants most, and one with Springer on physics-informed deep learning for tidal energy siting. My independent work on compost-powered microbial fuel cells was published in Sustentabilis Terra in 2025 and earned the EPA Award at ISEF.
+          </p>
+          <p>
+            I grew up in Lima, Ohio, watching science fairs from the sidelines: curious but under-resourced, with no roadmap for how someone like me got to stand at a project board at a national competition. When I found my way in, through a teacher who believed in me and a community that showed up, it changed everything. That's why I founded the FairGame Initiative, which has now reached more than 1,000 students, most of them entering their first science fair, supported by a statewide teacher network and a free library of 288 resources for teachers running fairs on no budget.
+          </p>
+          <p>
+            The direction I'm building toward sits at the overlap of engineering and environmental law, not because I couldn't choose between them, but because the most important problems won't be solved by either field alone. The science tells us what's possible. The policy determines what actually happens. I want to be someone who can move in both rooms.
           </p>
         </div>
 
@@ -334,7 +372,7 @@
             <div class="credential-row">
               <div class="credential-year">2028</div>
               <div class="credential-text">
-                B.S. Environmental Engineering
+                B.S. Chemical Engineering
                 <div class="cred-org">Ohio State University · Humanitarian Engineering Scholars · Expected Dec 2028</div>
               </div>
             </div>
@@ -360,7 +398,7 @@
             <div class="credential-row">
               <div class="credential-year">Natl</div>
               <div class="credential-text">
-                National Youth Science Camp — Ohio Delegate · AJAS Fellow
+                National Youth Science Camp Ohio Delegate · AJAS Fellow
                 <div class="cred-org">NYSC · American Junior Academy of Science</div>
               </div>
             </div>
@@ -380,18 +418,28 @@
             </div>
           </div>
 
-          <!-- Downloads -->
-          <div class="download-row">
-            <a href="files/Kyla_Fallis_Resume.pdf" class="btn btn-primary" target="_blank">
+          <!-- Downloads. The CV button is rendered by render.js only when
+               SITE_DATA.cv is set AND the file is reachable, so it never 404s. -->
+          <div class="download-row" id="download-row">
+            <a href="files/Kyla_Fallis_Resume.pdf" class="btn btn-primary" target="_blank" data-analytics="resume-download">
               Resume <span>↓</span>
-            </a>
-            <a href="files/Kyla_Fallis_CV.pdf" class="btn btn-outline" target="_blank">
-              Full CV <span>↓</span>
             </a>
           </div>
 
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section style="background:var(--bg-mid);padding:var(--section-pad);">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Competencies</span>
+        <h2>Skills &amp; Expertise</h2>
+        <p>Technical and interdisciplinary capabilities built across research, engineering, software, and policy.</p>
+      </div>
+      <div class="skills-grid" id="skills-grid"><!-- prerender:skills-grid --><div class="skill-domain reveal reveal-delay-1"><div class="skill-domain-label">Research &amp; Science</div><div class="skill-tag-list"><span class="tag">Electrochemistry</span><span class="tag">Ocean Science</span><span class="tag">Environmental Chemistry</span><span class="tag">Soil Science</span><span class="tag">Spectroscopic Analysis</span><span class="tag">Experimental Design</span><span class="tag">Scientific Writing</span><span class="tag">Peer Review</span></div></div><div class="skill-domain reveal reveal-delay-2"><div class="skill-domain-label">Machine Learning &amp; AI</div><div class="skill-tag-list"><span class="tag">Machine Learning</span><span class="tag">Deep Learning</span><span class="tag">Physics-Informed ML</span><span class="tag">Computer Vision</span><span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">Data Analysis</span><span class="tag">Flux Modeling</span></div></div><div class="skill-domain reveal reveal-delay-1"><div class="skill-domain-label">Engineering &amp; Systems</div><div class="skill-tag-list"><span class="tag">Circuit Design</span><span class="tag">Embedded Systems</span><span class="tag">C++</span><span class="tag">SolidWorks</span><span class="tag">MATLAB</span><span class="tag">IoT</span><span class="tag">Sensor Integration</span><span class="tag">Power Electronics</span></div></div><div class="skill-domain reveal reveal-delay-2"><div class="skill-domain-label">Policy &amp; Communication</div><div class="skill-tag-list"><span class="tag">Model United Nations</span><span class="tag">Public Speaking</span><span class="tag">Science Policy</span><span class="tag">Nonprofit Management</span><span class="tag">International Relations</span><span class="tag">Grant Writing</span><span class="tag">Science Advocacy</span></div></div><!-- /prerender:skills-grid --></div>
     </div>
   </section>
 
@@ -403,7 +451,7 @@
         <h2>Involvement</h2>
       </div>
 
-      <div class="involvement-grid reveal" id="involvement-grid"></div>
+      <div class="involvement-grid reveal" id="involvement-grid"><!-- prerender:involvement-grid --><div class="involvement-item"><div class="inv-role">Founder &amp; Executive Director</div><h3>FairGame Initiative</h3><p>Founded November 2025. Nonprofit closing the resource gap in STEM education, now reaching 1,000+ students through a statewide teacher network and a free 288-resource library.</p></div><div class="involvement-item"><div class="inv-role">Co-Founder &amp; CTO</div><h3>EvE Waste</h3><p>Co-founded a startup in 2024 building modular anaerobic reactors that digest food manufacturing waste on-site and sell the digestate as a nutrient additive. Leads reactor design, the digestion process, and technical direction.</p></div><div class="involvement-item"><div class="inv-role">Vice President</div><h3>United Nations Association of Ohio</h3><p>Serves as Vice President of the statewide UNA chapter, supporting chapter programming, membership, and advocacy on global policy across Ohio.</p></div><div class="involvement-item"><div class="inv-role">Attendee</div><h3>Climate Week NYC</h3><p>Attended Climate Week NYC, the largest annual climate event in North America, alongside delegates from government, industry, and civil society.</p></div><div class="involvement-item"><div class="inv-role">NPIP Placement, 2026–27</div><h3>EDGE: Eastland for Everyone</h3><p>Nonprofit Internship Program placement supporting EDGE, the organization carrying out the city-backed Eastland for Everyone plan in southeast Columbus.</p></div><div class="involvement-item"><div class="inv-role">Competitor</div><h3>OSU CCWA Model United Nations</h3><p>Competes on Ohio State's collegiate MUN team through the Council on World Affairs, working at the intersection of technical knowledge and international policy.</p></div><div class="involvement-item"><div class="inv-role">Member</div><h3>Undergraduate Student Government: Sustainability Issues Team</h3><p>Selected for OSU's sustainability committee to advance student-driven policy recommendations and integrate sustainable practices into university operations.</p></div><div class="involvement-item"><div class="inv-role">Member</div><h3>Society of Women Engineers (SWE) &amp; Engineers for a Sustainable World</h3><p>Community building for gender equity in engineering; collaboration on sustainable engineering projects and devices alongside ESW's interdisciplinary team.</p></div><!-- /prerender:involvement-grid --></div>
     </div>
   </section>
 
@@ -415,7 +463,7 @@
         <h2 style="color:var(--text-white);">Awards &amp; Honors</h2>
       </div>
 
-      <div class="awards-columns reveal" id="awards-columns"></div>
+      <div class="awards-columns reveal" id="awards-columns"><!-- prerender:awards-columns --><div><div class="awards-column-title">International &amp; National</div><div class="awards-list"><div class="award-item"><div class="award-title">IFoRE 2025 Finalist</div><div class="award-org">International Forum on Research Excellence</div></div><div class="award-item"><div class="award-title">EPA Award at ISEF</div><div class="award-org">U.S. Environmental Protection Agency</div></div><div class="award-item"><div class="award-title">ISEF Qualifier &amp; Presenter</div><div class="award-org">Society for Science</div></div><div class="award-item"><div class="award-title">National Youth Science Camp: Ohio Delegate</div><div class="award-org">NYSC · One of two Ohio representatives</div></div><div class="award-item"><div class="award-title">AJAS Fellow</div><div class="award-org">American Junior Academy of Science</div></div></div></div><div><div class="awards-column-title">State</div><div class="awards-list"><div class="award-item"><div class="award-title">Melvin Scholar</div><div class="award-org">Ohio Academy of Science</div></div><div class="award-item"><div class="award-title">OAS President's Award</div><div class="award-org">Ohio Academy of Science</div></div><div class="award-item"><div class="award-title">Governor's Thomas Edison Award for Excellence in STEM</div><div class="award-org">State of Ohio</div></div><div class="award-item"><div class="award-title">1st Place, Ohio 4-H AI Competition</div><div class="award-org">Ohio 4-H · National Qualifier</div></div><div class="award-item"><div class="award-title">5× Superior Ratings, State Science Day</div><div class="award-org">Ohio Academy of Science</div></div></div></div><div><div class="awards-column-title">Regional &amp; Academic</div><div class="awards-list"><div class="award-item"><div class="award-title">Distinguished Young Woman of Allen County</div><div class="award-org">DYW Program</div></div><div class="award-item"><div class="award-title">Class Valedictorian, Rank 1</div><div class="award-org">Bath High School · May 2025</div></div><div class="award-item"><div class="award-title">National Honor Society</div><div class="award-org">Bath High School</div></div><div class="award-item"><div class="award-title">Humanitarian Engineering Scholars Program</div><div class="award-org">The Ohio State University</div></div></div></div><!-- /prerender:awards-columns --></div>
     </div>
   </section>
 
@@ -423,6 +471,7 @@
     <div class="container">
       <div class="footer-inner">
         <span class="footer-logo">Kyla Fallis</span>
+        <!-- prerender:footer --><div class="footer-links-wrap"><div class="footer-links" role="navigation" aria-label="Elsewhere"><a href="https://linkedin.com/in/kylafallis07" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.75V21h-4v-5.6c0-1.34-.03-3.06-1.9-3.06-1.9 0-2.2 1.45-2.2 2.96V21H9z"/></svg><span>LinkedIn</span></a><a href="https://github.com/kylafallis" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.26.8-.57v-2c-3.34.72-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.1-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.3.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 016 0C18.26 4.3 19.26 4.62 19.26 4.62c.64 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.37.81 1.1.81 2.22v3.29c0 .31.2.68.81.57A12 12 0 0012 .5z"/></svg><span>GitHub</span></a><a href="https://fairgameinitiative.org" target="_blank" rel="noopener" aria-label="FairGame Initiative" title="FairGame Initiative"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v18M12 3l7 3-7 3"/><path d="M5 21h14"/></svg><span>FairGame Initiative</span></a><a href="mailto:hello@kylafallis.com" aria-label="hello@kylafallis.com" title="hello@kylafallis.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="M3 6l9 7 9-7"/></svg><span>hello@kylafallis.com</span></a></div></div><!-- /prerender:footer -->
         <p class="footer-copy" id="footer-year"></p>
       </div>
     </div>
