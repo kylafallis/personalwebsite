@@ -16,7 +16,7 @@
     'ODOR', 'OGRE', 'ORDER', 'ORDERED', 'OTHER', 'OTTER', 'REDO', 'RETRO', 'RODE', 'RODEO',
     'ROOD', 'ROOT', 'ROOTED', 'ROOTER', 'ROTE', 'ROTOR', 'ROTTED', 'THROE', 'TOED', 'TOGETHER',
     'TOOT', 'TOOTED', 'TORE', 'TORTE', 'TOTE', 'TOTED', 'TOTER', 'TOTTER', 'TROD', 'TROT',
-    'TROTH', 'TROTTED', 'TROTTER'
+    'TROTH', 'TROTTED', 'TROTTER', 'GROOT', 'GROTTED', 'GROTTOED', 'HODGE', 'HODGED', 'HOGGER', 'HOGGED', 'HOGGERED', 'DODGED'
   ];
   const LETTERS = [CENTER].concat(OUTER);
   const isPangram = w => LETTERS.every(l => w.includes(l));
@@ -27,7 +27,7 @@
     ['Beginner', 0], ['Good Start', 0.02], ['Moving Up', 0.05], ['Good', 0.08], ['Solid', 0.15],
     ['Nice', 0.25], ['Great', 0.4], ['Amazing', 0.5], ['Genius', 0.7], ['Top Dog', 1]
   ];
-  const GENIUS = Math.round(MAX * 0.7);
+  const WIN = Math.round(MAX * 0.5);  // reaching Amazing wins the game
 
   const hiveEl   = document.getElementById('hive-board');
   const entryEl  = document.getElementById('hive-entry');
@@ -138,6 +138,7 @@
     const p = points(w);
     if (isPangram(w)) say('Pangram! +' + p, true);
     else say((p === 1 ? 'Good!' : p < 7 ? 'Nice!' : 'Awesome!') + ' +' + p, true);
+    if (rank() !== before && rank()[0] === 'Amazing') say('Amazing! That counts as a win. +' + p, true);
     if (rank() !== before && rank()[0] === 'Genius') say('Genius! +' + p, true);
     renderProgress();
     Games.update();
@@ -173,12 +174,12 @@
   renderEntry();
   renderProgress();
 
-  // There's no natural end to a word hive, so reaching Genius counts as done
+  // There's no natural end to a word hive, so reaching Amazing counts as done
   Games.register('hive', () => {
     const s = score();
     if (!state.found.length) return { state: 'new', label: 'Not started' };
     const label = rank()[0] + ' · ' + s + ' pts';
-    return { state: s >= GENIUS ? 'done' : 'playing', label, quality: Math.min(1, s / GENIUS) };
+    return { state: s >= WIN ? 'done' : 'playing', label, quality: Math.min(1, s / WIN) };
   });
 
 })();
