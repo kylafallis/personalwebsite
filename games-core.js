@@ -8,25 +8,28 @@
 window.Games = (function () {
 
   // ── DAILY SETUP ────────────────────────────────────────────
-  // Puzzle No. 1 is launch day. Everything keys off the visitor's
-  // local date so the puzzle rolls over at their midnight.
+  // Today's content lives in puzzle.js (built by build/make-puzzle.js).
+  // Puzzle No. 1 is launch day; the number comes from the puzzle's own
+  // date, so a late update never shows tomorrow's number on old content.
+  const P = window.PUZZLE;
   const LAUNCH = new Date(2026, 9, 21); // Oct 21, 2026 (month is 0-based)
 
+  const [py, pm, pd] = P.date.split('-').map(Number);
+  const puzzleDay = new Date(py, pm - 1, pd);
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const dayKey = today.getFullYear() + '-' +
-    String(today.getMonth() + 1).padStart(2, '0') + '-' +
-    String(today.getDate()).padStart(2, '0');
-  const puzzleNo = Math.max(1, Math.round((today - LAUNCH) / 86400000) + 1);
+  const puzzleNo = Math.max(1, Math.round((puzzleDay - LAUNCH) / 86400000) + 1);
 
+  // Progress is keyed to the puzzle itself, so new content always
+  // starts fresh even if it lands mid-day.
   // Storage can throw (private mode, blocked cookies), so the games
   // must still work when nothing persists.
   function load(name) {
-    try { return JSON.parse(localStorage.getItem('games:' + dayKey + ':' + name)); }
+    try { return JSON.parse(localStorage.getItem('games:' + P.id + ':' + name)); }
     catch (e) { return null; }
   }
   function save(name, value) {
-    try { localStorage.setItem('games:' + dayKey + ':' + name, JSON.stringify(value)); }
+    try { localStorage.setItem('games:' + P.id + ':' + name, JSON.stringify(value)); }
     catch (e) { /* not persisting is fine */ }
   }
 
@@ -57,7 +60,7 @@ window.Games = (function () {
   // ── BANNER ─────────────────────────────────────────────────
   document.getElementById('puzzle-no').textContent = 'No. ' + puzzleNo;
   document.getElementById('puzzle-date').textContent =
-    today.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+    puzzleDay.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
 
   const countdownEl = document.getElementById('puzzle-countdown');
   function tick() {
@@ -130,10 +133,31 @@ window.Games = (function () {
     return 'miss';
   }
 
+  // ── TIMING ─────────────────────────────────────────────────
+  // Each game's clock runs from the first move in it (Games.touch) to the
+  // update where it reports done. The total feeds the leaderboard.
+  const timing = load('timing') || {};
+  function touch(id) {
+    if (timing[id]) return;
+    timing[id] = { start: Date.now() };
+    save('timing', timing);
+  }
+  function totalTime() {
+    let ms = 0;
+    for (const id of ids) {
+      const t = timing[id];
+      if (!t || !t.start || !t.end) return null;   // finished before timing existed
+      ms += t.end - t.start;
+    }
+    return ms;
+  }
+  let progress = { done: 0, total: ids.length, score: null, timeMs: null };
+
   function update() {
     let done = 0, total = 0;
     ids.forEach((id, i) => {
       const sum = summaries[id] ? summaries[id]() : { state: 'new', label: '' };
+      if (sum.state === 'done' && timing[id] && !timing[id].end) { timing[id].end = Date.now(); save('timing', timing); }
       const seg = segEls[i];
       const q = Math.max(0, Math.min(1, sum.quality || 0));
       seg.dataset.state = sum.state;
@@ -157,6 +181,9 @@ window.Games = (function () {
     }
     replayEl.hidden = done < ids.length;
     if (allIn) lastDone = done;
+
+    progress = { done, total: ids.length, score: done ? Math.round(total / done * 100) : null, timeMs: done === ids.length ? totalTime() : null };
+    if (allIn) document.dispatchEvent(new CustomEvent('games:progress', { detail: progress }));
   }
 
   // ── THE PRIZE ──────────────────────────────────────────────
@@ -172,52 +199,97 @@ window.Games = (function () {
   let prizeEl = null;
   function closePrize() {
     if (!prizeEl) return;
-    if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
     prizeEl.remove();
     prizeEl = null;
     document.body.style.overflow = '';
+    document.dispatchEvent(new CustomEvent('games:prize-closed'));
   }
 
+  // A popup over the page: the intro card first, then the video in the same window
   function prize(skipIntro) {
     if (prizeEl) return;
     prizeEl = document.createElement('div');
     prizeEl.className = 'prize';
-    prizeEl.setAttribute('role', 'dialog');
-    prizeEl.setAttribute('aria-modal', 'true');
-    prizeEl.setAttribute('aria-label', 'Your prize');
     prizeEl.innerHTML =
-      '<button type="button" class="prize-close" aria-label="Close">&times;</button>' +
-      '<div class="prize-intro">' +
-        '<span class="section-label">All five solved</span>' +
-        '<h2>You did it. <em>Every single one.</em></h2>' +
-        '<p>Unlocking your prize<span class="prize-dots"></span></p>' +
+      '<div class="prize-window" role="dialog" aria-modal="true" aria-label="Your prize">' +
+        '<button type="button" class="prize-close" aria-label="Close">&times;</button>' +
+        '<div class="prize-intro">' +
+          '<span class="section-label">All five solved</span>' +
+          '<h2>You did it. <em>Every single one.</em></h2>' +
+          '<p>Unlocking your prize<span class="prize-dots"></span></p>' +
+        '</div>' +
       '</div>';
     document.body.appendChild(prizeEl);
     document.body.style.overflow = 'hidden';
-    prizeEl.querySelector('.prize-close').addEventListener('click', closePrize);
-    prizeEl.querySelector('.prize-close').focus();
+    const win = prizeEl.querySelector('.prize-window');
+    win.querySelector('.prize-close').addEventListener('click', closePrize);
+    win.querySelector('.prize-close').focus();
+    // Clicking the dimmed page around the window closes it
+    prizeEl.addEventListener('click', e => { if (e.target === prizeEl) closePrize(); });
 
-    // Fullscreen needs the click/keypress that finished the game, so ask right away
-    if (prizeEl.requestFullscreen) prizeEl.requestFullscreen().catch(() => {});
-
+    loadYouTubeApi();  // fetch the player during the intro so the video starts on time
     setTimeout(() => {
       if (!prizeEl) return;
-      const frame = document.createElement('iframe');
-      frame.className = 'prize-video';
-      frame.src = 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0&playsinline=1&controls=0';
-      frame.title = 'Your prize';
-      frame.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
-      frame.allowFullscreen = true;
-      prizeEl.appendChild(frame);
+      const slot = document.createElement('div');
+      slot.className = 'prize-video';
+      win.appendChild(slot);
       prizeEl.classList.add('is-playing');
+      playPrize(slot, win);
     }, skipIntro ? 0 : 2200);
   }
 
+  // ── Video ──────────────────────────────────────────────────
+  // The YouTube player API reports when a video refuses to embed (the label
+  // limits where this one plays), so the prize can fall back to a button
+  // that opens it on YouTube instead of showing a dead player.
+  const PRIZE_VIDEO = 'dQw4w9WgXcQ';
+  let ytReady = null;
+  function loadYouTubeApi() {
+    if (ytReady) return ytReady;
+    ytReady = new Promise((resolve, reject) => {
+      if (window.YT && window.YT.Player) { resolve(window.YT); return; }
+      const prev = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => { if (prev) prev(); resolve(window.YT); };
+      const s = document.createElement('script');
+      s.src = 'https://www.youtube.com/iframe_api';
+      s.onerror = reject;
+      document.head.appendChild(s);
+      setTimeout(() => reject(new Error('timeout')), 8000);
+    });
+    ytReady.catch(() => { ytReady = null; });  // allow a retry on replay
+    return ytReady;
+  }
+
+  function prizeFallback(win) {
+    const slot = win.querySelector('.prize-video');
+    if (slot) slot.remove();
+    if (win.querySelector('.prize-fallback')) return;
+    const box = document.createElement('div');
+    box.className = 'prize-fallback';
+    box.innerHTML =
+      '<span class="section-label">Your prize is ready</span>' +
+      '<h2>One more click.</h2>' +
+      '<a class="btn btn-primary" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=' + PRIZE_VIDEO + '">Claim Prize <span class="arrow">→</span></a>';
+    box.querySelector('a').addEventListener('click', () => setTimeout(closePrize, 300));
+    win.appendChild(box);
+  }
+
+  function playPrize(slot, win) {
+    loadYouTubeApi().then(YT => {
+      if (!prizeEl) return;
+      new YT.Player(slot, {
+        videoId: PRIZE_VIDEO,
+        host: 'https://www.youtube-nocookie.com',
+        playerVars: { autoplay: 1, rel: 0, playsinline: 1 },
+        events: {
+          onReady: e => e.target.playVideo(),
+          onError: () => prizeFallback(win)   // 101/150: embedding not allowed here
+        }
+      });
+    }, () => prizeFallback(win));
+  }
+
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closePrize(); });
-  document.addEventListener('fullscreenchange', () => {
-    // Leaving fullscreen with the browser's own Esc closes the prize too
-    if (!document.fullscreenElement && prizeEl && prizeEl.classList.contains('is-playing')) closePrize();
-  });
 
   function register(id, summary) {
     summaries[id] = summary;
@@ -237,7 +309,9 @@ window.Games = (function () {
   });
 
   return {
-    dayKey, puzzleNo, load, save, copyText, shuffle, register, update,
+    puzzle: P, puzzleNo, load, save, copyText, shuffle, register, update, touch,
+    rickroll: () => prize(true),
+    get progress() { return progress; },
     get active() { return active; }
   };
 

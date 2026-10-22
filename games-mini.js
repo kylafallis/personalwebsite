@@ -4,16 +4,11 @@
 
 (function () {
 
-  const ANSWER = 'HOTDOG';
-
-  // A 6x6 "#" grid: two across and two down, crossing at the O's.
-  const SIZE = 6;
-  const ENTRIES = [
-    { num: 1, dir: 'down',   row: 0, col: 1, clue: 'Show off on the slopes' },
-    { num: 2, dir: 'down',   row: 0, col: 4, clue: 'Its sandwich status is hotly debated' },
-    { num: 3, dir: 'across', row: 1, col: 0, clue: 'Ballpark staple, often with mustard' },
-    { num: 4, dir: 'across', row: 4, col: 0, clue: 'Frank in a bun' }
-  ];
+  // Every entry is the day's word; build/make-puzzle.js finds the layout.
+  const WORD = Games.puzzle.word;
+  const SIZE = Games.puzzle.mini.size;
+  const ENTRIES = Games.puzzle.mini.entries;
+  const len = en => en.answer.length;
 
   const gridEl  = document.getElementById('xw-grid');
   const cluesEl = document.getElementById('xw-clues');
@@ -26,16 +21,18 @@
   const numbers = {};
   ENTRIES.forEach(en => {
     numbers[en.row + ',' + en.col] = en.num;
-    for (let i = 0; i < ANSWER.length; i++) {
+    for (let i = 0; i < len(en); i++) {
       const r = en.row + (en.dir === 'down' ? i : 0);
       const c = en.col + (en.dir === 'across' ? i : 0);
-      solution[r + ',' + c] = ANSWER[i];
+      solution[r + ',' + c] = en.answer[i];
     }
   });
 
   // started is set on the first letter typed, so opening the tab doesn't start the clock
   const state = Games.load('crossword') || { letters: {}, status: 'playing', revealed: false, checks: 0 };
-  let sel = { row: 1, col: 0, dir: 'across' };
+  const first = ENTRIES.find(en => en.dir === 'across') || ENTRIES[0];
+  let sel = { row: first.row, col: first.col, dir: first.dir };
+  gridEl.style.gridTemplateColumns = 'repeat(' + SIZE + ', 1fr)';
 
   const cellEls = {};
   for (let r = 0; r < SIZE; r++) {
@@ -95,13 +92,13 @@
   function entryAt(row, col, dir) {
     return ENTRIES.find(en => en.dir === dir &&
       (dir === 'across'
-        ? en.row === row && col >= en.col && col < en.col + ANSWER.length
-        : en.col === col && row >= en.row && row < en.row + ANSWER.length));
+        ? en.row === row && col >= en.col && col < en.col + len(en)
+        : en.col === col && row >= en.row && row < en.row + len(en)));
   }
 
   function cellsOf(en) {
     const out = [];
-    for (let i = 0; i < ANSWER.length; i++) {
+    for (let i = 0; i < len(en); i++) {
       out.push((en.row + (en.dir === 'down' ? i : 0)) + ',' + (en.col + (en.dir === 'across' ? i : 0)));
     }
     return out;
@@ -151,8 +148,8 @@
   function finish() {
     gridEl.classList.add('solved');
     msgEl.textContent = state.revealed
-      ? 'Revealed. Every answer was HOTDOG. Of course it was.'
-      : 'Solved in ' + fmtTime(state.time) + '. Every answer was HOTDOG.';
+      ? 'Revealed. Every answer was ' + WORD + '. Of course it was.'
+      : 'Solved in ' + fmtTime(state.time) + '. Every answer was ' + WORD + '.';
     document.getElementById('xw-check').hidden = true;
     document.getElementById('xw-reveal').hidden = true;
     shareEl.hidden = state.revealed;
@@ -174,6 +171,7 @@
   function typeLetter(ch) {
     if (state.status !== 'playing') return;
     if (!state.started) state.started = Date.now();
+    Games.touch('mini');
     state.letters[sel.row + ',' + sel.col] = ch;
     move(1);
     afterEdit();
@@ -256,7 +254,7 @@
   });
 
   shareEl.addEventListener('click', () => {
-    Games.copyText('The Mini No. ' + Games.puzzleNo + ' solved in ' + fmtTime(state.time) + ' 🌭\nkylafallis.com/games', shareEl);
+    Games.copyText('The Mini No. ' + Games.puzzleNo + ' solved in ' + fmtTime(state.time) + ' ' + Games.puzzle.emoji + '\nkylafallis.com/games', shareEl);
   });
 
   render();

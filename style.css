@@ -1681,6 +1681,157 @@ footer {
 .trails-cell.hinted span    { outline: 2px dashed var(--green-primary); outline-offset: -2px; }
 .trails-cell:disabled       { cursor: default; }
 
+/* Leaderboard */
+.leaderboard {
+  margin-top: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--green-pale);
+  box-shadow: var(--shadow-sm);
+  padding: 2.5rem 2rem;
+  scroll-margin-top: 84px;
+}
+
+.leaderboard[hidden], .lb-form[hidden] { display: none; }
+
+.lb-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.lb-toggle { display: flex; border: 1px solid var(--green-pale); }
+
+.lb-toggle button {
+  padding: 0.55rem 1.1rem;
+  border: none;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.lb-toggle button[aria-selected="true"] { background: var(--bg-dark); color: var(--text-white); }
+
+.lb-form {
+  background: var(--bg);
+  border-left: 3px solid var(--game-present);
+  padding: 1.2rem 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.lb-form p { margin-bottom: 0.8rem; color: var(--text-dark); }
+
+.lb-form-row { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+
+.lb-form input {
+  flex: 1 1 200px;
+  min-width: 0;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--green-pale);
+  background: var(--bg-card);
+  color: var(--text-dark);
+}
+
+.lb-form input:focus { outline: none; border-color: var(--green-primary); box-shadow: 0 0 0 3px rgba(74,124,89,0.1); }
+
+.lb-error { color: #B23A2E !important; font-size: 0.88rem; margin: 0.6rem 0 0 !important; min-height: 0; }
+.lb-error:empty { display: none; }
+
+.lb-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.lb-note { font-size: 0.92rem; color: var(--text-mid); }
+
+.lb-table-wrap { overflow-x: auto; }
+
+.lb-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.lb-table th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-primary);
+  padding: 0.7rem 0.6rem;
+  border-bottom: 1px solid var(--green-pale);
+}
+
+.lb-table td {
+  padding: 0.7rem 0.6rem;
+  border-bottom: 1px solid var(--bg-mid);
+  color: var(--text-dark);
+}
+
+.lb-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+.lb-table .rank { width: 3rem; font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-light); }
+.lb-table tbody tr:nth-child(1) .rank { color: var(--game-present); font-weight: 500; }
+.lb-table .name { overflow-wrap: anywhere; }
+.lb-table tr.me td { background: #E4EEE6; }
+.lb-table tr.gap td, .lb-table tr.empty td { text-align: center; color: var(--text-light); }
+
+.lb-you {
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--green-primary);
+  color: var(--text-white);
+}
+
+.lb-fine { margin-top: 1.2rem; font-size: 0.8rem; color: var(--text-light); max-width: none; }
+
+/* The joke invoice (games-leaderboard.js) */
+.prize-window.invoice {
+  width: min(100%, 520px);
+  background: var(--bg-card);
+  border: 1px solid var(--green-pale);
+  padding: 2.4rem 2rem 1.8rem;
+}
+
+.invoice .section-label { color: #B23A2E; }
+.invoice h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); margin-bottom: 1rem; }
+.invoice-to { font-size: 0.92rem; margin-bottom: 1.4rem; }
+
+.invoice-lines {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.6rem 1rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--green-pale);
+  border-bottom: 1px solid var(--green-pale);
+  margin-bottom: 1.6rem;
+  font-size: 0.95rem;
+}
+
+.invoice-lines dd { text-align: right; font-variant-numeric: tabular-nums; }
+.invoice-lines .total { font-weight: 600; font-size: 1.15rem; color: var(--text-dark); padding-top: 0.4rem; }
+.invoice-pay { width: 100%; justify-content: center; }
+.invoice-fine { margin: 0.9rem 0 0; font-size: 0.72rem; color: var(--text-light); text-align: center; max-width: none; }
+.invoice .prize-close { background: var(--bg-card); color: var(--text-dark); border-color: var(--green-pale); }
+
 /* The prize (all five solved) */
 .tracker-replay {
   padding: 0;
@@ -1703,47 +1854,64 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
-  background: var(--bg-dark);
-  animation: prize-in 0.4s ease;
+  padding: 16px;
+  background: rgba(26,43,24,0.82);
+  animation: prize-in 0.3s ease;
 }
 
-.prize-intro { text-align: center; }
-.prize-intro h2 { color: var(--text-white); font-size: clamp(2rem, 6vw, 3.6rem); }
+.prize-window {
+  position: relative;
+  width: min(100%, 880px);
+  background: var(--bg-dark);
+  border: 1px solid rgba(125,175,138,0.35);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.45);
+  animation: prize-pop 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+
+.prize-intro { text-align: center; padding: 4.5rem 1.5rem; }
+.prize-intro h2 { color: var(--text-white); font-size: clamp(1.8rem, 5vw, 3rem); }
 .prize-intro em { font-style: italic; color: var(--green-light); }
 .prize-intro p { margin: 1.2rem auto 0; color: rgba(245,242,237,0.7); font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; }
 .prize-dots::after { content: ''; animation: prize-dots 1.2s steps(4) infinite; }
 
-.prize.is-playing { background: #000; padding: 0; }
 .prize.is-playing .prize-intro { display: none; }
 
 .prize-video {
-  position: absolute;
-  inset: 0;
+  display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
   border: 0;
+  background: #000;
 }
+
+.prize-fallback { text-align: center; padding: 4.5rem 1.5rem; }
+.prize-fallback h2 { color: var(--text-white); margin-bottom: 1.8rem; }
 
 .prize-close {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: -18px;
+  right: -18px;
   z-index: 1;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   border: 1px solid rgba(245,242,237,0.35);
-  background: rgba(26,43,24,0.8);
+  background: var(--bg-dark);
   color: var(--text-white);
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   line-height: 1;
   cursor: pointer;
   transition: var(--transition);
 }
 
+@media (max-width: 768px) {
+  .prize-close { top: -48px; right: 0; }
+}
+
 .prize-close:hover { border-color: var(--green-light); color: var(--green-light); }
 
 @keyframes prize-in   { from { opacity: 0; } }
+@keyframes prize-pop  { from { opacity: 0; transform: scale(0.92); } }
 @keyframes prize-dots { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75% { content: '...'; } }
 
 @keyframes hive-caret { 50% { opacity: 0; } }
@@ -1757,7 +1925,7 @@ footer {
 
 /* ── RESPONSIVE ──────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .game-panel { padding: 1.8rem 1rem; }
+  .game-panel, .leaderboard { padding: 1.8rem 1rem; }
   .crossword-layout { grid-template-columns: 1fr; gap: 2rem; }
   .games-banner-dot { display: none; }
   .wordle-key { height: 48px; }

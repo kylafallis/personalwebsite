@@ -4,20 +4,12 @@
 
 (function () {
 
-  // HOTDOG only has five distinct letters, so the hive adds E and R.
-  // That makes HOTDOGGER (one who hotdogs) the pangram.
-  const CENTER = 'O';
-  const OUTER  = ['H', 'T', 'D', 'G', 'E', 'R'];
-  const WORDS = [
-    'DODGE', 'DODGER', 'DODO', 'DOER', 'DOGE', 'DOGGED', 'DOGTOOTH', 'DOOR', 'DOTE', 'DOTED',
-    'DOTH', 'DOTTED', 'ERGO', 'GEODE', 'GHETTO', 'GOER', 'GOOD', 'GORE', 'GORED', 'GORGE',
-    'GORGED', 'GOTH', 'GROTTO', 'HERO', 'HOED', 'HOGGED', 'HOOD', 'HOODED', 'HOODOO',
-    'HOOT', 'HOOTED', 'HOOTER', 'HORDE', 'HOTDOG', 'HOTDOGGED', 'HOTDOGGER', 'HOTTER', 'ODDER',
-    'ODOR', 'OGRE', 'ORDER', 'ORDERED', 'OTHER', 'OTTER', 'REDO', 'RETRO', 'RODE', 'RODEO',
-    'ROOD', 'ROOT', 'ROOTED', 'ROOTER', 'ROTE', 'ROTOR', 'ROTTED', 'THROE', 'TOED', 'TOGETHER',
-    'TOOT', 'TOOTED', 'TORE', 'TORTE', 'TOTE', 'TOTED', 'TOTER', 'TOTTER', 'TROD', 'TROT',
-    'TROTH', 'TROTTED', 'TROTTER', 'GROOT', 'GROTTED', 'GROTTOED', 'HODGE', 'HODGED', 'HOGGER', 'HOGGED', 'HOGGERED', 'DODGED'
-  ];
+  // Letters come from the day's pangram; the word list is filtered from
+  // the ENABLE dictionary by build/make-puzzle.js.
+  const HIVE   = Games.puzzle.hive;
+  const CENTER = HIVE.center;
+  const OUTER  = HIVE.outer;
+  const WORDS  = HIVE.words;
   const LETTERS = [CENTER].concat(OUTER);
   const isPangram = w => LETTERS.every(l => w.includes(l));
   const points = w => (w.length === 4 ? 1 : w.length) + (isPangram(w) ? 7 : 0);
@@ -25,7 +17,7 @@
 
   const RANKS = [
     ['Beginner', 0], ['Good Start', 0.02], ['Moving Up', 0.05], ['Good', 0.08], ['Solid', 0.15],
-    ['Nice', 0.25], ['Great', 0.4], ['Amazing', 0.5], ['Genius', 0.7], ['Top Dog', 1]
+    ['Nice', 0.25], ['Great', 0.4], ['Amazing', 0.5], ['Genius', 0.7], [HIVE.topRank, 1]
   ];
   const WIN = Math.round(MAX * 0.5);  // reaching Amazing wins the game
 
@@ -116,6 +108,7 @@
   }
 
   function add(ch) {
+    Games.touch('hive');
     if (entry.length >= 19) return;
     entry += ch;
     renderEntry();
@@ -166,7 +159,7 @@
 
   shareEl.addEventListener('click', () => {
     Games.copyText('The Hive No. ' + Games.puzzleNo + '\n' + rank()[0] + ' · ' + score() + ' pts · ' +
-      state.found.length + ' words' + (state.found.some(isPangram) ? ' · found the pangram 🌭' : '') +
+      state.found.length + ' words' + (state.found.some(isPangram) ? ' · found the pangram ' + Games.puzzle.emoji : '') +
       '\nkylafallis.com/games', shareEl);
   });
 

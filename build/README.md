@@ -89,3 +89,24 @@ If you swap the hero photo, open `build/make_share.py` and adjust `FACE_X` /
 `python build/make_icons.py` regenerates `favicon.ico`, `favicon-32/192/512.png`
 and `apple-touch-icon.png` from the "KF" monogram. Run `make_share.py` afterwards,
 since make_icons also touches the share card.
+
+## Daily puzzle (games page)
+
+Everything on `games.html` that changes day to day lives in one generated
+file, **`puzzle.js`**. Don't hand-edit it. Each day has a spec in
+`build/puzzle/specs/<date>.json` (the word, clues, Links groups, Hive letters,
+Trails words), and the generator builds the rest:
+
+```bash
+node build/make-puzzle.js build/puzzle/specs/2026-10-22.json --dry   # check + preview
+node build/make-puzzle.js build/puzzle/specs/2026-10-22.json         # write puzzle.js
+```
+
+It finds a legal mini crossword layout, tiles the Trails grid, pulls the Hive
+word list from `build/puzzle/words.txt` (the public-domain ENABLE word list),
+and validates all five games. If anything is wrong it writes nothing and lists
+what to fix. `--seed=N` tries a different Trails grid or crossword layout.
+
+The `daily-puzzle` skill in `.claude/skills/` automates the whole thing:
+it picks a word, writes the spec, builds, commits and pushes. The specs folder
+doubles as the history of past words, so it never repeats one.

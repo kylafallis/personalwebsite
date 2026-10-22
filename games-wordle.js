@@ -4,9 +4,16 @@
 
 (function () {
 
-  const ANSWER = 'HOTDOG';
+  const ANSWER = Games.puzzle.wordle.answer;
   const W_LEN = ANSWER.length;
   const W_TRIES = 6;
+
+  // The game is named for the word length: Five, Six or Seven Letters
+  const COUNT = ['five', 'six', 'seven'][W_LEN - 5] || String(W_LEN);
+  const NAME  = COUNT.charAt(0).toUpperCase() + COUNT.slice(1) + ' Letters';
+  document.querySelector('#tab-wordle .tab-name').textContent = NAME;
+  document.querySelector('#panel-wordle h2').textContent = NAME;
+  document.getElementById('wordle-how').textContent = 'Guess the ' + COUNT + '-letter word in six tries. Green means right letter, right spot. Mustard means it\'s in the word somewhere else.';
 
   const boardEl = document.getElementById('wordle-board');
   const kbEl    = document.getElementById('wordle-keyboard');
@@ -31,11 +38,13 @@
     return result;
   }
 
-  // Build the board
+  // Build the board (tiles stay ~62px whatever the word length)
+  boardEl.style.width = 'min(100%, ' + (W_LEN * 62) + 'px)';
   const rows = [];
   for (let r = 0; r < W_TRIES; r++) {
     const row = document.createElement('div');
     row.className = 'wordle-row';
+    row.style.gridTemplateColumns = 'repeat(' + W_LEN + ', 1fr)';
     const tiles = [];
     for (let c = 0; c < W_LEN; c++) {
       const t = document.createElement('div');
@@ -95,7 +104,7 @@
     const grid = state.guesses.map(g =>
       score(g).map(s => s === 'correct' ? '🟩' : s === 'present' ? '🟨' : '⬜').join('')
     ).join('\n');
-    return 'Six Letters No. ' + Games.puzzleNo + ' ' + tries + '/' + W_TRIES + '\n' + grid + '\nkylafallis.com/games';
+    return NAME + ' No. ' + Games.puzzleNo + ' ' + tries + '/' + W_TRIES + '\n' + grid + '\nkylafallis.com/games';
   }
 
   function finish() {
@@ -117,6 +126,7 @@
 
   function press(key) {
     if (state.status !== 'playing') return;
+    Games.touch('wordle');
     const r = state.guesses.length;
     if (key === 'Enter') {
       if (current.length < W_LEN) { flash('Not enough letters'); return; }

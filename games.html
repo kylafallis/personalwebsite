@@ -103,7 +103,7 @@
       <div class="game-panel" role="tabpanel" id="panel-wordle" data-game="wordle">
         <div class="game-head">
           <h2>Six Letters</h2>
-          <p>Guess the six-letter word in six tries. Green means right letter, right spot. Mustard means it's in the word somewhere else.</p>
+          <p id="wordle-how">Guess the six-letter word in six tries. Green means right letter, right spot. Mustard means it's in the word somewhere else.</p>
         </div>
         <div class="wordle-board" id="wordle-board" aria-label="Guess grid"></div>
         <p class="game-message" id="wordle-message" aria-live="polite"></p>
@@ -196,7 +196,7 @@
           <div class="trails-info">
             <div class="trails-theme">
               <span>Today's theme</span>
-              <strong>Dress it up</strong>
+              <strong id="trails-theme-name"></strong>
             </div>
             <p class="trails-progress" id="trails-progress"></p>
             <p class="trails-current" id="trails-current" aria-live="polite"></p>
@@ -209,6 +209,36 @@
           </div>
           <div class="trails-board" id="trails-board"></div>
         </div>
+      </div>
+
+
+      <!-- LEADERBOARD (shown once LEADERBOARD_URL is set in games-leaderboard.js) -->
+      <div class="leaderboard" id="leaderboard" hidden>
+        <div class="lb-head">
+          <div>
+            <span class="section-label">Leaderboard</span>
+            <h2>Who's the best?</h2>
+          </div>
+          <div class="lb-toggle" role="tablist" aria-label="Leaderboard">
+            <button type="button" role="tab" data-board="today" aria-selected="true">Today</button>
+            <button type="button" role="tab" data-board="all" aria-selected="false">All time</button>
+          </div>
+        </div>
+        <form class="lb-form" id="lb-form" hidden>
+          <p id="lb-summary"></p>
+          <div class="lb-form-row">
+            <label class="visually-hidden" for="lb-name">Your name</label>
+            <input id="lb-name" type="text" maxlength="20" autocomplete="nickname" placeholder="Your name" required>
+            <button class="btn btn-primary" type="submit">Add Me</button>
+          </div>
+          <p class="lb-error" id="lb-error" aria-live="polite"></p>
+        </form>
+        <div class="lb-meta">
+          <p class="lb-note" id="lb-note" aria-live="polite"></p>
+          <button type="button" class="btn btn-ghost" id="lb-refresh">Refresh</button>
+        </div>
+        <div class="lb-table-wrap"><table class="lb-table" id="lb-table"></table></div>
+        <p class="lb-fine">Today ranks score, then total solve time (each game's clock starts at your first move). All time ranks total points across every day you finish.</p>
       </div>
 
     </div>
@@ -228,11 +258,13 @@
   <script src="data.js"></script>
   <script src="render.js"></script>
   <script src="main.js"></script>
+  <script src="puzzle.js"></script>
   <script src="games-core.js"></script>
   <script src="games-wordle.js"></script>
   <script src="games-mini.js"></script>
   <script src="games-links.js"></script>
   <script src="games-hive.js"></script>
   <script src="games-trails.js"></script>
+  <script src="games-leaderboard.js"></script>
 </body>
 </html>

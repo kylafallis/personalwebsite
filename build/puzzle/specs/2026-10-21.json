@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-21",
+  "word": "HOTDOG",
+  "emoji": "🌭",
+  "mini": {
+    "clues": [
+      "Show off on the slopes",
+      "Its sandwich status is hotly debated",
+      "Ballpark staple, often with mustard",
+      "Frank in a bun"
+    ]
+  },
+  "links": [
+    { "name": "Condiments", "words": ["MUSTARD", "KETCHUP", "RELISH", "KRAUT"] },
+    { "name": "Other names for a hot dog", "words": ["WIENER", "FRANKFURTER", "TUBE STEAK", "RED HOT"] },
+    { "name": "___ Dog", "words": ["CORN", "CHILI", "CHICAGO", "SLAW"] },
+    { "name": "Famous Franks", "words": ["SINATRA", "OCEAN", "ZAPPA", "WRIGHT"] }
+  ],
+  "hive": {
+    "pangram": "HOTDOGGER",
+    "center": "O",
+    "topRank": "Top Dog",
+    "exclude": ["DEHORT", "DEHORTED", "DODDERER", "DOETH", "DOGGER", "DOGGO", "DOGTROT", "DOGTROTTED", "DORE", "DORR", "DOTER", "DOTTER", "EDDO", "GEORGETTE", "GHETTOED", "GODDED", "GODET", "GODHOOD", "GOGO", "GORGER", "GORGET", "GORGETED", "GREGO", "GROT", "HOER", "HOGG", "HOGGER", "HOGGET", "HOODOOED", "HOTTED", "OGEE", "OHED", "ORDO", "ORTHO", "OTTO", "REDROOT", "REGORGE", "REGORGED", "RETORE", "RETORTER", "RHETOR", "RODDED", "RODEOED", "ROTO", "ROTTE", "ROTTER", "TEREDO", "TETRODE", "THORO", "THRO", "TOGGED", "TOOTER", "TORERO", "TORO", "TOROT", "TOROTH", "TORR", "TOTHER", "TOTTED", "TOTTERER", "TROTHED"]
+  },
+  "trails": {
+    "theme": "Dress it up",
+    "spangram": "HOTDOG",
+    "words": ["MUSTARD", "KETCHUP", "RELISH", "ONIONS", "PICKLE", "CHILI", "KRAUT"]
+  }
+}

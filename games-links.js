@@ -4,14 +4,8 @@
 
 (function () {
 
-  // Ordered easiest to hardest. Red herrings: SLAW looks like a condiment,
-  // FRANKFURTER looks like a Frank, RED HOT looks like CHILI.
-  const GROUPS = [
-    { name: 'Condiments',                tone: 'mustard', emoji: '🟨', words: ['MUSTARD', 'KETCHUP', 'RELISH', 'KRAUT'] },
-    { name: 'Other names for a hot dog', tone: 'relish',  emoji: '🟩', words: ['WIENER', 'FRANKFURTER', 'TUBE STEAK', 'RED HOT'] },
-    { name: '___ Dog',                   tone: 'bun',     emoji: '🟧', words: ['CORN', 'CHILI', 'CHICAGO', 'SLAW'] },
-    { name: 'Famous Franks',             tone: 'ketchup', emoji: '🟥', words: ['SINATRA', 'OCEAN', 'ZAPPA', 'WRIGHT'] }
-  ];
+  // Ordered easiest to hardest; each group carries its color and share emoji
+  const GROUPS = Games.puzzle.links.groups;
   const MAX_MISTAKES = 4;
 
   const boardEl    = document.getElementById('links-board');
@@ -75,6 +69,7 @@
 
   function toggle(w) {
     if (state.status !== 'playing') return;
+    Games.touch('links');
     if (selected.includes(w)) selected = selected.filter(x => x !== w);
     else if (selected.length < 4) selected.push(w);
     render();
