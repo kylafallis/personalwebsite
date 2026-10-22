@@ -515,6 +515,9 @@
     '</div>';
 
     for (var i = 0; i < nodes.length; i++) {
+      // Replace the prerendered copy instead of adding a second row
+      var baked = nodes[i].querySelector('.footer-links-wrap');
+      if (baked && baked.parentNode) baked.parentNode.removeChild(baked);
       var copy = nodes[i].querySelector('.footer-copy');
       var wrap = document.createElement('div');
       wrap.className = 'footer-links-wrap';

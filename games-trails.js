@@ -1,0 +1,208 @@
+// ============================================================
+// games-trails.js: Trails (find the themed words in a letter grid)
+// ============================================================
+
+(function () {
+
+  // Generated so every cell belongs to exactly one word.
+  // HOTDOG is the spangram: it touches the left and right edges.
+  const COLS = 6, ROWS = 8;
+  const GRID = [
+    'ONIOKE',
+    'RLISNT',
+    'EPSHCC',
+    'KAUHHP',
+    'RTULII',
+    'HOTIEC',
+    'MUSDLK',
+    'DRATOG'
+  ];
+  const SPANGRAM = 'HOTDOG';
+  const PATHS = {
+    HOTDOG:  [[5, 0], [5, 1], [5, 2], [6, 3], [7, 4], [7, 5]],
+    ONIONS:  [[0, 0], [0, 1], [0, 2], [0, 3], [1, 4], [1, 3]],
+    KETCHUP: [[0, 4], [0, 5], [1, 5], [2, 4], [3, 3], [3, 2], [2, 1]],
+    RELISH:  [[1, 0], [2, 0], [1, 1], [1, 2], [2, 2], [2, 3]],
+    CHILI:   [[2, 5], [3, 4], [4, 4], [4, 3], [5, 3]],
+    KRAUT:   [[3, 0], [4, 0], [3, 1], [4, 2], [4, 1]],
+    PICKLE:  [[3, 5], [4, 5], [5, 5], [6, 5], [6, 4], [5, 4]],
+    MUSTARD: [[6, 0], [6, 1], [6, 2], [7, 3], [7, 2], [7, 1], [7, 0]]
+  };
+  const WORDS = Object.keys(PATHS);
+  const pathKey = p => p.map(c => c.join(',')).join(' ');
+
+  const boardEl    = document.getElementById('trails-board');
+  const progressEl = document.getElementById('trails-progress');
+  const currentEl  = document.getElementById('trails-current');
+  const msgEl      = document.getElementById('trails-message');
+  const hintEl     = document.getElementById('trails-hint');
+  const shareEl    = document.getElementById('trails-share');
+
+  const state = Games.load('trails') || { found: [], hints: 0, hinted: null, log: [] };
+  let sel = [];          // [[r, c], ...] in the order picked
+  let dragging = false, moved = false;
+
+  // ── Board ──────────────────────────────────────────────────
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(svgNS, 'svg');
+  svg.setAttribute('viewBox', '0 0 ' + COLS + ' ' + ROWS);
+  svg.setAttribute('class', 'trails-lines');
+  svg.setAttribute('aria-hidden', 'true');
+  boardEl.appendChild(svg);
+
+  const cellEls = [];
+  for (let r = 0; r < ROWS; r++) {
+    cellEls.push([]);
+    for (let c = 0; c < COLS; c++) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'trails-cell';
+      b.dataset.r = r;
+      b.dataset.c = c;
+      b.innerHTML = '<span></span>';
+      b.firstChild.textContent = GRID[r][c];
+      boardEl.appendChild(b);
+      cellEls[r].push(b);
+    }
+  }
+
+  const owner = {};    // "r,c" -> word, for found words
+  function rebuildOwners() {
+    Object.keys(owner).forEach(k => delete owner[k]);
+    state.found.forEach(w => PATHS[w].forEach(([r, c]) => { owner[r + ',' + c] = w; }));
+  }
+
+  function line(path, cls) {
+    if (path.length < 2) return;
+    const pl = document.createElementNS(svgNS, 'polyline');
+    pl.setAttribute('points', path.map(([r, c]) => (c + 0.5) + ',' + (r + 0.5)).join(' '));
+    pl.setAttribute('class', cls);
+    svg.appendChild(pl);
+  }
+
+  function render() {
+    rebuildOwners();
+    const selKeys = new Set(sel.map(p => p.join(',')));
+    const hinted = state.hinted && !state.found.includes(state.hinted) ? new Set(PATHS[state.hinted].map(p => p.join(','))) : null;
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const k = r + ',' + c;
+        const el = cellEls[r][c];
+        el.classList.toggle('found', !!owner[k] && owner[k] !== SPANGRAM);
+        el.classList.toggle('spangram', owner[k] === SPANGRAM);
+        el.classList.toggle('selected', selKeys.has(k));
+        el.classList.toggle('hinted', !!(hinted && hinted.has(k)));
+        el.disabled = !!owner[k];
+      }
+    }
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    state.found.forEach(w => line(PATHS[w], w === SPANGRAM ? 'is-spangram' : 'is-found'));
+    line(sel, 'is-selected');
+
+    currentEl.textContent = sel.map(([r, c]) => GRID[r][c]).join('');
+    progressEl.innerHTML = '<strong>' + state.found.length + '</strong> of ' + WORDS.length + ' theme words found';
+    const doneAll = state.found.length === WORDS.length;
+    hintEl.hidden = doneAll;
+    hintEl.disabled = !!hinted;
+    shareEl.hidden = !doneAll;
+  }
+
+  function say(text) {
+    msgEl.textContent = text;
+  }
+
+  function cellFrom(el) {
+    const b = el && el.closest && el.closest('.trails-cell');
+    return b && !b.disabled ? [+b.dataset.r, +b.dataset.c] : null;
+  }
+  const same = (a, b) => a && b && a[0] === b[0] && a[1] === b[1];
+  const adjacent = (a, b) => Math.max(Math.abs(a[0] - b[0]), Math.abs(a[1] - b[1])) === 1;
+  const inSel = p => sel.some(s => same(s, p));
+
+  function submit() {
+    if (sel.length < 2) return;
+    const word = sel.map(([r, c]) => GRID[r][c]).join('');
+    const k = pathKey(sel);
+    const hit = WORDS.find(w => !state.found.includes(w) && (pathKey(PATHS[w]) === k || pathKey(PATHS[w].slice().reverse()) === k));
+    if (hit) {
+      state.found.push(hit);
+      state.log.push(hit === SPANGRAM ? 'span' : 'word');
+      if (state.hinted === hit) state.hinted = null;
+      say(hit === SPANGRAM ? 'SPANGRAM! You found ' + hit + '.' : state.found.length === WORDS.length ? 'All dressed up. Puzzle complete.' : 'Found ' + hit + '.');
+      Games.save('trails', state);
+      Games.update();
+    } else if (word.length < 4) {
+      say('Too short.');
+    } else {
+      say(word + ' is not a theme word.');
+    }
+    sel = [];
+    render();
+  }
+
+  // ── Input: drag through letters, or tap one by one ─────────
+  boardEl.addEventListener('pointerdown', e => {
+    const p = cellFrom(e.target);
+    if (!p) return;
+    e.preventDefault();
+    if (sel.length && same(sel[sel.length - 1], p)) { submit(); return; }   // tap last letter again
+    if (sel.length && adjacent(sel[sel.length - 1], p) && !inSel(p)) sel.push(p);
+    else sel = [p];
+    dragging = true;
+    moved = false;
+    render();
+  });
+
+  boardEl.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    // elementFromPoint, not e.target: touch keeps targeting the starting cell
+    const p = cellFrom(document.elementFromPoint(e.clientX, e.clientY));
+    if (!p) return;
+    const last = sel[sel.length - 1];
+    if (same(last, p)) return;
+    if (sel.length > 1 && same(sel[sel.length - 2], p)) { sel.pop(); moved = true; render(); return; }
+    // Only take a cell once the pointer is well inside it, so diagonals don't catch neighbors
+    const rect = cellEls[p[0]][p[1]].getBoundingClientRect();
+    const dx = e.clientX - (rect.left + rect.width / 2), dy = e.clientY - (rect.top + rect.height / 2);
+    if (Math.hypot(dx, dy) > rect.width * 0.38) return;
+    if (adjacent(last, p) && !inSel(p)) { sel.push(p); moved = true; render(); }
+  });
+
+  window.addEventListener('pointerup', () => {
+    if (!dragging) return;
+    dragging = false;
+    if (moved && sel.length > 1) submit();
+  });
+
+  document.getElementById('trails-clear').addEventListener('click', () => { sel = []; say(''); render(); });
+
+  hintEl.addEventListener('click', () => {
+    const left = WORDS.filter(w => !state.found.includes(w));
+    // Save the spangram for last, it's the fun one
+    state.hinted = left.find(w => w !== SPANGRAM) || left[0];
+    state.hints++;
+    state.log.push('hint');
+    say('Hint: the outlined letters spell a theme word.');
+    Games.save('trails', state);
+    Games.update();
+    render();
+  });
+
+  shareEl.addEventListener('click', () => {
+    const icons = state.log.map(x => x === 'span' ? '🟡' : x === 'hint' ? '💡' : '🟢').join('');
+    Games.copyText('Trails No. ' + Games.puzzleNo + '\n"Dress it up"\n' + icons + '\nkylafallis.com/games', shareEl);
+  });
+
+  render();
+  if (state.found.length === WORDS.length) say('All dressed up. Puzzle complete.');
+
+  Games.register('trails', () => {
+    const n = state.found.length;
+    if (n === WORDS.length) {
+      return { state: 'done', label: state.hints ? state.hints + ' hint' + (state.hints > 1 ? 's' : '') : 'No hints', quality: Math.max(0.2, 1 - state.hints * 0.15) };
+    }
+    if (n || state.hints) return { state: 'playing', label: n + ' of ' + WORDS.length + ' words', quality: n / WORDS.length };
+    return { state: 'new', label: 'Not started' };
+  });
+
+})();

@@ -21,7 +21,7 @@ const path = require('path');
 process.chdir(path.join(__dirname, '..'));
 
 const PAGES = ['index.html', 'about.html', 'research.html', 'projects.html',
-               'speaking.html', 'contact.html', 'now.html', 'mediakit.html'];
+               'speaking.html', 'contact.html', 'now.html', 'mediakit.html', 'games.html'];
 
 const dataSrc   = fs.readFileSync('data.js', 'utf8');
 const renderSrc = fs.readFileSync('render.js', 'utf8');

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games · Kyla Fallis</title>
+  <meta name="description" content="Daily puzzles from Kyla Fallis: a word game, a mini crossword, a grouping puzzle, a word hive, and a letter trail, new every day.">
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"        content="https://kylafallis.com/games.html">
+  <meta property="og:site_name"   content="Kyla Fallis">
+  <meta property="og:title"       content="Games · Kyla Fallis">
+  <meta property="og:description" content="Daily puzzles from Kyla Fallis: a word game, a mini crossword, a grouping puzzle, a word hive, and a letter trail, new every day.">
+  <meta property="og:image"       content="https://kylafallis.com/images/share.jpg">
+  <meta name="twitter:card"       content="summary_large_image">
+  <meta name="twitter:title"      content="Games · Kyla Fallis">
+  <meta name="twitter:description" content="Daily puzzles from Kyla Fallis: a word game, a mini crossword, a grouping puzzle, a word hive, and a letter trail, new every day.">
+  <meta name="twitter:image"      content="https://kylafallis.com/images/share.jpg">
+
+    <link rel="canonical" href="https://kylafallis.com/games.html">
+  <!-- Icons -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#1A2B18">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-games">
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Kyla <span>Fallis</span></a>
+      <ul class="nav-links">
+        <li><a href="research.html">Research</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="speaking.html">Speaking</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="now.html">Now</a></li>
+        <li><a href="games.html" class="active">Games</a></li>
+        <li><a href="contact.html" class="nav-cta">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="nav-overlay">
+    <a href="index.html">Home</a>
+    <a href="research.html">Research</a>
+    <a href="projects.html">Projects</a>
+    <a href="speaking.html">Speaking</a>
+    <a href="about.html">About</a>
+    <a href="now.html">Now</a>
+    <a href="games.html">Games</a>
+    <a href="mediakit.html">Media Kit</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- DAILY BANNER -->
+  <div class="games-banner" role="status">
+    <div class="container games-banner-inner">
+      <span>Daily Puzzle <strong id="puzzle-no">No. 1</strong></span>
+      <span class="games-banner-dot" aria-hidden="true"></span>
+      <span id="puzzle-date"></span>
+      <span class="games-banner-dot" aria-hidden="true"></span>
+      <span>Next puzzle in <strong id="puzzle-countdown">--:--:--</strong></span>
+    </div>
+  </div>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero page-hero-games">
+    <div class="container">
+      <span class="section-label">Take a break</span>
+      <h1>Daily <em style="font-style:italic;color:var(--green-light);">puzzles.</em></h1>
+      <p>Five small games, fresh every day. Fair warning: today's theme is a strong one.</p>
+    </div>
+  </div>
+
+  <!-- GAMES -->
+  <section class="games-shell">
+    <div class="container">
+
+      <!-- Tracker: one segment per game, sitting directly above its tab -->
+      <div class="games-tracker" aria-label="Today's progress">
+        <div class="tracker-head">
+          <span class="tracker-title">Today's progress</span>
+          <span class="tracker-count" id="tracker-count">0 of 5 done</span>
+          <span class="tracker-score">Score <strong id="tracker-score">&mdash;</strong></span>
+        </div>
+        <div class="tracker-bar" id="tracker-bar" aria-hidden="true"></div>
+      </div>
+
+      <div class="games-tabs" id="games-tabs" role="tablist" aria-label="Games">
+        <button role="tab" data-game="wordle"><span class="tab-name">Six Letters</span><span class="tab-status"></span></button>
+        <button role="tab" data-game="mini"><span class="tab-name">The Mini</span><span class="tab-status"></span></button>
+        <button role="tab" data-game="links"><span class="tab-name">Links</span><span class="tab-status"></span></button>
+        <button role="tab" data-game="hive"><span class="tab-name">The Hive</span><span class="tab-status"></span></button>
+        <button role="tab" data-game="trails"><span class="tab-name">Trails</span><span class="tab-status"></span></button>
+      </div>
+
+      <!-- SIX LETTERS -->
+      <div class="game-panel" role="tabpanel" id="panel-wordle" data-game="wordle">
+        <div class="game-head">
+          <h2>Six Letters</h2>
+          <p>Guess the six-letter word in six tries. Green means right letter, right spot. Mustard means it's in the word somewhere else.</p>
+        </div>
+        <div class="wordle-board" id="wordle-board" aria-label="Guess grid"></div>
+        <p class="game-message" id="wordle-message" aria-live="polite"></p>
+        <div class="wordle-keyboard" id="wordle-keyboard" aria-label="Keyboard"></div>
+        <div class="game-actions">
+          <button class="btn btn-outline" id="wordle-share" hidden>Share Result</button>
+        </div>
+      </div>
+
+      <!-- THE MINI -->
+      <div class="game-panel" role="tabpanel" id="panel-mini" data-game="mini" hidden>
+        <div class="game-head">
+          <h2>The Mini</h2>
+          <p>A tiny crossword. Click a square to start, click it again to switch direction, or tap a clue.</p>
+        </div>
+        <div class="crossword-layout">
+          <div>
+            <div class="crossword-active-clue" id="xw-active-clue"></div>
+            <div class="crossword-grid" id="xw-grid" role="grid" aria-label="Crossword grid"></div>
+            <p class="game-message" id="xw-message" aria-live="polite"></p>
+            <div class="game-actions">
+              <button class="btn btn-outline" id="xw-check">Check</button>
+              <button class="btn btn-ghost" id="xw-reveal">Reveal</button>
+              <button class="btn btn-outline" id="xw-share" hidden>Share Result</button>
+            </div>
+          </div>
+          <div class="crossword-clues" id="xw-clues"></div>
+        </div>
+      </div>
+
+      <!-- LINKS -->
+      <div class="game-panel" role="tabpanel" id="panel-links" data-game="links" hidden>
+        <div class="game-head">
+          <h2>Links</h2>
+          <p>Find four groups of four. Pick four words that share something and submit. Four mistakes and you're out.</p>
+        </div>
+        <div class="links-board" id="links-board"></div>
+        <div class="links-mistakes" id="links-mistakes"></div>
+        <p class="game-message" id="links-message" aria-live="polite"></p>
+        <div class="game-actions" id="links-controls">
+          <button class="btn btn-ghost" id="links-shuffle">Shuffle</button>
+          <button class="btn btn-ghost" id="links-deselect">Deselect All</button>
+          <button class="btn btn-primary" id="links-submit" disabled>Submit</button>
+        </div>
+        <div class="game-actions">
+          <button class="btn btn-outline" id="links-share" hidden>Share Result</button>
+        </div>
+      </div>
+
+      <!-- THE HIVE -->
+      <div class="game-panel" role="tabpanel" id="panel-hive" data-game="hive" hidden>
+        <div class="game-head">
+          <h2>The Hive</h2>
+          <p>Make words of four or more letters. Every word must use the center letter, and letters can repeat. Find the word that uses all seven for a bonus.</p>
+        </div>
+        <div class="hive-layout">
+          <div>
+            <div class="hive-entry" id="hive-entry" aria-live="polite"></div>
+            <div class="hive" id="hive-board"></div>
+            <p class="game-message" id="hive-message" aria-live="polite"></p>
+            <div class="game-actions">
+              <button class="btn btn-ghost" id="hive-delete">Delete</button>
+              <button class="btn btn-ghost" id="hive-shuffle">Shuffle</button>
+              <button class="btn btn-primary" id="hive-enter">Enter</button>
+            </div>
+          </div>
+          <div class="hive-side">
+            <div class="hive-rank">
+              <div class="hive-rank-head"><span id="hive-rank-name">Beginner</span><strong id="hive-points">0 pts</strong></div>
+              <div class="hive-rank-bar" id="hive-rank-bar"></div>
+            </div>
+            <div class="hive-found">
+              <h4 id="hive-found-count">You have found 0 words</h4>
+              <ul id="hive-found-list"></ul>
+            </div>
+            <div class="game-actions" style="justify-content:flex-start;">
+              <button class="btn btn-outline" id="hive-share">Share Progress</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRAILS -->
+      <div class="game-panel" role="tabpanel" id="panel-trails" data-game="trails" hidden>
+        <div class="game-head">
+          <h2>Trails</h2>
+          <p>Every letter belongs to exactly one word. Drag through neighboring letters (sideways and diagonals count), or tap them one by one and tap the last letter again to submit. One word spans the whole board, edge to edge.</p>
+        </div>
+        <div class="trails-layout">
+          <div class="trails-info">
+            <div class="trails-theme">
+              <span>Today's theme</span>
+              <strong>Dress it up</strong>
+            </div>
+            <p class="trails-progress" id="trails-progress"></p>
+            <p class="trails-current" id="trails-current" aria-live="polite"></p>
+            <p class="game-message" id="trails-message" aria-live="polite"></p>
+            <div class="game-actions" style="justify-content:flex-start;">
+              <button class="btn btn-ghost" id="trails-clear">Clear</button>
+              <button class="btn btn-outline" id="trails-hint">Hint</button>
+              <button class="btn btn-outline" id="trails-share" hidden>Share Result</button>
+            </div>
+          </div>
+          <div class="trails-board" id="trails-board"></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-logo">Kyla Fallis</span>
+        <!-- prerender:footer --><div class="footer-links-wrap"><div class="footer-links" role="navigation" aria-label="Elsewhere"><a href="https://linkedin.com/in/kylafallis07" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.75V21h-4v-5.6c0-1.34-.03-3.06-1.9-3.06-1.9 0-2.2 1.45-2.2 2.96V21H9z"/></svg><span>LinkedIn</span></a><a href="https://github.com/kylafallis" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a12 12 0 00-3.8 23.4c.6.1.8-.26.8-.57v-2c-3.34.72-4.04-1.6-4.04-1.6-.55-1.4-1.34-1.77-1.34-1.77-1.1-.75.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.3.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 016 0C18.26 4.3 19.26 4.62 19.26 4.62c.64 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.42.37.81 1.1.81 2.22v3.29c0 .31.2.68.81.57A12 12 0 0012 .5z"/></svg><span>GitHub</span></a><a href="https://fairgameinitiative.org" target="_blank" rel="noopener" aria-label="FairGame Initiative" title="FairGame Initiative"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v18M12 3l7 3-7 3"/><path d="M5 21h14"/></svg><span>FairGame Initiative</span></a><a href="mailto:hello@kylafallis.com" aria-label="hello@kylafallis.com" title="hello@kylafallis.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="M3 6l9 7 9-7"/></svg><span>hello@kylafallis.com</span></a></div></div><!-- /prerender:footer -->
+        <p class="footer-copy" id="footer-year"></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="render.js"></script>
+  <script src="main.js"></script>
+  <script src="games-core.js"></script>
+  <script src="games-wordle.js"></script>
+  <script src="games-mini.js"></script>
+  <script src="games-links.js"></script>
+  <script src="games-hive.js"></script>
+  <script src="games-trails.js"></script>
+</body>
+</html>
