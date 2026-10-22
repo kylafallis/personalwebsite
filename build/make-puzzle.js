@@ -52,7 +52,7 @@ const up = s => String(s || '').toUpperCase().trim();
 
 // ── Basics ─────────────────────────────────────────────────
 const WORD = up(spec.word);
-if (!/^[A-Z]{5,7}$/.test(WORD)) problem('word must be 5 to 7 letters A-Z (got "' + spec.word + '")');
+if (!/^[A-Z]{5,10}$/.test(WORD)) problem('word must be 5 to 10 letters A-Z (got "' + spec.word + '")');
 if (!/^\d{4}-\d{2}-\d{2}$/.test(spec.date || '')) problem('date must look like YYYY-MM-DD');
 if (!spec.emoji) problem('emoji is required (used in share text)');
 if (problems.length) bail();
@@ -65,7 +65,7 @@ function buildMini(W, clues) {
   const L = W.length;
   let best = null, bestScore = null, ties = [];
 
-  for (let N = L; N <= L + 2; N++) {
+  for (let N = L; N <= L + (L >= 9 ? 1 : 2); N++) {
     const places = [];
     for (let r = 0; r < N; r++) for (let c = 0; c + L <= N; c++) places.push({ dir: 'across', row: r, col: c });
     for (let c = 0; c < N; c++) for (let r = 0; r + L <= N; r++) places.push({ dir: 'down', row: r, col: c });
@@ -182,14 +182,15 @@ function buildLinks(groups) {
 }
 
 // ============================================================
-// THE HIVE: seven letters from a pangram; words come from ENABLE
+// THE HIVE: seven (or eight) letters from a pangram; words come from
+// ENABLE unless the spec gives its own curated "words" list
 // ============================================================
 function buildHive(h) {
   if (!h || !h.pangram || !h.center) { problem('Hive: needs "pangram" and "center"'); return null; }
   const pangram = up(h.pangram);
   const letters = [...new Set(pangram)];
   const center = up(h.center);
-  if (letters.length !== 7) { problem('Hive: pangram "' + pangram + '" has ' + letters.length + ' different letters; it needs exactly 7'); return null; }
+  if (letters.length !== 7 && letters.length !== 8) { problem('Hive: pangram "' + pangram + '" has ' + letters.length + ' different letters; it needs 7 (or 8 for a long theme word)'); return null; }
   if (!letters.includes(center) || center.length !== 1) { problem('Hive: center must be one of the pangram letters'); return null; }
 
   const dictFile = path.join(__dirname, 'puzzle', 'words.txt');
@@ -197,12 +198,19 @@ function buildHive(h) {
   const dictSet = new Set(dict);
   const fits = w => w.length >= 4 && w.includes(center) && [...w].every(ch => letters.includes(ch));
 
-  if (!dictSet.has(pangram)) problem('Hive: pangram "' + pangram + '" is not in the dictionary (build/puzzle/words.txt)');
   const exclude = new Set((h.exclude || []).map(up));
   const include = (h.include || []).map(up);
   include.forEach(w => { if (!fits(w)) problem('Hive: include word "' + w + '" breaks the hive rules (4+ letters, uses the center, only hive letters)'); });
 
-  const words = [...new Set(dict.filter(fits).concat(include))].filter(w => !exclude.has(w)).sort();
+  let words;
+  if (Array.isArray(h.words)) {
+    // A hand-curated list: still has to obey the hive rules
+    words = [...new Set(h.words.map(up))].sort();
+    words.forEach(w => { if (!fits(w)) problem('Hive: word "' + w + '" breaks the hive rules (4+ letters, uses the center, only hive letters)'); });
+  } else {
+    if (!dictSet.has(pangram)) problem('Hive: pangram "' + pangram + '" is not in the dictionary (build/puzzle/words.txt)');
+    words = [...new Set(dict.filter(fits).concat(include))].filter(w => !exclude.has(w)).sort();
+  }
   if (!words.includes(pangram)) problem('Hive: the pangram was excluded');
   const pangrams = words.filter(w => letters.every(l => w.includes(l)));
   if (words.length < 20) problem('Hive: only ' + words.length + ' words; pick letters that make more words');
@@ -222,11 +230,24 @@ function buildTrails(t) {
   const SPAN = up(t.spangram).replace(/\s+/g, '');
   const words = t.words.map(w => up(w).replace(/\s+/g, ''));
   if (!/^[A-Z]{6,12}$/.test(SPAN)) problem('Trails: spangram must be 6-12 letters so it can cross the 6-wide board');
-  words.forEach(w => { if (!/^[A-Z]{4,9}$/.test(w)) problem('Trails: theme word "' + w + '" must be 4-9 letters'); });
+  words.forEach(w => { if (!/^[A-Z]{4,10}$/.test(w)) problem('Trails: theme word "' + w + '" must be 4-10 letters'); });
   if (new Set(words.concat(SPAN)).size !== words.length + 1) problem('Trails: words must all be different (and not repeat the spangram)');
   const total = words.reduce((s, w) => s + w.length, SPAN.length);
   if (total !== COLS * ROWS) problem('Trails: letters must add up to exactly ' + (COLS * ROWS) + ' (spangram + theme words = ' + total + '). Add, drop or swap a word.');
   if (problems.length) return null;
+
+  // A spec can pin an exact grid (to keep a puzzle that's already live);
+  // the verify step below still checks every path.
+  if (Array.isArray(t.grid) && t.paths) {
+    const paths = {};
+    [SPAN].concat(words).forEach(w => {
+      if (!t.paths[w]) problem('Trails: fixed grid is missing a path for ' + w);
+      paths[w] = t.paths[w];
+    });
+    if (t.grid.length !== ROWS || t.grid.some(r => typeof r !== 'string' || r.length !== COLS)) problem('Trails: fixed grid must be ' + ROWS + ' rows of ' + COLS + ' letters');
+    if (problems.length) return null;
+    return { theme: String(t.theme).trim(), cols: COLS, rows: ROWS, grid: t.grid.map(up), spangram: SPAN, paths };
+  }
 
   const nb = (r, c) => { const o = []; for (let dr = -1; dr <= 1; dr++) for (let dc = -1; dc <= 1; dc++) { if (!dr && !dc) continue; const R = r + dr, C = c + dc; if (R >= 0 && R < ROWS && C >= 0 && C < COLS) o.push([R, C]); } return o; };
   const grid = Array.from({ length: ROWS }, () => Array(COLS).fill(null));
@@ -381,7 +402,7 @@ const puzzle = { id, date: spec.date, word: WORD, emoji: spec.emoji, wordle, min
 const points = w => (w.length === 4 ? 1 : w.length) + (hive.pangrams.includes(w) ? 7 : 0);
 const maxPts = hive.words.reduce((s, w) => s + points(w), 0);
 console.log('Puzzle ' + id + (DRY ? ' (dry run, nothing written)' : ''));
-console.log('  Six Letters  ' + WORD);
+console.log('  Word game    ' + WORD + ' (' + WORD.length + ' letters)');
 console.log('  The Mini     ' + mini.size + 'x' + mini.size + ', ' + mini.entries.length + ' entries');
 const g = {}; mini.entries.forEach(e => [...e.answer].forEach((ch, i) => { g[(e.row + (e.dir === 'down' ? i : 0)) + ',' + (e.col + (e.dir === 'across' ? i : 0))] = ch; }));
 for (let r = 0; r < mini.size; r++) { let s = ''; for (let c = 0; c < mini.size; c++) s += g[r + ',' + c] || '#'; console.log('               ' + s); }

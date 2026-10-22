@@ -11,6 +11,8 @@
   const OUTER  = HIVE.outer;
   const WORDS  = HIVE.words;
   const LETTERS = [CENTER].concat(OUTER);
+  const NUMBER = ['seven', 'eight'][LETTERS.length - 7] || String(LETTERS.length);
+  document.getElementById('hive-how').textContent = 'Make words of four or more letters. Every word must use the center letter, and letters can repeat. Find the word that uses all ' + NUMBER + ' for a bonus.';
   const isPangram = w => LETTERS.every(l => w.includes(l));
   const points = w => (w.length === 4 ? 1 : w.length) + (isPangram(w) ? 7 : 0);
   const MAX = WORDS.reduce((s, w) => s + points(w), 0);
@@ -45,10 +47,14 @@
     return r;
   }
 
-  // Seven hexes: the center letter plus a ring of six
+  // The center letter plus a ring of the outer letters, spaced evenly so
+  // 7-letter and 8-letter hives both work
   function buildHive() {
     hiveEl.innerHTML = '';
-    const slots = [[0, 0], [0, -1], [0.75, -0.5], [0.75, 0.5], [0, 1], [-0.75, 0.5], [-0.75, -0.5]];
+    const slots = [[0, 0]].concat(outer.map((_, i) => {
+      const a = -Math.PI / 2 + i * 2 * Math.PI / outer.length;
+      return [+(1.16 * Math.cos(a)).toFixed(3), +(1.36 * Math.sin(a)).toFixed(3)];
+    }));
     [CENTER].concat(outer).forEach((l, i) => {
       const b = document.createElement('button');
       b.type = 'button';

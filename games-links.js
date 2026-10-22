@@ -47,7 +47,7 @@
     state.order.filter(w => !state.solved.includes(groupOf[w])).forEach(w => {
       const b = document.createElement('button');
       b.type = 'button';
-      b.className = 'links-tile' + (w.length > 8 ? ' long' : '') + (selected.includes(w) ? ' selected' : '');
+      b.className = 'links-tile' + (w.length >= 8 ? ' long' : '') + (selected.includes(w) ? ' selected' : '');
       b.textContent = w;
       b.setAttribute('aria-pressed', selected.includes(w));
       b.disabled = state.status !== 'playing';

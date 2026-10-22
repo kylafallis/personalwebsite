@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-22",
+  "word": "TROGLODYTE",
+  "emoji": "🦇",
+  "mini": {
+    "clues": [
+      "Cave dweller",
+      "Wren, to a taxonomist",
+      "Someone hopelessly behind the times",
+      "Stalactite admirer, perhaps"
+    ]
+  },
+  "links": [
+    { "name": "Cave formations", "words": ["STALACTITE", "STALAGMITE", "FLOWSTONE", "COLUMN"] },
+    { "name": "Animals that live in caves", "words": ["BAT", "OLM", "CAVEFISH", "GLOWWORM"] },
+    { "name": "Famous caves", "words": ["LASCAUX", "ALTAMIRA", "CARLSBAD", "MAMMOTH"] },
+    { "name": "Someone stuck in the past", "words": ["LUDDITE", "DINOSAUR", "FOSSIL", "NEANDERTHAL"] }
+  ],
+  "hive": {
+    "pangram": "TROGLODYTE",
+    "center": "O",
+    "topRank": "Top Troglodyte",
+    "words": [
+      "DODGE", "DODGED", "DODGER", "DODGY", "DODO", "DOER", "DOGE", "DOGGED", "DOGGEDLY", "DOGGEREL",
+      "DOGGY", "DOGLEG", "DOLE", "DOLL", "DOLLED", "DOLLY", "DOLT", "DOODLE", "DOOR", "DORY", "DOTED",
+      "DOTTED", "DOTTY", "DROLL", "DROOL", "ERGO", "ERODE", "ERODED", "ERROR", "GEOLOGY", "GLORY",
+      "GODLY", "GOER", "GOGGLE", "GOLD", "GOLLY", "GOOD", "GOODLY", "GOODY", "GOOEY", "GORE", "GORED",
+      "GORGE", "GORGED", "GORY", "GROG", "GROGGY", "GROTTO", "LODE", "LODGE", "LODGED", "LODGER",
+      "LOGGED", "LOGGER", "LOGO", "LOLLY", "LOOT", "LOOTED", "LORD", "LORE", "LORRY", "LOTTERY",
+      "LOTTO", "ODDER", "ODDLY", "ODOR", "OGLE", "OGRE", "OLDER", "ORDER", "ORDERED", "ORDERLY",
+      "OTTER", "REDO", "REORDER", "RETOLD", "RETORT", "RETORTED", "RETRO", "RODE", "RODEO", "ROLE",
+      "ROLL", "ROLLED", "ROLLER", "ROOD", "ROOT", "ROOTED", "ROTE", "ROTOR", "ROTTED", "TERROR",
+      "TODDLER", "TODDY", "TOED", "TOGGLE", "TOGGLED", "TOLD", "TOLL", "TOLLED", "TOOL", "TOOLED",
+      "TOOT", "TORE", "TORT", "TOTE", "TOYED", "TROD", "TROGLODYTE", "TROLL", "TROLLED", "TROLLEY",
+      "TROT", "TROTTED", "TROTTER", "YODEL", "YODELER", "YORE"
+    ]
+  },
+  "trails": {
+    "theme": "Home sweet cave",
+    "spangram": "TROGLODYTE",
+    "words": ["STALACTITE", "STALAGMITE", "GROTTO", "BATS", "ECHO", "FIRE"],
+    "grid": ["GROTIM", "STOTTG", "TEAEAH", "TISLCO", "CLTTAE", "AALSTB", "OGODYE", "TRFIRE"],
+    "paths": {
+      "TROGLODYTE": [[7, 0], [7, 1], [6, 0], [6, 1], [5, 2], [6, 2], [6, 3], [6, 4], [5, 4], [6, 5]],
+      "STALACTITE": [[5, 3], [4, 2], [5, 1], [4, 1], [5, 0], [4, 0], [3, 0], [3, 1], [2, 0], [2, 1]],
+      "STALAGMITE": [[1, 0], [1, 1], [2, 2], [3, 3], [2, 4], [1, 5], [0, 5], [0, 4], [1, 4], [2, 3]],
+      "GROTTO":     [[0, 0], [0, 1], [0, 2], [0, 3], [1, 3], [1, 2]],
+      "BATS":       [[5, 5], [4, 4], [4, 3], [3, 2]],
+      "ECHO":       [[4, 5], [3, 4], [2, 5], [3, 5]],
+      "FIRE":       [[7, 2], [7, 3], [7, 4], [7, 5]]
+    }
+  }
+}

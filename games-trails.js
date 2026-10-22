@@ -116,6 +116,10 @@
       say(hit === SPANGRAM ? 'SPANGRAM! You found ' + hit + '.' : state.found.length === WORDS.length ? 'Every theme word found. Puzzle complete.' : 'Found ' + hit + '.');
       Games.save('trails', state);
       Games.update();
+    } else if (WORDS.includes(word) && !state.found.includes(word)) {
+      say('Right word, different trail. Try another route.');
+    } else if (state.found.includes(word)) {
+      say('Already found ' + word + '.');
     } else if (word.length < 4) {
       say('Too short.');
     } else {
@@ -146,11 +150,13 @@
     if (!p) return;
     const last = sel[sel.length - 1];
     if (same(last, p)) return;
-    if (sel.length > 1 && same(sel[sel.length - 2], p)) { sel.pop(); moved = true; render(); return; }
-    // Only take a cell once the pointer is well inside it, so diagonals don't catch neighbors
+    // Only react once the pointer is well inside a cell. A diagonal move
+    // clips the corners of the cells beside it, and without this a corner
+    // touch would either grab a neighbor or undo the previous letter.
     const rect = cellEls[p[0]][p[1]].getBoundingClientRect();
     const dx = e.clientX - (rect.left + rect.width / 2), dy = e.clientY - (rect.top + rect.height / 2);
     if (Math.hypot(dx, dy) > rect.width * 0.38) return;
+    if (sel.length > 1 && same(sel[sel.length - 2], p)) { sel.pop(); moved = true; render(); return; }
     if (adjacent(last, p) && !inSel(p)) { sel.push(p); moved = true; render(); }
   });
 

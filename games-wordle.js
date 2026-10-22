@@ -8,8 +8,8 @@
   const W_LEN = ANSWER.length;
   const W_TRIES = 6;
 
-  // The game is named for the word length: Five, Six or Seven Letters
-  const COUNT = ['five', 'six', 'seven'][W_LEN - 5] || String(W_LEN);
+  // The game is named for the word length: Five Letters through Ten Letters
+  const COUNT = ['five', 'six', 'seven', 'eight', 'nine', 'ten'][W_LEN - 5] || String(W_LEN);
   const NAME  = COUNT.charAt(0).toUpperCase() + COUNT.slice(1) + ' Letters';
   document.querySelector('#tab-wordle .tab-name').textContent = NAME;
   document.querySelector('#panel-wordle h2').textContent = NAME;
