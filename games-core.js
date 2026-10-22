@@ -148,7 +148,76 @@ window.Games = (function () {
     });
     document.getElementById('tracker-count').textContent = done + ' of ' + ids.length + ' done';
     document.getElementById('tracker-score').textContent = done ? Math.round(total / done * 100) + '%' : '—';
+
+    // The prize fires on the move that finishes the last game, not on every
+    // page load with everything already done.
+    const allIn = Object.keys(summaries).length === ids.length;
+    if (allIn && lastDone !== null && lastDone < ids.length && done === ids.length) {
+      setTimeout(prize, 900);  // let the game's own "solved" moment land first
+    }
+    replayEl.hidden = done < ids.length;
+    if (allIn) lastDone = done;
   }
+
+  // ── THE PRIZE ──────────────────────────────────────────────
+  let lastDone = null;
+  const replayEl = document.createElement('button');
+  replayEl.type = 'button';
+  replayEl.className = 'tracker-replay';
+  replayEl.textContent = 'Replay prize';
+  replayEl.hidden = true;
+  replayEl.addEventListener('click', () => prize(true));
+  document.querySelector('.tracker-head').appendChild(replayEl);
+
+  let prizeEl = null;
+  function closePrize() {
+    if (!prizeEl) return;
+    if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
+    prizeEl.remove();
+    prizeEl = null;
+    document.body.style.overflow = '';
+  }
+
+  function prize(skipIntro) {
+    if (prizeEl) return;
+    prizeEl = document.createElement('div');
+    prizeEl.className = 'prize';
+    prizeEl.setAttribute('role', 'dialog');
+    prizeEl.setAttribute('aria-modal', 'true');
+    prizeEl.setAttribute('aria-label', 'Your prize');
+    prizeEl.innerHTML =
+      '<button type="button" class="prize-close" aria-label="Close">&times;</button>' +
+      '<div class="prize-intro">' +
+        '<span class="section-label">All five solved</span>' +
+        '<h2>You did it. <em>Every single one.</em></h2>' +
+        '<p>Unlocking your prize<span class="prize-dots"></span></p>' +
+      '</div>';
+    document.body.appendChild(prizeEl);
+    document.body.style.overflow = 'hidden';
+    prizeEl.querySelector('.prize-close').addEventListener('click', closePrize);
+    prizeEl.querySelector('.prize-close').focus();
+
+    // Fullscreen needs the click/keypress that finished the game, so ask right away
+    if (prizeEl.requestFullscreen) prizeEl.requestFullscreen().catch(() => {});
+
+    setTimeout(() => {
+      if (!prizeEl) return;
+      const frame = document.createElement('iframe');
+      frame.className = 'prize-video';
+      frame.src = 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0&playsinline=1&controls=0';
+      frame.title = 'Your prize';
+      frame.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
+      frame.allowFullscreen = true;
+      prizeEl.appendChild(frame);
+      prizeEl.classList.add('is-playing');
+    }, skipIntro ? 0 : 2200);
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closePrize(); });
+  document.addEventListener('fullscreenchange', () => {
+    // Leaving fullscreen with the browser's own Esc closes the prize too
+    if (!document.fullscreenElement && prizeEl && prizeEl.classList.contains('is-playing')) closePrize();
+  });
 
   function register(id, summary) {
     summaries[id] = summary;

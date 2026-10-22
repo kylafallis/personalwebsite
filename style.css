@@ -1681,6 +1681,71 @@ footer {
 .trails-cell.hinted span    { outline: 2px dashed var(--green-primary); outline-offset: -2px; }
 .trails-cell:disabled       { cursor: default; }
 
+/* The prize (all five solved) */
+.tracker-replay {
+  padding: 0;
+  border: none;
+  border-bottom: 1px solid var(--game-present);
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: #8A6D12;
+  cursor: pointer;
+}
+
+.tracker-replay[hidden] { display: none; }
+
+.prize {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--bg-dark);
+  animation: prize-in 0.4s ease;
+}
+
+.prize-intro { text-align: center; }
+.prize-intro h2 { color: var(--text-white); font-size: clamp(2rem, 6vw, 3.6rem); }
+.prize-intro em { font-style: italic; color: var(--green-light); }
+.prize-intro p { margin: 1.2rem auto 0; color: rgba(245,242,237,0.7); font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; }
+.prize-dots::after { content: ''; animation: prize-dots 1.2s steps(4) infinite; }
+
+.prize.is-playing { background: #000; padding: 0; }
+.prize.is-playing .prize-intro { display: none; }
+
+.prize-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.prize-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(245,242,237,0.35);
+  background: rgba(26,43,24,0.8);
+  color: var(--text-white);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.prize-close:hover { border-color: var(--green-light); color: var(--green-light); }
+
+@keyframes prize-in   { from { opacity: 0; } }
+@keyframes prize-dots { 0% { content: ''; } 25% { content: '.'; } 50% { content: '..'; } 75% { content: '...'; } }
+
 @keyframes hive-caret { 50% { opacity: 0; } }
 @keyframes game-pop   { 50% { transform: scale(1.08); } }
 @keyframes game-flip  { 0% { transform: rotateX(90deg); } 100% { transform: rotateX(0); } }
