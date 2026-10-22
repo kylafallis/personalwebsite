@@ -1,10 +1,10 @@
 // ============================================================
-// games-wordle.js: Six Letters
+// games-wordle.js: Ten Letters
 // ============================================================
 
 (function () {
 
-  const ANSWER = 'HOTDOG';
+  const ANSWER = 'TROGLODYTE';
   const W_LEN = ANSWER.length;
   const W_TRIES = 6;
 
@@ -16,7 +16,7 @@
   const state = Games.load('wordle') || { guesses: [], status: 'playing' };
   let current = '';
 
-  // Two-pass scoring so repeated letters (two O's) are handled correctly.
+  // Two-pass scoring so repeated letters (two O's, two T's) are handled correctly.
   function score(guess) {
     const result = Array(W_LEN).fill('absent');
     const left = {};
@@ -36,6 +36,7 @@
   for (let r = 0; r < W_TRIES; r++) {
     const row = document.createElement('div');
     row.className = 'wordle-row';
+    row.style.gridTemplateColumns = 'repeat(' + W_LEN + ', minmax(0, 1fr))';
     const tiles = [];
     for (let c = 0; c < W_LEN; c++) {
       const t = document.createElement('div');
@@ -95,7 +96,7 @@
     const grid = state.guesses.map(g =>
       score(g).map(s => s === 'correct' ? '🟩' : s === 'present' ? '🟨' : '⬜').join('')
     ).join('\n');
-    return 'Six Letters No. ' + Games.puzzleNo + ' ' + tries + '/' + W_TRIES + '\n' + grid + '\nkylafallis.com/games';
+    return 'Ten Letters No. ' + Games.puzzleNo + ' ' + tries + '/' + W_TRIES + '\n' + grid + '\nkylafallis.com/games';
   }
 
   function finish() {

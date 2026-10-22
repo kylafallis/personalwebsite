@@ -4,18 +4,20 @@
 
 (function () {
 
-  const ANSWER = 'HOTDOG';
+  const ANSWER = 'TROGLODYTE';
 
-  // A 6x6 "#" grid: two across and two down, crossing at the O's.
-  const SIZE = 6;
+  // A 10x10 "#" grid: two across and two down, crossing at the O's
+  // (TROGLODYTE has O's in spots 3 and 6, so the lines sit on rows/cols 2 and 5).
+  const SIZE = 10;
   const ENTRIES = [
-    { num: 1, dir: 'down',   row: 0, col: 1, clue: 'Show off on the slopes' },
-    { num: 2, dir: 'down',   row: 0, col: 4, clue: 'Its sandwich status is hotly debated' },
-    { num: 3, dir: 'across', row: 1, col: 0, clue: 'Ballpark staple, often with mustard' },
-    { num: 4, dir: 'across', row: 4, col: 0, clue: 'Frank in a bun' }
+    { num: 1, dir: 'down',   row: 0, col: 2, clue: 'Cave dweller' },
+    { num: 2, dir: 'down',   row: 0, col: 5, clue: 'Wren, to a taxonomist' },
+    { num: 3, dir: 'across', row: 2, col: 0, clue: 'Someone hopelessly behind the times' },
+    { num: 4, dir: 'across', row: 5, col: 0, clue: 'Stalactite admirer, perhaps' }
   ];
 
   const gridEl  = document.getElementById('xw-grid');
+  gridEl.style.gridTemplateColumns = 'repeat(' + SIZE + ', minmax(0, 1fr))';
   const cluesEl = document.getElementById('xw-clues');
   const msgEl   = document.getElementById('xw-message');
   const activeClueEl = document.getElementById('xw-active-clue');
@@ -35,7 +37,7 @@
 
   // started is set on the first letter typed, so opening the tab doesn't start the clock
   const state = Games.load('crossword') || { letters: {}, status: 'playing', revealed: false, checks: 0 };
-  let sel = { row: 1, col: 0, dir: 'across' };
+  let sel = { row: ENTRIES[2].row, col: ENTRIES[2].col, dir: 'across' };
 
   const cellEls = {};
   for (let r = 0; r < SIZE; r++) {
@@ -151,8 +153,8 @@
   function finish() {
     gridEl.classList.add('solved');
     msgEl.textContent = state.revealed
-      ? 'Revealed. Every answer was HOTDOG. Of course it was.'
-      : 'Solved in ' + fmtTime(state.time) + '. Every answer was HOTDOG.';
+      ? 'Revealed. Every answer was ' + ANSWER + '. Of course it was.'
+      : 'Solved in ' + fmtTime(state.time) + '. Every answer was ' + ANSWER + '.';
     document.getElementById('xw-check').hidden = true;
     document.getElementById('xw-reveal').hidden = true;
     shareEl.hidden = state.revealed;
@@ -256,7 +258,7 @@
   });
 
   shareEl.addEventListener('click', () => {
-    Games.copyText('The Mini No. ' + Games.puzzleNo + ' solved in ' + fmtTime(state.time) + ' 🌭\nkylafallis.com/games', shareEl);
+    Games.copyText('The Mini No. ' + Games.puzzleNo + ' solved in ' + fmtTime(state.time) + ' 🦇\nkylafallis.com/games', shareEl);
   });
 
   render();

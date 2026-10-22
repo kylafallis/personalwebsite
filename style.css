@@ -1170,18 +1170,18 @@ footer {
 
 .game-actions .btn[hidden] { display: none; }
 
-/* Six Letters */
+/* Ten Letters (columns are set from the answer length in games-wordle.js) */
 .wordle-board {
   display: grid;
-  gap: 6px;
-  width: min(100%, 372px);
+  gap: 5px;
+  width: min(100%, 520px);
   margin: 0 auto;
 }
 
 .wordle-row {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 6px;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 5px;
 }
 
 .wordle-row.shake { animation: game-shake 0.4s ease; }
@@ -1195,7 +1195,7 @@ footer {
   background: var(--bg);
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: clamp(1.3rem, 5vw, 1.8rem);
+  font-size: clamp(1rem, 4.2vw, 1.6rem);
   color: var(--text-dark);
   user-select: none;
   transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
@@ -1273,7 +1273,7 @@ footer {
 .crossword-grid {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(10, 1fr);
   border: 2px solid var(--text-dark);
   background: var(--text-dark);
   gap: 1px;
@@ -1301,10 +1301,10 @@ footer {
 
 .xw-num {
   position: absolute;
-  top: 3px;
-  left: 5px;
+  top: 2px;
+  left: 3px;
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.55rem;
   line-height: 1;
   color: var(--text-mid);
 }
@@ -1312,7 +1312,7 @@ footer {
 .xw-letter {
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: clamp(1.1rem, 4.5vw, 1.7rem);
+  font-size: clamp(0.95rem, 3.6vw, 1.35rem);
   color: var(--text-dark);
 }
 
@@ -1472,8 +1472,8 @@ footer {
   --hw: 84px;                    /* hex width, corner to corner */
   --hh: calc(var(--hw) * 0.866); /* hex height */
   position: relative;
-  width: calc(var(--hw) * 2.62);
-  height: calc(var(--hh) * 3.12);
+  width: calc(var(--hw) * 3.5);
+  height: calc(var(--hh) * 3.9);
   margin: 0 auto;
 }
 

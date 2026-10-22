@@ -4,29 +4,28 @@
 
 (function () {
 
-  // Generated so every cell belongs to exactly one word.
-  // HOTDOG is the spangram: it touches the left and right edges.
+  // Generated so every cell belongs to exactly one word and no two trails
+  // cross. TROGLODYTE is the spangram: it touches the left and right edges.
   const COLS = 6, ROWS = 8;
   const GRID = [
-    'ONIOKE',
-    'RLISNT',
-    'EPSHCC',
-    'KAUHHP',
-    'RTULII',
-    'HOTIEC',
-    'MUSDLK',
-    'DRATOG'
+    'GROTIM',
+    'STOTTG',
+    'TEAEAH',
+    'TISLCO',
+    'CLTTAE',
+    'AALSTB',
+    'OGODYE',
+    'TRFIRE'
   ];
-  const SPANGRAM = 'HOTDOG';
+  const SPANGRAM = 'TROGLODYTE';
   const PATHS = {
-    HOTDOG:  [[5, 0], [5, 1], [5, 2], [6, 3], [7, 4], [7, 5]],
-    ONIONS:  [[0, 0], [0, 1], [0, 2], [0, 3], [1, 4], [1, 3]],
-    KETCHUP: [[0, 4], [0, 5], [1, 5], [2, 4], [3, 3], [3, 2], [2, 1]],
-    RELISH:  [[1, 0], [2, 0], [1, 1], [1, 2], [2, 2], [2, 3]],
-    CHILI:   [[2, 5], [3, 4], [4, 4], [4, 3], [5, 3]],
-    KRAUT:   [[3, 0], [4, 0], [3, 1], [4, 2], [4, 1]],
-    PICKLE:  [[3, 5], [4, 5], [5, 5], [6, 5], [6, 4], [5, 4]],
-    MUSTARD: [[6, 0], [6, 1], [6, 2], [7, 3], [7, 2], [7, 1], [7, 0]]
+    TROGLODYTE: [[7, 0], [7, 1], [6, 0], [6, 1], [5, 2], [6, 2], [6, 3], [6, 4], [5, 4], [6, 5]],
+    STALACTITE: [[5, 3], [4, 2], [5, 1], [4, 1], [5, 0], [4, 0], [3, 0], [3, 1], [2, 0], [2, 1]],
+    STALAGMITE: [[1, 0], [1, 1], [2, 2], [3, 3], [2, 4], [1, 5], [0, 5], [0, 4], [1, 4], [2, 3]],
+    GROTTO:     [[0, 0], [0, 1], [0, 2], [0, 3], [1, 3], [1, 2]],
+    BATS:       [[5, 5], [4, 4], [4, 3], [3, 2]],
+    ECHO:       [[4, 5], [3, 4], [2, 5], [3, 5]],
+    FIRE:       [[7, 2], [7, 3], [7, 4], [7, 5]]
   };
   const WORDS = Object.keys(PATHS);
   const pathKey = p => p.map(c => c.join(',')).join(' ');
@@ -128,9 +127,13 @@
       state.found.push(hit);
       state.log.push(hit === SPANGRAM ? 'span' : 'word');
       if (state.hinted === hit) state.hinted = null;
-      say(hit === SPANGRAM ? 'SPANGRAM! You found ' + hit + '.' : state.found.length === WORDS.length ? 'All dressed up. Puzzle complete.' : 'Found ' + hit + '.');
+      say(hit === SPANGRAM ? 'SPANGRAM! You found ' + hit + '.' : state.found.length === WORDS.length ? 'Home sweet cave. Puzzle complete.' : 'Found ' + hit + '.');
       Games.save('trails', state);
       Games.update();
+    } else if (WORDS.includes(word) && !state.found.includes(word)) {
+      say('Right word, different trail. Try another route.');
+    } else if (state.found.includes(word)) {
+      say('Already found ' + word + '.');
     } else if (word.length < 4) {
       say('Too short.');
     } else {
@@ -190,11 +193,11 @@
 
   shareEl.addEventListener('click', () => {
     const icons = state.log.map(x => x === 'span' ? '🟡' : x === 'hint' ? '💡' : '🟢').join('');
-    Games.copyText('Trails No. ' + Games.puzzleNo + '\n"Dress it up"\n' + icons + '\nkylafallis.com/games', shareEl);
+    Games.copyText('Trails No. ' + Games.puzzleNo + '\n"Home sweet cave"\n' + icons + '\nkylafallis.com/games', shareEl);
   });
 
   render();
-  if (state.found.length === WORDS.length) say('All dressed up. Puzzle complete.');
+  if (state.found.length === WORDS.length) say('Home sweet cave. Puzzle complete.');
 
   Games.register('trails', () => {
     const n = state.found.length;

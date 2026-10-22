@@ -1,22 +1,27 @@
 // ============================================================
-// games-hive.js: The Hive (make words from seven letters)
+// games-hive.js: The Hive (make words from the hive's letters)
 // ============================================================
 
 (function () {
 
-  // HOTDOG only has five distinct letters, so the hive adds E and R.
-  // That makes HOTDOGGER (one who hotdogs) the pangram.
+  // TROGLODYTE has eight distinct letters and no common word uses exactly
+  // seven of them, so this hive has eight: O in the middle, seven around it.
+  // TROGLODYTE itself is the pangram.
   const CENTER = 'O';
-  const OUTER  = ['H', 'T', 'D', 'G', 'E', 'R'];
+  const OUTER  = ['T', 'R', 'G', 'L', 'D', 'Y', 'E'];
   const WORDS = [
-    'DODGE', 'DODGER', 'DODO', 'DOER', 'DOGE', 'DOGGED', 'DOGTOOTH', 'DOOR', 'DOTE', 'DOTED',
-    'DOTH', 'DOTTED', 'ERGO', 'GEODE', 'GHETTO', 'GOER', 'GOOD', 'GORE', 'GORED', 'GORGE',
-    'GORGED', 'GOTH', 'GROTTO', 'HERO', 'HOED', 'HOGGED', 'HOOD', 'HOODED', 'HOODOO',
-    'HOOT', 'HOOTED', 'HOOTER', 'HORDE', 'HOTDOG', 'HOTDOGGED', 'HOTDOGGER', 'HOTTER', 'ODDER',
-    'ODOR', 'OGRE', 'ORDER', 'ORDERED', 'OTHER', 'OTTER', 'REDO', 'RETRO', 'RODE', 'RODEO',
-    'ROOD', 'ROOT', 'ROOTED', 'ROOTER', 'ROTE', 'ROTOR', 'ROTTED', 'THROE', 'TOED', 'TOGETHER',
-    'TOOT', 'TOOTED', 'TORE', 'TORTE', 'TOTE', 'TOTED', 'TOTER', 'TOTTER', 'TROD', 'TROT',
-    'TROTH', 'TROTTED', 'TROTTER', 'GROOT', 'GROTTED', 'GROTTOED', 'HODGE', 'HODGED', 'HOGGER', 'HOGGED', 'HOGGERED', 'DODGED'
+    'DODGE', 'DODGED', 'DODGER', 'DODGY', 'DODO', 'DOER', 'DOGE', 'DOGGED', 'DOGGEDLY', 'DOGGEREL',
+    'DOGGY', 'DOGLEG', 'DOLE', 'DOLL', 'DOLLED', 'DOLLY', 'DOLT', 'DOODLE', 'DOOR', 'DORY', 'DOTED',
+    'DOTTED', 'DOTTY', 'DROLL', 'DROOL', 'ERGO', 'ERODE', 'ERODED', 'ERROR', 'GEOLOGY', 'GLORY',
+    'GODLY', 'GOER', 'GOGGLE', 'GOLD', 'GOLLY', 'GOOD', 'GOODLY', 'GOODY', 'GOOEY', 'GORE', 'GORED',
+    'GORGE', 'GORGED', 'GORY', 'GROG', 'GROGGY', 'GROTTO', 'LODE', 'LODGE', 'LODGED', 'LODGER',
+    'LOGGED', 'LOGGER', 'LOGO', 'LOLLY', 'LOOT', 'LOOTED', 'LORD', 'LORE', 'LORRY', 'LOTTERY',
+    'LOTTO', 'ODDER', 'ODDLY', 'ODOR', 'OGLE', 'OGRE', 'OLDER', 'ORDER', 'ORDERED', 'ORDERLY',
+    'OTTER', 'REDO', 'REORDER', 'RETOLD', 'RETORT', 'RETORTED', 'RETRO', 'RODE', 'RODEO', 'ROLE',
+    'ROLL', 'ROLLED', 'ROLLER', 'ROOD', 'ROOT', 'ROOTED', 'ROTE', 'ROTOR', 'ROTTED', 'TERROR',
+    'TODDLER', 'TODDY', 'TOED', 'TOGGLE', 'TOGGLED', 'TOLD', 'TOLL', 'TOLLED', 'TOOL', 'TOOLED',
+    'TOOT', 'TORE', 'TORT', 'TOTE', 'TOYED', 'TROD', 'TROGLODYTE', 'TROLL', 'TROLLED', 'TROLLEY',
+    'TROT', 'TROTTED', 'TROTTER', 'YODEL', 'YODELER', 'YORE'
   ];
   const LETTERS = [CENTER].concat(OUTER);
   const isPangram = w => LETTERS.every(l => w.includes(l));
@@ -25,7 +30,7 @@
 
   const RANKS = [
     ['Beginner', 0], ['Good Start', 0.02], ['Moving Up', 0.05], ['Good', 0.08], ['Solid', 0.15],
-    ['Nice', 0.25], ['Great', 0.4], ['Amazing', 0.5], ['Genius', 0.7], ['Top Dog', 1]
+    ['Nice', 0.25], ['Great', 0.4], ['Amazing', 0.5], ['Genius', 0.7], ['Top Troglodyte', 1]
   ];
   const WIN = Math.round(MAX * 0.5);  // reaching Amazing wins the game
 
@@ -53,10 +58,14 @@
     return r;
   }
 
-  // Seven hexes: the center letter plus a ring of six
+  // The center letter plus a ring of the outer letters
   function buildHive() {
     hiveEl.innerHTML = '';
-    const slots = [[0, 0], [0, -1], [0.75, -0.5], [0.75, 0.5], [0, 1], [-0.75, 0.5], [-0.75, -0.5]];
+    // Center hex, then the outer letters spaced evenly on a ring (works for 6 or 7)
+    const slots = [[0, 0]].concat(outer.map((_, i) => {
+      const a = -Math.PI / 2 + i * 2 * Math.PI / outer.length;
+      return [+(1.16 * Math.cos(a)).toFixed(3), +(1.36 * Math.sin(a)).toFixed(3)];
+    }));
     [CENTER].concat(outer).forEach((l, i) => {
       const b = document.createElement('button');
       b.type = 'button';
@@ -166,7 +175,7 @@
 
   shareEl.addEventListener('click', () => {
     Games.copyText('The Hive No. ' + Games.puzzleNo + '\n' + rank()[0] + ' · ' + score() + ' pts · ' +
-      state.found.length + ' words' + (state.found.some(isPangram) ? ' · found the pangram 🌭' : '') +
+      state.found.length + ' words' + (state.found.some(isPangram) ? ' · found the pangram 🦇' : '') +
       '\nkylafallis.com/games', shareEl);
   });
 

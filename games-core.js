@@ -19,14 +19,19 @@ window.Games = (function () {
     String(today.getDate()).padStart(2, '0');
   const puzzleNo = Math.max(1, Math.round((today - LAUNCH) / 86400000) + 1);
 
+  // Today's theme. Saved progress is keyed to it, so swapping the theme
+  // mid-day starts everyone fresh instead of loading old guesses.
+  const THEME = 'troglodyte';
+
   // Storage can throw (private mode, blocked cookies), so the games
   // must still work when nothing persists.
+  const storeKey = name => 'games:' + dayKey + ':' + THEME + ':' + name;
   function load(name) {
-    try { return JSON.parse(localStorage.getItem('games:' + dayKey + ':' + name)); }
+    try { return JSON.parse(localStorage.getItem(storeKey(name))); }
     catch (e) { return null; }
   }
   function save(name, value) {
-    try { localStorage.setItem('games:' + dayKey + ':' + name, JSON.stringify(value)); }
+    try { localStorage.setItem(storeKey(name), JSON.stringify(value)); }
     catch (e) { /* not persisting is fine */ }
   }
 
@@ -237,7 +242,7 @@ window.Games = (function () {
   });
 
   return {
-    dayKey, puzzleNo, load, save, copyText, shuffle, register, update,
+    dayKey, puzzleNo, THEME, load, save, copyText, shuffle, register, update,
     get active() { return active; }
   };
 

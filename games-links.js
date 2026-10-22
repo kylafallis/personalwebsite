@@ -4,13 +4,14 @@
 
 (function () {
 
-  // Ordered easiest to hardest. Red herrings: SLAW looks like a condiment,
-  // FRANKFURTER looks like a Frank, RED HOT looks like CHILI.
+  // Ordered easiest to hardest. Red herrings: MAMMOTH (a cave) and FOSSIL
+  // both sound prehistoric, and BAT and OLM look like they belong with the
+  // short cave words rather than the animals.
   const GROUPS = [
-    { name: 'Condiments',                tone: 'mustard', emoji: '🟨', words: ['MUSTARD', 'KETCHUP', 'RELISH', 'KRAUT'] },
-    { name: 'Other names for a hot dog', tone: 'relish',  emoji: '🟩', words: ['WIENER', 'FRANKFURTER', 'TUBE STEAK', 'RED HOT'] },
-    { name: '___ Dog',                   tone: 'bun',     emoji: '🟧', words: ['CORN', 'CHILI', 'CHICAGO', 'SLAW'] },
-    { name: 'Famous Franks',             tone: 'ketchup', emoji: '🟥', words: ['SINATRA', 'OCEAN', 'ZAPPA', 'WRIGHT'] }
+    { name: 'Cave formations',              tone: 'mustard', emoji: '🟨', words: ['STALACTITE', 'STALAGMITE', 'FLOWSTONE', 'COLUMN'] },
+    { name: 'Animals that live in caves',   tone: 'relish',  emoji: '🟩', words: ['BAT', 'OLM', 'CAVEFISH', 'GLOWWORM'] },
+    { name: 'Famous caves',                 tone: 'bun',     emoji: '🟧', words: ['LASCAUX', 'ALTAMIRA', 'CARLSBAD', 'MAMMOTH'] },
+    { name: 'Someone stuck in the past',    tone: 'ketchup', emoji: '🟥', words: ['LUDDITE', 'DINOSAUR', 'FOSSIL', 'NEANDERTHAL'] }
   ];
   const MAX_MISTAKES = 4;
 
@@ -53,7 +54,7 @@
     state.order.filter(w => !state.solved.includes(groupOf[w])).forEach(w => {
       const b = document.createElement('button');
       b.type = 'button';
-      b.className = 'links-tile' + (w.length > 8 ? ' long' : '') + (selected.includes(w) ? ' selected' : '');
+      b.className = 'links-tile' + (w.length >= 8 ? ' long' : '') + (selected.includes(w) ? ' selected' : '');
       b.textContent = w;
       b.setAttribute('aria-pressed', selected.includes(w));
       b.disabled = state.status !== 'playing';
