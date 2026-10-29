@@ -35,9 +35,9 @@ const SITE_DATA = {
       text:   "IEEE, Springer, and Sustentabilis Terra."
     },
     {
-      number: "1,000+",
+      number: "500+",
       label:  "Students Reached",
-      text:   "FairGame Initiative, launching first-time science fair students across Ohio."
+      text:   "FairGame Initiative, connecting first-time science fair students across 14+ countries."
     }
   ],
 
@@ -159,7 +159,7 @@ const SITE_DATA = {
       summary:       "Independent investigation into compost-powered microbial fuel cells as low-cost, decentralized renewable energy. Designed and fabricated prototypes, conducted controlled electrochemical experiments, and analyzed voltage output and substrate longevity across 18 months of research. Earned the EPA Award and ISEF qualification; directly informed the LYKA Lamp proof-of-concept.",
       body: [
         "Access to reliable, affordable energy remains one of the most persistent barriers to development in low-resource communities. This project investigates microbial fuel cells (MFCs) as a decentralized, low-cost alternative, using the electrochemical activity of naturally occurring soil microbes, fed by organic compost, to generate usable electricity.",
-        "Over 18 months of independent research, I designed and fabricated multiple MFC prototypes, systematically varied substrate compositions and electrode configurations, and conducted controlled electrochemical performance experiments. Key findings demonstrated consistent voltage output from compost-based bioanodic chambers, with substrate longevity as the primary variable in energy efficiency optimization. This work earned the EPA Award and ISEF qualification, and directly informed the LYKA Lamp project."
+        "Over 18 months of independent research, I designed and fabricated multiple MFC prototypes, systematically varied compost age, container size, and electrode material, size, and spacing, and conducted controlled electrochemical performance experiments. The best configuration (12–18-month compost, a 1 L container, and carbon cloth electrodes spaced 1 cm apart) averaged 1.08 W. Key findings demonstrated consistent voltage output from compost-based bioanodic chambers, with substrate longevity as the primary variable in energy efficiency optimization. This work earned the EPA Award and ISEF qualification, and directly informed the LYKA Lamp project."
       ],
       tags: ["Microbial Fuel Cells", "Bioelectrochemistry", "Decentralized Energy", "Compost", "Renewable Energy"],
       pdf:  null,
@@ -209,10 +209,10 @@ const SITE_DATA = {
       label:       "Engineering · Aerospace Testing",
       category:    "Engineering",
       title:       "Electromagnetic Environmental Effects at NASA Marshall",
-      role:        "Intern, ES31",
+      role:        "E3 Engineering Intern, ES31",
       date:        "Summer 2026",
-      description: "Worked in the Electromagnetic Environments Testing Branch (ES31) at NASA Marshall Space Flight Center on electromagnetic environmental effects, the discipline that keeps spacecraft electronics from interfering with each other or with their launch environment. Designed and built the Iron Hand Mark 3 test fixture during the placement.",
-      tech:        ["Electromagnetic Testing", "Test Fixture Design", "Instrumentation"],
+      description: "Worked as an Electromagnetic Environmental Effects (E3) engineer in the Electromagnetic Environments Testing Branch (ES31) at NASA Marshall Space Flight Center, supporting the Human Landing System (HLS) and Space Launch System (SLS) programs. E3 is the discipline that keeps spacecraft electronics from interfering with each other or with their launch environment. Researched and documented impedance specifications for the payload common bus, and designed and built the Iron Hand Mark 3 test fixture during the placement.",
+      tech:        ["Electromagnetic Testing", "Impedance Specifications", "Test Fixture Design", "Instrumentation"],
       award:       null,
       status:      null,
       outcome:     null,          // TODO: one line on what the Iron Hand Mark 3 does / measures
@@ -239,14 +239,30 @@ const SITE_DATA = {
       featured:    true
     },
     {
+      id:          "buckeyebites",
+      label:       "Software · Full-Stack",
+      category:    "Software",
+      title:       "BuckeyeBites",
+      role:        "Tech Lead",
+      date:        "October 2026",
+      description: "Allergy-safe dining hall meal planner built at HACK OHI/O 2026. Led a four-person team building a web app that shows Ohio State students only the dining-hall dishes that are safe for their allergies and diets, with station-by-station plates, weekly meal planning, nutrition-goal tracking, and dining-demand insights.",
+      tech:        ["Next.js", "Supabase", "Gemini API"],
+      award:       "HACK OHI/O 2026",
+      status:      null,
+      outcome:     "Gemini is used only to match recipe links, and every result is re-checked against allergen rules before a student sees it.",
+      image:       null,
+      image_alt:   null,
+      repo:        null
+    },
+    {
       id:          "wastewise",
       label:       "Software · ML / Computer Vision",
       category:    "Software",
       title:       "WasteWise AI",
       role:        "Project Lead",
       date:        "April 2024",
-      description: "AI-powered waste sorting system using computer vision to classify incoming items as organic, recyclable, or landfill trash, reducing contamination and methane emissions at the point of disposal.",
-      tech:        ["Machine Learning", "Computer Vision", "Python"],
+      description: "AI-powered waste sorting system using computer vision to classify incoming items as organic, recyclable, or landfill trash, reducing contamination and methane emissions at the point of disposal. Built the backend: trained a YOLOv8 model on Roboflow-segmented images in Google Cloud and streamed live camera results to a Firebase-backed website with item mass and CO₂ estimates.",
+      tech:        ["Machine Learning", "Computer Vision", "YOLOv8", "Roboflow", "Google Cloud", "Firebase", "Python"],
       award:       "1st Place, Ohio 4-H AI Competition · National Qualifier",
       status:      null,
       outcome:     "Classifies organic, recyclable, and landfill waste at the point of disposal, cutting contamination before it reaches the facility.",
@@ -309,11 +325,11 @@ const SITE_DATA = {
       title:       "AquaTracker",
       role:        "Team Engineer",
       date:        "October 2024",
-      description: "Autonomous water quality monitoring device measuring salinity, pH, and temperature in real time. Integrated environmental sensors with a microcontroller and wrote C++ firmware for automated data logging.",
-      tech:        ["C++", "SolidWorks", "Sensor Integration", "Circuit Design"],
+      description: "Autonomous, Arduino-based water quality monitoring device measuring temperature, pH, salinity, and dissolved oxygen in real time, designed and tested on a four-person team. Integrated environmental sensors with a microcontroller and wrote C++ firmware for automated data logging. Led concept development, market and user research, and prototype testing, including interviews with marine researchers.",
+      tech:        ["C++", "Arduino", "SolidWorks", "Sensor Integration", "Circuit Design"],
       award:       null,
       status:      null,
-      outcome:     "Logs salinity, pH, and temperature continuously in the field without a tethered operator.",
+      outcome:     "Logs temperature, pH, salinity, and dissolved oxygen continuously in the field without a tethered operator.",
       image:       null,
       image_alt:   null,
       repo:        null
@@ -329,7 +345,7 @@ const SITE_DATA = {
       tech:        ["Circuit Design", "MFC Fabrication", "Power Electronics"],
       award:       null,
       status:      null,
-      outcome:     "Runs a usable light source entirely on compost, with no grid and no batteries to replace.",
+      outcome:     "11.95 hours of charging gives 2.43 hours of continuous light, an estimated $128.76 a year in savings for an average U.S. family.",
       image:       null,
       image_alt:   null,
       repo:        null
@@ -358,18 +374,18 @@ const SITE_DATA = {
     role:        "Founder & Executive Director",
     date:        "November 2025 – Present",
     url:         "https://fairgameinitiative.org",
-    description: "FairGame is a nonprofit dedicated to closing the resource and opportunity gap in STEM education, starting with the science fair pipeline. As Founder and Executive Director, Kyla has grown it from a single-county effort into a program reaching more than 1,000 students, supported by a statewide teacher network and a free library of 288 resources.",
+    description: "FairGame is a nonprofit that brings science fair to students whose schools have never entered one, closing the resource and opportunity gap in STEM education. As Founder and Executive Director, Kyla has grown it from a single-county effort into a program that has connected with 500+ students across 14+ countries, working with partners including COSI and NASA and backed by a database of 50+ judges and mentors and a free resource library for teachers.",
     highlights: [
-      "Reached 1,000+ students, most entering a science fair for the first time",
-      "Published a free library of 288 resources for teachers running fairs without a budget",
-      "Directed outreach across 10+ school science fairs in Ohio",
-      "Built a statewide network of teachers and mentors supporting first-time competitors",
-      "Oversees nonprofit finances, legal compliance, and organizational strategy"
+      "Connected with 500+ students across 14+ countries, most entering a science fair for the first time",
+      "Partnered with COSI and NASA on outreach to first-time competitors",
+      "Built a database of 50+ judges and mentors supporting first-time competitors",
+      "Published a free resource library for teachers running fairs without a budget",
+      "Leads a 5-person team and oversees nonprofit finances, legal compliance, and organizational strategy"
     ],
     stats: [
-      { num: "1,000+",  lbl: "Students Reached"  },
-      { num: "288",     lbl: "Teacher Resources" },
-      { num: "10+",     lbl: "Science Fairs"     },
+      { num: "500+",    lbl: "Students Reached"   },
+      { num: "14+",     lbl: "Countries"          },
+      { num: "50+",     lbl: "Judges & Mentors"   },
       { num: "Nov '25", lbl: "Founded"           }
     ]
   },
@@ -382,10 +398,12 @@ const SITE_DATA = {
     role:        "Co-Founder & CTO",
     date:        "2024 – Present",
     url:         null,              // TODO: company site, once there is one
-    description: "EvE Waste builds modular anaerobic reactors that sit on-site at food manufacturers. Organic waste gets digested where it is produced instead of being trucked to a landfill, and the digestate that comes out the other end is sold on as a nutrient additive. As co-founder and CTO I lead the technical side: reactor design, the digestion process, and how a single module scales into a system.",
+    description: "EvE Waste builds modular anaerobic reactors that sit on-site at food manufacturers. Organic waste gets digested where it is produced instead of being trucked to a landfill, and the digestate that comes out the other end is sold on as a nutrient additive. As co-founder and CTO I lead the technical side: reactor design, the digestion process, how a single module scales into a system, and the software architecture, database schema, and 18-month technical roadmap behind it.",
     highlights: [
       "Co-founded the company in 2024 and lead its technical direction as CTO",
       "Designs modular anaerobic reactors that deploy on-site at food manufacturers",
+      "Leads system design for the containerized digester, taking it through formal phase-gate design reviews",
+      "Leads software for the Waste Hauling Monitor, a computer-vision system that estimates container fill with an on-device privacy architecture",
       "Diverts organic waste from landfill at the source, before it is ever hauled",
       "Pilot running at Clocktower, with testing underway on Ohio State's campus",   // TODO: confirm Clocktower's full name
       "Turns digestate into a saleable nutrient additive, so the waste stream pays for itself"
@@ -466,7 +484,7 @@ const SITE_DATA = {
     {
       title:    "The Only Woman in the Room, and the Pipeline That Put Me There",
       audience: "Students · Educators · Civic & STEM equity",
-      summary:  "I watched science fairs from the sidelines in Lima, Ohio long before I competed in one. This is the honest version of that path: what opened the door, what nearly closed it, and what FairGame has learned, across 1,000+ first-time competitors, about which barriers are real and which are simply unmarked."
+      summary:  "I watched science fairs from the sidelines in Lima, Ohio long before I competed in one. This is the honest version of that path: what opened the door, what nearly closed it, and what FairGame has learned, across 500+ first-time competitors, about which barriers are real and which are simply unmarked."
     }
   ],
 
@@ -479,7 +497,9 @@ const SITE_DATA = {
         { name: "NASA Marshall Space Flight Center",    org: "Electromagnetic Environments Testing Branch (ES31) · Summer",  badge: "Research"      },
         { name: "United Nations Association of Ohio",   org: "Vice President · statewide chapter leadership",                badge: "Policy"        },
         { name: "UNA-USA Leadership Summit",            org: "United Nations Association – USA · OSU Representative",        badge: "Policy"        },
-        { name: "HoosierMUN II: WHO Committee",        org: "OSU CCWA · Indiana University",                                badge: "MUN"           }
+        { name: "HoosierMUN II: WHO Committee",        org: "OSU CCWA · Indiana University",                                badge: "MUN"           },
+        { name: "IEEE Conference: Poster Presenter",   org: "Dark oxygen flux research",                                    badge: "Research"      },
+        { name: "Event with Jarret Lash, UNA-USA Youth Observer", org: "Co-host · 2025–2026",                                 badge: "Policy"        }
       ]
     },
     {
@@ -490,6 +510,7 @@ const SITE_DATA = {
         { name: "AJAS Annual Conference",                          org: "American Junior Academy of Science · AJAS Fellow",                 badge: "National"      },
         { name: "International Science & Engineering Fair (ISEF)", org: "Society for Science · EPA Award",                                  badge: "International" },
         { name: "COSI Big Science Day: Invited Panelist",         org: "Center of Science and Industry · Columbus, OH",                    badge: "Public"        },
+        { name: "OAS Science Fair Young STEM Panel: Panelist",    org: "Ohio Academy of Science · Columbus, OH",                           badge: "Public"        },
         { name: "OAS State Science Day",                           org: "Ohio Academy of Science · Melvin Scholar · President's Award",     badge: "State"         }
       ]
     },
@@ -518,13 +539,14 @@ const SITE_DATA = {
     ],
     state: [
       { title: "Melvin Scholar",                                       org: "Ohio Academy of Science"   },
-      { title: "OAS President's Award",                                org: "Ohio Academy of Science"   },
+      { title: "OAS President's Award",                                org: "Ohio Academy of Science · 1st overall of 660+ projects" },
       { title: "Governor's Thomas Edison Award for Excellence in STEM", org: "State of Ohio"            },
       { title: "1st Place, Ohio 4-H AI Competition",                   org: "Ohio 4-H · National Qualifier" },
       { title: "5× Superior Ratings, State Science Day",               org: "Ohio Academy of Science"   }
     ],
     regional: [
-      { title: "Distinguished Young Woman of Allen County", org: "DYW Program" }
+      { title: "Distinguished Young Woman of Allen County", org: "DYW Program" },
+      { title: "Rotary Speech Contest Winner",              org: "Rotary International · 2024, 2025" }
     ],
     academic: [
       { title: "Class Valedictorian, Rank 1",               org: "Bath High School · May 2025"  },
@@ -545,7 +567,11 @@ const SITE_DATA = {
     },
     {
       label: "Engineering & Systems",
-      items: ["Circuit Design", "Embedded Systems", "C++", "SolidWorks", "MATLAB", "IoT", "Sensor Integration", "Power Electronics"]
+      items: ["Circuit Design", "Embedded Systems", "C++", "SolidWorks", "OnShape", "Fusion 360", "MATLAB", "IoT", "Sensor Integration", "Power Electronics"]
+    },
+    {
+      label: "Software & Full-Stack",
+      items: ["JavaScript", "TypeScript", "React", "Next.js", "Supabase", "Firebase", "Google Cloud", "Vercel", "YOLOv8", "Git"]
     },
     {
       label: "Policy & Communication",
@@ -561,6 +587,7 @@ const SITE_DATA = {
         label: "Research",
         items: [
           "Two papers out this year: dark oxygen flux in the Clarion-Clipperton Zone (IEEE) and physics-informed deep learning for tidal energy siting (Springer)",
+          "Research Project Lead in Ohio State's Humanitarian Engineering Lab, scaling microbial fuel cell technology for water treatment facilities",
           "Writing up electromagnetic environmental effects work from the summer at NASA Marshall",
           "Following on from the CCZ work into deep-sea mining law and ecological modeling"
         ]
@@ -569,6 +596,7 @@ const SITE_DATA = {
         label: "Building",
         items: [
           "EvE Waste: leading the technical side as co-founder and CTO, with a reactor pilot running at Clocktower and testing underway on Ohio State's campus",
+          "BuckeyeBites: tech lead on an allergy-safe dining hall meal planner, built at HACK OHI/O 2026",
           "Class Companion: full-stack study hub for OSU students",
           "AI Research Assistant + companion Chrome extension"
         ]
@@ -576,8 +604,8 @@ const SITE_DATA = {
       {
         label: "FairGame Initiative",
         items: [
-          "Past 1,000 students reached, most competing in a science fair for the first time",
-          "Maintaining a free 288-resource library for teachers and a statewide mentor network",
+          "Past 500 students reached across 14+ countries, most competing in a science fair for the first time",
+          "Maintaining a free resource library for teachers and a database of 50+ judges and mentors",
           "Building out the 2026–27 season and the mentor network behind it"
         ]
       },
@@ -592,8 +620,9 @@ const SITE_DATA = {
       {
         label: "At OSU",
         items: [
-          "Second year, Chemical Engineering · Humanitarian Engineering Scholars Program",
-          "CCWA Model UN · USG Sustainability Issues Team · SWE · Engineers for a Sustainable World"
+          "Second year, Chemical Engineering with a minor in Computer Science and Engineering · Humanitarian Engineering Scholars Program",
+          "Archival Assistant at Ohio State",
+          "CCWA Model UN (UNA-USA Chapter President) · USG Sustainability Issues Team · SWE · Engineers for a Sustainable World"
         ]
       }
     ]
@@ -604,7 +633,7 @@ const SITE_DATA = {
     {
       org:         "FairGame Initiative",
       role:        "Founder & Executive Director",
-      description: "Founded November 2025. Nonprofit closing the resource gap in STEM education, now reaching 1,000+ students through a statewide teacher network and a free 288-resource library."
+      description: "Founded November 2025. Nonprofit closing the resource gap in STEM education, now connecting with 500+ students across 14+ countries, backed by 50+ judges and mentors and a free resource library."
     },
     {
       org:         "EvE Waste",
@@ -627,9 +656,14 @@ const SITE_DATA = {
       description: "Nonprofit Internship Program placement supporting EDGE, the organization carrying out the city-backed Eastland for Everyone plan in southeast Columbus."
     },
     {
+      org:         "Humanitarian Engineering Lab, The Ohio State University",
+      role:        "Research Project Lead",
+      description: "Since January 2026, leads independent research on scaling microbial fuel cell technology for use in water treatment facilities."
+    },
+    {
       org:         "OSU CCWA Model United Nations",
-      role:        "Competitor",
-      description: "Competes on Ohio State's collegiate MUN team through the Council on World Affairs, working at the intersection of technical knowledge and international policy."
+      role:        "UNA-USA Chapter President",
+      description: "Leads Ohio State's UNA-USA chapter and competes on its collegiate MUN team through the Council on World Affairs, including HoosierMUN II (WHO Committee, 2026), working at the intersection of technical knowledge and international policy."
     },
     {
       org:         "Undergraduate Student Government: Sustainability Issues Team",
@@ -640,6 +674,11 @@ const SITE_DATA = {
       org:         "Society of Women Engineers (SWE) & Engineers for a Sustainable World",
       role:        "Member",
       description: "Community building for gender equity in engineering; collaboration on sustainable engineering projects and devices alongside ESW's interdisciplinary team."
+    },
+    {
+      org:         "Lima Community Church",
+      role:        "Small Group & Worship Leader",
+      description: "Small group and worship leader since 2019, leading biweekly groups for children ages 3–12."
     }
   ]
 };
